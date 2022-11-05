@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BankController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,11 @@ Route::prefix('admin')->group(function(){
     Route::middleware('auth:admin-api')->group(function(){
         Route::controller(App\Http\Controllers\Admin\AuthController::class)->group(function(){
             Route::get('me', 'me');
+        });
+
+        Route::controller(BankController::class)->group(function(){
+            Route::post('/banks', 'bank_setup');
+            Route::get('/banks', 'index');
         });
     });
 
