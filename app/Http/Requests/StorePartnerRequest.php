@@ -24,7 +24,9 @@ class StorePartnerRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'partner' => 'required|string|unique:partners,partner',
+            'bank' => 'required|string|exists:banks,name',
+            'account_number' => 'required|string'
         ];
     }
 }

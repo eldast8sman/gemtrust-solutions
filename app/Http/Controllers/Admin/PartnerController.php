@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Bank;
+use App\Models\Partner;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePartnerRequest;
 use App\Http\Requests\UpdatePartnerRequest;
-use App\Models\Partner;
 
 class PartnerController extends Controller
 {
@@ -49,7 +50,22 @@ class PartnerController extends Controller
      */
     public function store(StorePartnerRequest $request)
     {
-        //
+        $all = $request->all();
+        $bank = Bank::fetch_bankName($all['bank'])->first();
+        $all['bank_code'] = $bank->code;
+        $all['bank_nip'] = $bank->nip;
+        if($partner = Partner::create($all)){
+            return response([
+                'status' => 'success',
+                'message' => 'Partner Created successfully',
+                'data' => $partner
+            ], 200);
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'Partner creation failed',
+            ], 500);
+        }
     }
 
     /**
@@ -58,9 +74,21 @@ class PartnerController extends Controller
      * @param  \App\Models\Partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function show(Partner $partner)
+    public function show($id)
     {
-        //
+        $partner = Partner::find($id);
+        if(!empty($partner)){
+            return response([
+                'status' => 'success',
+                'message' => 'Partner was fetched successfully',
+                'data' => $partner
+            ], 200);
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'No Partner was fetched'
+            ], 404);
+        }
     }
 
     /**
@@ -81,9 +109,35 @@ class PartnerController extends Controller
      * @param  \App\Models\Partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePartnerRequest $request, Partner $partner)
+    public function update(UpdatePartnerRequest $request, $id)
     {
-        //
+        $partner = Partner::find($id);
+        if(!empty($partner)){
+            $all = $request->all();
+            if(!empty($all['bank'])){
+                $bank = Bank::fetch_bankName($all['bank'])->first();
+                $all['bank_code'] = $bank->code;
+                $all['bank_nip'] = $bank->nip;
+            }
+
+            if($partner->update($all)){
+                return response([
+                    'status' => 'success',
+                    'message' => 'Partner updated successfully',
+                    'data' => $partner
+                ], 200);
+            } else {
+                return response([
+                    'status' => 'failed',
+                    'message' => 'Partner was not Updated'
+                ], 500);
+            }
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'No Partner was fetched'
+            ], 404);
+        }
     }
 
     /**
@@ -92,8 +146,21 @@ class PartnerController extends Controller
      * @param  \App\Models\Partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Partner $partner)
+    public function destroy($id)
     {
-        //
+        $partner = Partner::find($id);
+        if(!empty($partner)){
+            $partner->delete();
+            return response([
+                'status' => 'success',
+                'message' => 'Partner fetched successfully',
+                'data' => $partner
+            ], 200);
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'No Partner was fetched'
+            ], 400);
+        }
     }
 }

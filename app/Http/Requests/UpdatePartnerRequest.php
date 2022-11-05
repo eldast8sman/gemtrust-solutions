@@ -13,7 +13,7 @@ class UpdatePartnerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdatePartnerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'partner' => 'required|string',
+            'bank' => 'required|string|exists:banks,name',
+            'account_number' => 'required|string'
         ];
     }
 }
