@@ -54,7 +54,7 @@ class AuthController extends Controller
     {
         $all = $request->all();
         if(isset($all['password']) && !empty($all['password'])){
-            $all['password'] = Hash::make($all['passwprd']);
+            $all['password'] = Hash::make($all['password']);
         }
 
         if($admin = Admin::create($all)){
@@ -101,8 +101,9 @@ class AuthController extends Controller
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function show(Admin $admin)
+    public function show($id)
     {
+        $admin = Admin::find($id);
         if(!empty($admin)){
             return response([
                 'status' => 'success',
@@ -135,8 +136,9 @@ class AuthController extends Controller
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAdminRequest $request, Admin $admin)
+    public function update(UpdateAdminRequest $request, $id)
     {
+        $admin = Admin::find($id);
         if(!empty($admin)){
             $all = $request->all();
             if($admin->update($all)){

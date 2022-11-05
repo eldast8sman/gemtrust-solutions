@@ -31,7 +31,7 @@ Route::prefix('admin')->group(function(){
         Route::get('admins', 'index');
         Route::get('admins/{id}', 'show');
         Route::put('admins/{id}', 'update');
-        Route::put('admins/{id}/change-password', 'changePassword');
+        Route::put('change-password', 'changePassword');
         Route::delete('admins/{id}', 'destroy');
         Route::get('/logout', 'logout');
     });
