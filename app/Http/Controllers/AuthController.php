@@ -79,7 +79,27 @@ class AuthController extends Controller
     }
 
     public function adminLogin(AdminLoginRequest $request){
-        
+        $all = $request->all();
+
+        if($token = auth('admin-api')->attempt($all)){
+            $admin = Admin::where('email', $all['email'])->first();
+            $admin->authorization = [
+                'token' => $token,
+                'type' => 'Bearer',
+                'expiry' => auth('admin-api')->factory()->getTTL() * 60
+            ];
+
+            return response([
+                'status' => 'success',
+                'message' => 'Login was successful',
+                'data' => $admin
+            ], 200);
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'Admin Login failed due to wrong Credentials'
+            ], 401);
+        }
     }
 
     /**
@@ -139,7 +159,7 @@ class AuthController extends Controller
                     'status' => 'success',
                     'message' => 'Admin Updated successfully',
                     'data' => $admin
-                ])
+                ], 200);
             } else {
                 return response([
                     'status' => 'failed',
@@ -155,7 +175,47 @@ class AuthController extends Controller
     }
 
     public function changeAdminPassword(UpdatePasswordRequest $request){
+        $old_password = $request->current_password;
 
+        $credentials = [
+            'email' => auth('admin-api')->user()->email,
+            'password' => $old_password
+        ];
+
+        if(auth('admin-api')->attempt($credentials)){
+            $admin = Admin::find(auth('admin-api')->user()->id);
+            $admin->password = Hash::make($request->password);
+            $admin->save();
+
+            $new_credentials = [
+                'email' => $admin->email,
+                'password' => $request->password
+            ];
+
+            if($token = auth('admin-api')->attempt($new_credentials)){
+                $admin->authorization = [
+                    'token' => $token,
+                    'type' => 'Bearer',
+                    'expiry' => auth('admin-api')->factory()->getTTL() * 60
+                ];
+
+                return response([
+                    'status' => 'success',
+                    'message' => 'Admin Password changed successfully'
+                ]);
+            } else {
+                return response([
+                    'status' => 'failed',
+                    'message' => 'User Login Failed due to wrong credentials',
+                    'data' => $admin
+                ], 401);
+            }
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'Wrong Password was provided'
+            ], 404);
+        }
     }
 
     /**
