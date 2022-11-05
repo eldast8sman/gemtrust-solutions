@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Http\Requests\UpdatePasswordRequest;
-use App\Models\Admin;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -18,10 +19,6 @@ class AuthController extends Controller
      */
     public function index()
     {
-        
-    }
-
-    public function fetch_admins(){
         $admins = Admin::all();
         if(!empty($admins)){
             return response([
@@ -53,12 +50,8 @@ class AuthController extends Controller
      * @param  \App\Http\Requests\StoreAdminRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(StoreAdminRequest $request)
     {
-        //
-    }
-
-    public function storeAdmin(StoreAdminRequest $request){
         $all = $request->all();
         if(isset($all['password']) && !empty($all['password'])){
             $all['password'] = Hash::make($all['passwprd']);
@@ -78,7 +71,7 @@ class AuthController extends Controller
         }
     }
 
-    public function adminLogin(AdminLoginRequest $request){
+    public function login(AdminLoginRequest $request){
         $all = $request->all();
 
         if($token = auth('admin-api')->attempt($all)){
@@ -110,10 +103,6 @@ class AuthController extends Controller
      */
     public function show(Admin $admin)
     {
-        //
-    }
-
-    public function showAdmin(Admin $admin){
         if(!empty($admin)){
             return response([
                 'status' => 'success',
@@ -148,10 +137,6 @@ class AuthController extends Controller
      */
     public function update(UpdateAdminRequest $request, Admin $admin)
     {
-        //
-    }
-
-    public function updateAdmin(UpdateAdminRequest $request, Admin $admin){
         if(!empty($admin)){
             $all = $request->all();
             if($admin->update($all)){
@@ -174,7 +159,7 @@ class AuthController extends Controller
         }
     }
 
-    public function changeAdminPassword(UpdatePasswordRequest $request){
+    public function changePassword(UpdatePasswordRequest $request){
         $old_password = $request->current_password;
 
         $credentials = [
