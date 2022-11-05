@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class AdminLoginRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class AdminLoginRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,12 @@ class AdminLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email' => 'required|string|email|exists:admins,email',
+            'password' => [
+                'required',
+                'string',
+                Password::min(8)->mixedCase()->numbers()->symbols()
+            ]
         ];
     }
 }

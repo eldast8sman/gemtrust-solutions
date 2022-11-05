@@ -231,4 +231,13 @@ class AuthController extends Controller
             ], 404);
         }
     }
+
+    public function logout(){
+        auth('admin-api')->logout();
+
+        return response([
+            'status' => 'success',
+            'message' => 'Logged out successfully'
+        ], 200);
+    }
 }
