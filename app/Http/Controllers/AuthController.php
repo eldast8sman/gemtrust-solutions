@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 
@@ -76,6 +78,10 @@ class AuthController extends Controller
         }
     }
 
+    public function adminLogin(AdminLoginRequest $request){
+        
+    }
+
     /**
      * Display the specified resource.
      *
@@ -85,6 +91,21 @@ class AuthController extends Controller
     public function show(Admin $admin)
     {
         //
+    }
+
+    public function showAdmin(Admin $admin){
+        if(!empty($admin)){
+            return response([
+                'status' => 'success',
+                'message' => 'Admin Found Successfully',
+                'data' => $admin
+            ], 200);
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'Admin Not Found'
+            ], 404);
+        }
     }
 
     /**
@@ -110,6 +131,33 @@ class AuthController extends Controller
         //
     }
 
+    public function updateAdmin(UpdateAdminRequest $request, Admin $admin){
+        if(!empty($admin)){
+            $all = $request->all();
+            if($admin->update($all)){
+                return response([
+                    'status' => 'success',
+                    'message' => 'Admin Updated successfully',
+                    'data' => $admin
+                ])
+            } else {
+                return response([
+                    'status' => 'failed',
+                    'message' => 'Admin Update failed'
+                ], 500);
+            }
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'Admin was not found'
+            ], 404);
+        }
+    }
+
+    public function changeAdminPassword(UpdatePasswordRequest $request){
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -118,6 +166,24 @@ class AuthController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        //
+        if(!empty($admin)){
+            if($admin->delete()){
+                return response([
+                    'status' => 'success',
+                    'message' => 'Admin Deleted Successfully',
+                    'data' => $admin
+                ], 200);
+            } else {
+                return response([
+                    'status' => 'failed',
+                    'message' => 'Admin Delete Failed'
+                ], 500);
+            }
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'No Admin was fetched'
+            ], 404);
+        }
     }
 }
