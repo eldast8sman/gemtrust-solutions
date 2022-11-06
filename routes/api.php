@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BankController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PartnerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,14 @@ Route::prefix('admin')->group(function(){
             Route::put('/partners/{id}', 'update');
             Route::delete('/partners/{id}', 'destroy');
             Route::get('/partners/{id}/wallet', 'fetchWallet');
+        });
+
+        Route::controller(PackageController::class)->group(function(){
+            Route::get('/packages', 'index');
+            Route::post('/packages', 'store');
+            Route::get('/packages/{id}', 'show');
+            Route::put('/packages/{id}', 'update');
+            Route::delete('/packages/{id}', 'destroy');
         });
     });
 
