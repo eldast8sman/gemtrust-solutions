@@ -37,6 +37,7 @@ Route::prefix('admin')->group(function(){
             Route::get('/partners/{id}', 'show');
             Route::put('/partners/{id}', 'update');
             Route::delete('/partners/{id}', 'destroy');
+            Route::get('/partners/{id}/wallet', 'fetchWallet');
         });
     });
 

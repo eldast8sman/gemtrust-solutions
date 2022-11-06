@@ -7,6 +7,7 @@ use App\Models\Partner;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePartnerRequest;
 use App\Http\Requests\UpdatePartnerRequest;
+use App\Models\Wallet;
 
 class PartnerController extends Controller
 {
@@ -55,6 +56,10 @@ class PartnerController extends Controller
         $all['bank_code'] = $bank->code;
         $all['bank_nip'] = $bank->nip;
         if($partner = Partner::create($all)){
+            Wallet::create([
+                'type' => 'partner',
+                'user_id' => $partner->id
+            ]);
             return response([
                 'status' => 'success',
                 'message' => 'Partner Created successfully',
@@ -87,6 +92,22 @@ class PartnerController extends Controller
             return response([
                 'status' => 'failed',
                 'message' => 'No Partner was fetched'
+            ], 404);
+        }
+    }
+
+    public function fetchWallet($id){
+        $wallet = Wallet::where('type', 'partner')->where('user_id', $id)->first();
+        if(!empty($wallet)){
+            return response([
+                'status' => 'success',
+                'message' => 'Wallet Found',
+                'data' => $wallet
+            ], 200);
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'No Wallet was found'
             ], 404);
         }
     }
