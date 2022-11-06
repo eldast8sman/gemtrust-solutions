@@ -153,7 +153,7 @@ class PartnerController extends Controller
             $partner->delete();
             return response([
                 'status' => 'success',
-                'message' => 'Partner fetched successfully',
+                'message' => 'Partner deleted successfully',
                 'data' => $partner
             ], 200);
         } else {

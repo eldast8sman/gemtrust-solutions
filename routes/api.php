@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BankController;
+use App\Http\Controllers\Admin\PartnerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,14 @@ Route::prefix('admin')->group(function(){
         Route::controller(BankController::class)->group(function(){
             Route::post('/banks', 'bank_setup');
             Route::get('/banks', 'index');
+        });
+
+        Route::controller(PartnerController::class)->group(function(){
+            Route::get('/partners', 'index');
+            Route::post('/partners', 'store');
+            Route::get('/partners/{id}', 'show');
+            Route::put('/partners/{id}', 'update');
+            Route::delete('/partners/{id}', 'destroy');
         });
     });
 

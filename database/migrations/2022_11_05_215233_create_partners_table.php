@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('bank_code', 255);
             $table->string('bank_nip', 255);
             $table->string('account_number', 255);
-            $table->string('account_name', 255);
+            $table->string('account_name', 255)->nullable();
             $table->timestamps();
         });
     }
