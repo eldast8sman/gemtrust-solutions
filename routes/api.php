@@ -47,6 +47,8 @@ Route::prefix('admin')->group(function(){
             Route::get('/packages/{id}', 'show');
             Route::put('/packages/{id}', 'update');
             Route::delete('/packages/{id}', 'destroy');
+            Route::post('/packages/{id}/add-partner', 'addPartner');
+            Route::delete('/packages/remove-partner/{id}', 'removePartner');
         });
     });
 

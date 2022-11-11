@@ -13,7 +13,7 @@ class StorePackageRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class StorePackageRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'package' => 'required|string|unique:packages,package',
+            'description' => 'string',
+            'reg_amount' => 'required|numeric|min:1',
+            'upline1' => 'numeric|min:1',
+            'upline2' => 'numeric|min:1',
+            'upline3' => 'numeric|min:1',
+            'upline4' => 'numeric|min:1'
         ];
     }
 }

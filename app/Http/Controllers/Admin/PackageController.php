@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Package;
+use App\Models\Partner;
+use App\Models\PackagePartner;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePackageRequest;
 use App\Http\Requests\UpdatePackageRequest;
-use App\Models\Package;
+use App\Http\Requests\PackagePartnerRequest;
 
 class PackageController extends Controller
 {
@@ -21,7 +24,7 @@ class PackageController extends Controller
             return response([
                 'status' => 'success',
                 'message' => 'Packages fetched successfully',
-                'data' => $packages
+                'data' => $packages->get()
             ], 200);
         } else {
             return response([
@@ -81,6 +84,19 @@ class PackageController extends Controller
     {
         $package = Package::find($id);
         if(!empty($package)){
+            $partners = [];
+            $packPartners = PackagePartner::where('package_id', $package->id);
+            if($packPartners->count() > 0){
+                foreach($packPartners->get() as $pack){
+                    $partner = Partner::find($pack->partner_id);
+                    $partners[] = [
+                        'id' => $pack->id,
+                        'partner' => $partner->partner,
+                        'amount' => $pack->amount
+                    ];
+                }
+            }
+            $package->partners = $partners;
             return response([
                 'status' => 'success',
                 'message' => 'Package fetched successfully',
@@ -90,6 +106,39 @@ class PackageController extends Controller
             return response([
                 'status' => 'failed',
                 'message' => 'No Package was fetched'
+            ], 404);
+        }
+    }
+
+    public function addPartner(PackagePartnerRequest $request){
+        $pack_partner = PackagePartner::where('package_id', $request->package_id)->where('partner_id', $request->partner_id);
+        if($pack_partner->count() > 0){
+            $partner = $pack_partner->first();
+            $partner->update($request->all());
+        } else {
+            $partner = PackagePartner::create($request->all());
+        }
+
+        return response([
+            'status' => 'success',
+            'message' => 'Partner added to Package',
+            'data' => $partner
+        ], 200);
+    }
+
+    public function removePartner($id){
+        $package_partner = PackagePartner::find($id);
+        if(!empty($package_partner)){
+            $package_partner->delete();
+            return response([
+                'status' => 'success',
+                'message' => 'Partner successfully deleted',
+                'data' => $package_partner
+            ], 200);
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'No Partner was fetched',
             ], 404);
         }
     }
@@ -155,6 +204,12 @@ class PackageController extends Controller
         $package = Package::find($id);
         if(!empty($package)){
             if($package->delete()){
+                $partners = PackagePartner::where('package_id', $package->id);
+                if($partners->count() > 0){
+                    foreach($partners->get() as $partner){
+                        $partner->delete();
+                    }
+                }
                 return response([
                     'status' => 'success',
                     'message' => 'Package was successfully deleted',
