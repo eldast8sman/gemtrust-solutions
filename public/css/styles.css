@@ -51,6 +51,16 @@ body, p {
 	font: 400 1rem/1.625rem "Open Sans", sans-serif;;
 }
 
+.table-p {
+	border-collapse: collapse;
+}
+
+.table-p td, th {
+	border: 1px solid #555;
+	padding: 10px 20px;
+	border-color: #555;
+}
+
 .p-large {
 	font: 400 1.125rem/1.75rem "Open Sans", sans-serif;
 }
