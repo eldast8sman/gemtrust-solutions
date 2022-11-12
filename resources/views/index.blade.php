@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -46,57 +46,7 @@
     
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-        <div class="container">
-
-            <!-- Text Logo - Use this if you don't have a graphic logo -->
-            <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Tivo</a> -->
-
-            <!-- Image Logo -->
-            <a class="navbar-brand logo-image" href="index.html"><img src="images/logo.svg" alt="alternative"></a> 
-            
-            <!-- Mobile Menu Toggle Button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-awesome fas fa-bars"></span>
-                <span class="navbar-toggler-awesome fas fa-times"></span>
-            </button>
-            <!-- end of mobile menu toggle button -->
-
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#header">HOME <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#about">ABOUT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#features">FEATURES</a>
-                    </li>
-
-                    <!-- Dropdown Menu -->          
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle page-scroll" href="#video" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">VIDEO</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="article-details.html"><span class="item-text">ARTICLE DETAILS</span></a>
-                            <div class="dropdown-items-divide-hr"></div>
-                            <a class="dropdown-item" href="terms-conditions.html"><span class="item-text">TERMS CONDITIONS</span></a>
-                            <div class="dropdown-items-divide-hr"></div>
-                            <a class="dropdown-item" href="privacy-policy.html"><span class="item-text">PRIVACY POLICY</span></a>
-                        </div>
-                    </li>
-                    <!-- end of dropdown menu -->
-
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#pricing">PRICING</a>
-                    </li>
-                </ul>
-                <span class="nav-item">
-                    <a class="btn-outline-sm" href="log-in.html">LOG IN</a>
-                </span>
-            </div>
-        </div> <!-- end of container -->
-    </nav> <!-- end of navbar -->
+    @include("components.header")
     <!-- end of navigation -->
 
 
@@ -116,7 +66,7 @@
                     <div class="col-lg-6 col-xl-7">
                         <div class="image-container">
                             <div class="img-wrapper">
-                                <img class="img-fluid" src="images/header-software-app.png" alt="alternative">
+                                <img class="img-fluid" src="images/py.jpeg" alt="alternative">
                             </div> <!-- end of img-wrapper -->
                         </div> <!-- end of image-container -->
                     </div> <!-- end of col -->
@@ -124,119 +74,13 @@
             </div> <!-- end of container -->
         </div> <!-- end of header-content -->
     </header> <!-- end of header -->
-    <svg class="header-frame" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 310"><defs><style>.cls-1{fill:#5f4def;}</style></defs><title>header-frame</title><path class="cls-1" d="M0,283.054c22.75,12.98,53.1,15.2,70.635,14.808,92.115-2.077,238.3-79.9,354.895-79.938,59.97-.019,106.17,18.059,141.58,34,47.778,21.511,47.778,21.511,90,38.938,28.418,11.731,85.344,26.169,152.992,17.971,68.127-8.255,115.933-34.963,166.492-67.393,37.467-24.032,148.6-112.008,171.753-127.963,27.951-19.26,87.771-81.155,180.71-89.341,72.016-6.343,105.479,12.388,157.434,35.467,69.73,30.976,168.93,92.28,256.514,89.405,100.992-3.315,140.276-41.7,177-64.9V0.24H0V283.054Z"/></svg>
+    <svg class="header-frame" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 310"><defs><style>.cls-1{fill:#356d74;}</style></defs><title>header-frame</title><path class="cls-1" d="M0,283.054c22.75,12.98,53.1,15.2,70.635,14.808,92.115-2.077,238.3-79.9,354.895-79.938,59.97-.019,106.17,18.059,141.58,34,47.778,21.511,47.778,21.511,90,38.938,28.418,11.731,85.344,26.169,152.992,17.971,68.127-8.255,115.933-34.963,166.492-67.393,37.467-24.032,148.6-112.008,171.753-127.963,27.951-19.26,87.771-81.155,180.71-89.341,72.016-6.343,105.479,12.388,157.434,35.467,69.73,30.976,168.93,92.28,256.514,89.405,100.992-3.315,140.276-41.7,177-64.9V0.24H0V283.054Z"/></svg>
     <!-- end of header -->
 
-
-
-    <!-- Description -->
-    <div class="cards-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- <div class="above-heading">DESCRIPTION</div> -->
-                    <h2 class="h2-heading">CORE VALUES</h2>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <!-- Card -->
-                    <div class="card">
-                        <!-- <div class="card-image">
-                            <img class="img-fluid" src="images/description-1.png" alt="alternative">
-                        </div> -->
-                        <div class="card-body">
-                            <h4 class="card-title">Trust</h4>
-                            <p>We are building the largest thriving community financially, on the world’s most valuable asset – Trust.</p>
-                        </div>
-                    </div>
-                    <!-- end of card -->
-
-                    <!-- Card -->
-                    <div class="card">
-                        <!-- <div class="card-image">
-                            <img class="img-fluid" src="images/description-2.png" alt="alternative">
-                        </div> -->
-                        <div class="card-body">
-                            <h4 class="card-title">Transparency</h4>
-                            <p>Our Vision and Mission are written in plain words, so our members can run with us as we lead.</p>
-                        </div>
-                    </div>
-                    <!-- end of card -->
-
-                    <!-- Card -->
-                    <div class="card">
-                        <!-- <div class="card-image">
-                            <img class="img-fluid" src="images/description-3.png" alt="alternative">
-                        </div> -->
-                        <div class="card-body">
-                            <h4 class="card-title">Passion</h4>
-                            <p>From Leadership down the ranks, our core vision is driven by passion to bridge the gap between the rich and the poor.</p>
-                        </div>
-                    </div>
-                    <!-- end of card -->
-
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-        
-
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">VISION</h2>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <!-- Card -->
-                    <div class="card">
-                        <div class="card-body">
-                            <p>To offer simple solutions to create abundant wealth.</p>
-                        </div>
-                    </div>
-                    <!-- end of card -->
-
-                    <!-- Card -->
-                    <div class="card">
-                        <div class="card-body">
-                            <p>To provide financial education to help our members sustain their wealth.</p>
-                        </div>
-                    </div>
-                    <!-- end of card -->
-
-                    <!-- Card -->
-                    <div class="card">
-                        <div class="card-body">
-                            <p>To raise an army of financially literate people.</p>
-                        </div>
-                    </div>
-                    <!-- end of card -->
-
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-
-        
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="h2-heading">Mision Statement </h2>
-                    <p class="p-heading">Take your business strategy to the next level and automatize your marketing tasks to save time for product development. Tivo can provide results in less than 2 weeks</p>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-
-    </div> <!-- end of cards-1 -->
-    <!-- end of description -->
-
-
-
+    
+    
     <!-- About -->
-    <div id="about" class="cards-1">
+    <div id="about" class="mt-4 cards-1">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -248,7 +92,6 @@
                             From general money knowledge, to Forex education, to crypto asset trading and lots more, in our academy you will find simplified concepts and training courses put together in form of articles, video trainings and live training sessions.
                             We are on a mission to spread financial literacy and help members of our community from all around the world earn money while learning with us.
                             Don not wait to join us, Join our fast growing community and say yes to financial literacy.
-                            Sign Up Here…
                         </p>
                     </div>
                 </div> <!-- end of col -->
@@ -262,8 +105,7 @@
     <!-- end of about -->
 
 
-
-
+    
     <!-- Features -->
     <div id="features" class="tabs">
         <div class="container">
@@ -280,13 +122,13 @@
                     <!-- Tabs Links -->
                     <ul class="nav nav-tabs" id="argoTabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="nav-tab-1" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true"><i class="fas fa-list"></i>List Builder</a>
+                            <a class="nav-link active" id="nav-tab-1" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true"><i class="fas fa-list"></i>Core Values</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="nav-tab-2" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false"><i class="fas fa-envelope-open-text"></i>Campaigns</a>
+                            <a class="nav-link" id="nav-tab-2" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false"><i class="fas fa-envelope-open-text"></i>Vision</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="nav-tab-3" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false"><i class="fas fa-chart-bar"></i>Analytics</a>
+                            <a class="nav-link" id="nav-tab-3" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false"><i class="fas fa-chart-bar"></i>Mision Statement</a>
                         </li>
                     </ul>
                     <!-- end of tabs links -->
@@ -296,100 +138,100 @@
 
                         <!-- Tab -->
                         <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="image-container">
-                                        <img class="img-fluid" src="images/features-1.png" alt="alternative">
-                                    </div> <!-- end of image-container -->
-                                </div> <!-- end of col -->
-                                <div class="col-lg-6">
-                                    <div class="text-container">
-                                        <h3>List Building Is Easier Than Ever</h3>
-                                        <p>It's very easy to start using Tivo. You just need to fill out and submit the <a class="blue page-scroll" href="sign-up.html">Sign Up Form</a> and you will receive access to the app and all of its features in no more than 24h.</p>
-                                        <ul class="list-unstyled li-space-lg">
-                                            <li class="media">
-                                                <i class="fas fa-square"></i>
-                                                <div class="media-body">Create and embed on websites newsletter sign up forms</div>
-                                            </li>
-                                            <li class="media">
-                                                <i class="fas fa-square"></i>
-                                                <div class="media-body">Manage forms and landing pages for your services</div>
-                                            </li>
-                                            <li class="media">
-                                                <i class="fas fa-square"></i>
-                                                <div class="media-body">Add and remove subscribers using the control panel</div>
-                                            </li>
-                                        </ul>
-                                        <a class="btn-solid-reg popup-with-move-anim" href="#details-lightbox-1">LIGHTBOX</a>
-                                    </div> <!-- end of text-container -->
-                                </div> <!-- end of col -->
-                            </div> <!-- end of row -->
+                            
+                                <div class="cards-2">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+
+                                            <!-- Card -->
+                                            <div class="card">
+                                                <div class="card-image">
+                                                    <img class="img-fluid" src="images/description-1.png" alt="alternative">
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Trust</h4>
+                                                    <p>We are building the largest thriving community financially, on the world’s most valuable asset – Trust.</p>
+                                                </div>
+                                            </div>
+                                            <!-- end of card -->
+
+                                            <!-- Card -->
+                                            <div class="card">
+                                                <div class="card-image">
+                                                    <img class="img-fluid" src="images/description-2.png" alt="alternative">
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Transparency</h4>
+                                                    <p>Our Vision and Mission are written in plain words, so our members can run with us as we lead.</p>
+                                                </div>
+                                            </div>
+                                            <!-- end of card -->
+
+                                            <!-- Card -->
+                                            <div class="card">
+                                                <div class="card-image">
+                                                    <img class="img-fluid" src="images/description-3.png" alt="alternative">
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Passion</h4>
+                                                    <p>From Leadership down the ranks, our core vision is driven by passion to bridge the gap between the rich and the poor.</p>
+                                                </div>
+                                            </div>
+                                            <!-- end of card -->
+
+                                        </div> <!-- end of col -->
+                                    </div> <!-- end of row -->
+                                </div> <!-- end of container -->
+
+
                         </div> <!-- end of tab-pane -->
                         <!-- end of tab -->
 
                         <!-- Tab -->
                         <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="image-container">
-                                        <img class="img-fluid" src="images/features-2.png" alt="alternative">
-                                    </div> <!-- end of image-container -->
-                                </div> <!-- end of col -->
-                                <div class="col-lg-6">
-                                    <div class="text-container">
-                                        <h3>Campaigns Monitoring Tools</h3>
-                                        <p>Campaigns monitoring is a feature we've developed since the beginning because it's at the core of Tivo and basically to any marketing activity focused on results.</p>
-                                        <ul class="list-unstyled li-space-lg">
-                                            <li class="media">
-                                                <i class="fas fa-square"></i>
-                                                <div class="media-body">Easily plan campaigns and schedule their starting date</div>
-                                            </li>
-                                            <li class="media">
-                                                <i class="fas fa-square"></i>
-                                                <div class="media-body">Start campaigns and follow their evolution closely</div>
-                                            </li>
-                                            <li class="media">
-                                                <i class="fas fa-square"></i>
-                                                <div class="media-body">Evaluate campaign results and optimize future actions</div>
-                                            </li>
-                                        </ul>
-                                        <a class="btn-solid-reg popup-with-move-anim" href="#details-lightbox-2">LIGHTBOX</a>
-                                    </div> <!-- end of text-container -->
-                                </div> <!-- end of col -->
-                            </div> <!-- end of row -->
+
+                            <div class="cards-2">
+                                <div class="row">
+                                    <div class="col-lg-12">
+
+                                        <!-- Card -->
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <p>To offer simple solutions to create abundant wealth.</p>
+                                            </div>
+                                        </div>
+                                        <!-- end of card -->
+
+                                        <!-- Card -->
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <p>To provide financial education to help our members sustain their wealth.</p>
+                                            </div>
+                                        </div>
+                                        <!-- end of card -->
+
+                                        <!-- Card -->
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <p>To raise an army of financially literate people.</p>
+                                            </div>
+                                        </div>
+                                        <!-- end of card -->
+
+                                    </div> <!-- end of col -->
+                                </div> <!-- end of row -->
+                            </div> <!-- end of container -->
+
                         </div> <!-- end of tab-pane -->
                         <!-- end of tab -->
 
                         <!-- Tab -->
                         <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="image-container">
-                                        <img class="img-fluid" src="images/features-3.png" alt="alternative">
-                                    </div> <!-- end of image-container -->
-                                </div> <!-- end of col -->
-                                <div class="col-lg-6">
-                                    <div class="text-container">
-                                        <h3>Analytics Control Panel</h3>
-                                        <p>Analytics control  panel is important for every marketing team so it's beed implemented from the begging and designed to produce reports based on very little input information.</p>
-                                        <ul class="list-unstyled li-space-lg">
-                                            <li class="media">
-                                                <i class="fas fa-square"></i>
-                                                <div class="media-body">If you set it up correctly you will get acces to great intel</div>
-                                            </li>
-                                            <li class="media">
-                                                <i class="fas fa-square"></i>
-                                                <div class="media-body">Easy to integrate in your websites and landing pages</div>
-                                            </li>
-                                            <li class="media">
-                                                <i class="fas fa-square"></i>
-                                                <div class="media-body">The generated reports are important for your strategy</div>
-                                            </li>
-                                        </ul>
-                                        <a class="btn-solid-reg popup-with-move-anim" href="#details-lightbox-3">LIGHTBOX</a>
-                                    </div> <!-- end of text-container -->
-                                </div> <!-- end of col -->
-                            </div> <!-- end of row -->
+
+                            <div class="mt-4 col-lg-12">
+                                <p class="p-heading">Take your business strategy to the next level and automatize your marketing tasks to save time for product development. Tivo can provide results in less than 2 weeks</p>
+                            </div> <!-- end of col -->
+
                         </div> <!-- end of tab-pane -->
                         <!-- end of tab -->
                         
@@ -866,11 +708,223 @@
                     </div> <!-- end of card -->
                     <!-- end of card -->
 
+                    <h4>Note: Terms and conditions apply.</h4>
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
     </div> <!-- end of cards-2 -->
     <!-- end of pricing -->
+
+
+    <!-- pricing exp -->
+    <div id="pricing" class="tabs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-container">
+                    <p>
+                        For each package you buy, you can potentially earn up to 4000% on your package by just sharing and building a successful team with us.
+                        Here’s how it works;
+                        Let’s say you buy Gold package of $200, with our 5x5 matrix you can only have 5 direct referrals. For each direct referral you earn a 20% commission off their registration package.
+                    </p>
+                    <br>
+
+                    <table class="table-p" style="width:100%">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>You</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>a. $40</td>
+                            <td>b. $40</td>
+                            <td>c. $40</td>
+                            <td>d. $40</td>
+                            <td>e. $40</td>
+                        </tr>
+                    </table>
+                    <br>
+
+                    <p>
+                        Total first level commission $200 <br>
+                        Each of your First Level referrals have access to 5 direct referrals too, making your second level a total of 25 persons. For each of these 25, you earn 10% off their registration.  And for levels 3 and 4 you earn 5% each.
+                    </p>
+                    <br>
+
+                    <table class="table-p" style="width:100%">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>You</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>$40</td>
+                            <td>$40</td>
+                            <td>$40</td>
+                            <td>$40</td>
+                            <td>$40</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>$100</td>
+                            <td>$100</td>
+                            <td>$100</td>
+                            <td>$100</td>
+                            <td>$100</td>
+                        </tr>
+
+                        <tr>
+                            <td>$250</td>
+                            <td>$250</td>
+                            <td>$250</td>
+                            <td>$250</td>
+                            <td>$250</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>$1250</td>
+                            <td>$1250</td>
+                            <td>$1250</td>
+                            <td>$1250</td>
+                            <td>$1250</td>
+                        </tr>
+                    </table>
+
+                    <!-- <p>
+                        Total commission =$8200
+
+There are four leadership Levels for each category
+Associate:  Until your First Level completes
+Leader: Until second Level completes.
+Manager: Until Third Level Completes.
+Executive: Until Fourth Level Completes.
+Rank Advancement Bonus:
+
+Gold Associate:   - xxx
+	Leader:   - xxx
+	Manager: - $200
+	Executive: - $1000
+
+Platinum Associate:  - xxx
+	Leader	: 	xxx
+	Manager:	$500
+	Executive:	$2500
+
+Emerald Associate: 	xxx
+	Leader:		xxx
+	Manager:	$1000
+	Executive:	$5000
+
+Diamond Associate:	xxx
+	Leader:		xxx
+	Manager:	$5000
+	Executive:	$25000
+Manager spot qualifies you for all other benefits specified in the terms and conditions section.
+                    </p> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of pricing exp -->
+
+
+    <!-- Testimonials -->
+    <div class="slider-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">      
+                    
+                    <!-- Text Slider -->
+                    <div class="slider-container">
+                        <div class="swiper-container text-slider swiper-container-horizontal">
+                            <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-2090px, 0px, 0px);"><div class="swiper-slide swiper-slide-duplicate swiper-slide-next swiper-slide-duplicate-prev" data-swiper-slide-index="3" style="width: 418px;">
+                                    <div class="image-wrapper">
+                                        <img class="img-fluid" src="images/testimonial-4.jpg" alt="alternative">
+                                    </div> <!-- end of image-wrapper -->
+                                    <div class="text-wrapper">
+                                        <div class="testimonial-text">Tivo is one of the greatest marketing automation apps out there. I especially love the Reporting Tools module because it gives me such a great amount of information based on little amounts of input gathered in just few weeks of light weight usage. Recommended!</div>
+                                        <div class="testimonial-author">Ronda Louis - Online Marketer</div>
+                                    </div> <!-- end of text-wrapper -->
+                                </div>
+                                
+                                <!-- Slide -->
+                                <div class="swiper-slide swiper-slide-duplicate-active" data-swiper-slide-index="0" style="width: 418px;">
+                                    <div class="image-wrapper">
+                                        <img class="img-fluid" src="images/testimonial-1.jpg" alt="alternative">
+                                    </div> <!-- end of image-wrapper -->
+                                    <div class="text-wrapper">
+                                        <div class="testimonial-text">I started to use Tivo with the free trial about a year ago and never stopped since then. It does all the repeating marketing tasks and allows me to focus on core development activities like new product research and design. I love it and recommend it to everyone.</div>
+                                        <div class="testimonial-author">Jude Thorn - Online Marketer</div>
+                                    </div> <!-- end of text-wrapper -->
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+
+                                <!-- Slide -->
+                                <div class="swiper-slide" data-swiper-slide-index="1" style="width: 418px;">
+                                    <div class="image-wrapper">
+                                        <img class="img-fluid" src="images/testimonial-2.jpg" alt="alternative">
+                                    </div> <!-- end of image-wrapper -->
+                                    <div class="text-wrapper">
+                                        <div class="testimonial-text">Awesome features for the money. I never thought such a low ammount of money would bring me so many leads per month. Before Tivo I used the services of an agency which cost 10x more and delivered far less. Highly recommended to marketers focused on results.</div>
+                                        <div class="testimonial-author">Roy Smith - Developer</div>
+                                    </div> <!-- end of text-wrapper -->
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+
+                                <!-- Slide -->
+                                <div class="swiper-slide" data-swiper-slide-index="2" style="width: 418px;">
+                                    <div class="image-wrapper">
+                                        <img class="img-fluid" src="images/testimonial-3.jpg" alt="alternative">
+                                    </div> <!-- end of image-wrapper -->
+                                    <div class="text-wrapper">
+                                        <div class="testimonial-text">Tivo is the best marketing automation app for small and medium sized business. It understands the mindset of young entrepreneurs and provides the necessary data for wise marketing decisions. Just give it a try and you will definitely not regret spending your time.</div>
+                                        <div class="testimonial-author">Marsha Singer - Online Marketer</div>
+                                    </div> <!-- end of text-wrapper -->
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+
+                                <!-- Slide -->
+                                <div class="swiper-slide swiper-slide-prev swiper-slide-duplicate-next" data-swiper-slide-index="3" style="width: 418px;">
+                                    <div class="image-wrapper">
+                                        <img class="img-fluid" src="images/testimonial-4.jpg" alt="alternative">
+                                    </div> <!-- end of image-wrapper -->
+                                    <div class="text-wrapper">
+                                        <div class="testimonial-text">Tivo is one of the greatest marketing automation apps out there. I especially love the Reporting Tools module because it gives me such a great amount of information based on little amounts of input gathered in just few weeks of light weight usage. Recommended!</div>
+                                        <div class="testimonial-author">Ronda Louis - Online Marketer</div>
+                                    </div> <!-- end of text-wrapper -->
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+
+                            <div class="swiper-slide swiper-slide-duplicate swiper-slide-active" data-swiper-slide-index="0" style="width: 418px;">
+                                    <div class="image-wrapper">
+                                        <img class="img-fluid" src="images/testimonial-1.jpg" alt="alternative">
+                                    </div> <!-- end of image-wrapper -->
+                                    <div class="text-wrapper">
+                                        <div class="testimonial-text">I started to use Tivo with the free trial about a year ago and never stopped since then. It does all the repeating marketing tasks and allows me to focus on core development activities like new product research and design. I love it and recommend it to everyone.</div>
+                                        <div class="testimonial-author">Jude Thorn - Online Marketer</div>
+                                    </div> <!-- end of text-wrapper -->
+                                </div></div> <!-- end of swiper-wrapper -->
+                            
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide"></div>
+                            <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"></div>
+                            <!-- end of add arrows -->
+
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div> <!-- end of swiper-container -->
+                    </div> <!-- end of slider-container -->
+                    <!-- end of text slider -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div>
+    <!-- end of Testimonials -->
 
 
     <!-- Newsletter -->
@@ -945,67 +999,58 @@
     </div> <!-- end of form -->
     <!-- end of newsletter -->
 
-
-    <!-- Footer -->
-    <svg class="footer-frame" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 79"><defs><style>.cls-2{fill:#5f4def;}</style></defs><title>footer-frame</title><path class="cls-2" d="M0,72.427C143,12.138,255.5,4.577,328.644,7.943c147.721,6.8,183.881,60.242,320.83,53.737,143-6.793,167.826-68.128,293-60.9,109.095,6.3,115.68,54.364,225.251,57.319,113.58,3.064,138.8-47.711,251.189-41.8,104.012,5.474,109.713,50.4,197.369,46.572,89.549-3.91,124.375-52.563,227.622-50.155A338.646,338.646,0,0,1,1920,23.467V79.75H0V72.427Z" transform="translate(0 -0.188)"/></svg>
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="footer-col first">
-                        <h4>About GEMTRUST/h4>
-                        <p class="p-small">Gemtrust financial solutions is a financial literacy campaign targeted at just any and every class of persons. Gemtrust has put together an academy  of constant increasing content to educate our community on finance.</p>
-                    </div>
-                </div> <!-- end of col -->
-                <div class="col-md-4">
-                    <div class="footer-col middle">
-                        <h4>Important Links</h4>
-                        <ul class="list-unstyled li-space-lg p-small">
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body">Our business partners <a class="white" href="#your-link">startupguide.com</a></div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body">Read our <a class="white" href="terms-conditions.html">Terms & Conditions</a>, <a class="white" href="privacy-policy.html">Privacy Policy</a></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div> <!-- end of col -->
-                <div class="col-md-4">
-                    <div class="footer-col last">
-                        <h4>Contact</h4>
-                        <ul class="list-unstyled li-space-lg p-small">
-                            <li class="media">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div class="media-body">22 Innovative, San Francisco, CA 94043, US</div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-envelope"></i>
-                                <div class="media-body"><a class="white" href="mailto:contact@tivo.com">contact@tivo.com</a> <i class="fas fa-globe"></i><a class="white" href="#your-link">www.tivo.com</a></div>
-                            </li>
-                        </ul>
-                    </div> 
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of footer -->  
-    <!-- end of footer -->
-
-
-    <!-- Copyright -->
-    <div class="copyright">
+    
+    <!-- customers  -->
+    <div class="slider-1">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <p class="p-small">Copyright © 2020 <a href="https://inovatik.com/">Template by Inovatik</a><br>
-                        Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-                    </p>
+                    
+                    <!-- Image Slider -->
+                    <div class="slider-container">
+                        <div class="swiper-container image-slider swiper-container-horizontal">
+                            <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-1480px, 0px, 0px);">
+                                <div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="5" style="width: 360px; margin-right: 10px;">
+                                    <img class="img-fluid" src="images/customer-logo-6.png" alt="alternative">
+                                </div>
+                                <div class="swiper-slide" data-swiper-slide-index="0" style="width: 360px; margin-right: 10px;">
+                                    <img class="img-fluid" src="images/customer-logo-1.png" alt="alternative">
+                                </div>
+                                <div class="swiper-slide" data-swiper-slide-index="1" style="width: 360px; margin-right: 10px;">
+                                    <img class="img-fluid" src="images/customer-logo-2.png" alt="alternative">
+                                </div>
+                                <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="2" style="width: 360px; margin-right: 10px;">
+                                    <img class="img-fluid" src="images/customer-logo-3.png" alt="alternative">
+                                </div>
+                                <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="3" style="width: 360px; margin-right: 10px;">
+                                    <img class="img-fluid" src="images/customer-logo-4.png" alt="alternative">
+                                </div>
+                                <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="4" style="width: 360px; margin-right: 10px;">
+                                    <img class="img-fluid" src="images/customer-logo-5.png" alt="alternative">
+                                </div>
+                                <div class="swiper-slide" data-swiper-slide-index="5" style="width: 360px; margin-right: 10px;">
+                                    <img class="img-fluid" src="images/customer-logo-6.png" alt="alternative">
+                                </div>
+                                <div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0" style="width: 360px; margin-right: 10px;">
+                                    <img class="img-fluid" src="images/customer-logo-1.png" alt="alternative">
+                                </div>
+                            </div> <!-- end of swiper-wrapper -->
+                            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                        </div> <!-- end of swiper container -->
+                    </div> <!-- end of slider-container -->
+                    <!-- end of image slider -->
+
                 </div> <!-- end of col -->
-            </div> <!-- enf of row -->
+            </div> <!-- end of row -->
         </div> <!-- end of container -->
-    </div> <!-- end of copyright --> 
-    <!-- end of copyright -->
+    </div>
+    <!-- end of customers  -->
+
+
+
+    <!-- Footer area -->
+    @include("components.footer")
+    <!-- End footer area -->
     
     	
     <!-- Scripts -->
