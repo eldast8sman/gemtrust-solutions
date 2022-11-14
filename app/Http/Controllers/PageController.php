@@ -11,6 +11,6 @@ class PageController extends Controller
     }
 
     public function terms(){
-        return view('terms-conditions');
+        return view('terms_conditions');
     }
 }

@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -11,1057 +12,517 @@
 
     <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
 	<meta property="og:site_name" content="gemtrust" /> <!-- website name -->
-	<meta property="og:site" content="" /> <!-- website link -->
-	<meta property="og:title" content="GEMTRUST - Home"/> <!-- title shown in the actual shared post -->
+	<meta property="og:site" content="https://gemtrust.cfcing.org" /> <!-- website link -->
+	<meta property="og:title" content="Gemtrust - Home"/> <!-- title shown in the actual shared post -->
 	<meta property="og:description" content="Gemtrust financial solutions is a financial literacy campaign targeted at just any and every class of persons. Gemtrust has put together an academy  of constant increasing content to educate our community on finance." /> <!-- description shown in the actual shared post -->
 	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
 	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
 	<meta property="og:type" content="article" />
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- Website Title -->
-    <title>GEMTRUST - Home</title>
-    
-    <!-- Styles -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&amp;display=swap&amp;subset=latin-ext" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/fontawesome-all.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/swiper.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/magnific-popup.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-	
-	<!-- Favicon  -->
-    <link rel="icon" href="images/favicon.png">
+    <title>Gemtrust - Home</title>
+
 </head>
-<body data-spy="scroll" data-target=".fixed-top">
-    
-    <!-- Preloader -->
-	<div class="spinner-wrapper">
-        <div class="spinner">
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
+
+
+    <!-- TOP NAV -->
+    <div class="top-nav" id="home">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-auto">
+                    <p> <i class='bx bxs-envelope'></i> info@gemtrust.cfcing.org</p>
+                    <p> <i class='bx bxs-phone-call'></i> 123 456-7890</p>
+                </div>
+                <div class="col-auto social-icons">
+                    <a href="#"><i class='bx bxl-facebook'></i></a>
+                    <a href="#"><i class='bx bxl-twitter'></i></a>
+                    <a href="#"><i class='bx bxl-instagram'></i></a>
+                    <a href="#"><i class='bx bxl-pinterest'></i></a>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- end of preloader -->
-    
 
-    <!-- Navigation -->
-    @include("components.header")
-    <!-- end of navigation -->
+    <!-- BOTTOM NAV -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Gemtrust<span class="dot">.</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#partners">partners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#team">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reviews">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog">Blog</a>
+                    </li>
+                </ul>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    class="btn btn-brand ms-lg-3">Login</a>
+            </div>
+        </div>
+    </nav>
 
-
-    <!-- Header -->
-    <header id="header" class="header">
-        <div class="header-content">
+    <!-- SLIDER -->
+    <div class="owl-carousel owl-theme hero-slider">
+        <div class="slide slide1">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 col-xl-5">
-                        <div class="text-container">
-                            <h1>GEMTRUST FINANCIAL SOLUTIONS</h1>
-                            <p class="p-large">Simple Solutions to wealth creation… Join our Thriving Community of Inspired people from various cities across the world</p>
-                            <p class="p-large">Join Our Financial Literacy Campaign And Make More Our Of Life</p>
-                            <a class="btn-solid-lg page-scroll" href="sign-up.html">SIGN UP</a>
-                        </div> <!-- end of text-container -->
-                    </div> <!-- end of col -->
-                    <div class="col-lg-6 col-xl-7">
-                        <div class="image-container">
-                            <div class="img-wrapper">
-                                <img class="img-fluid" src="images/py.jpeg" alt="alternative">
-                            </div> <!-- end of img-wrapper -->
-                        </div> <!-- end of image-container -->
-                    </div> <!-- end of col -->
-                </div> <!-- end of row -->
-            </div> <!-- end of container -->
-        </div> <!-- end of header-content -->
-    </header> <!-- end of header -->
-    <svg class="header-frame" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 310"><defs><style>.cls-1{fill:#356d74;}</style></defs><title>header-frame</title><path class="cls-1" d="M0,283.054c22.75,12.98,53.1,15.2,70.635,14.808,92.115-2.077,238.3-79.9,354.895-79.938,59.97-.019,106.17,18.059,141.58,34,47.778,21.511,47.778,21.511,90,38.938,28.418,11.731,85.344,26.169,152.992,17.971,68.127-8.255,115.933-34.963,166.492-67.393,37.467-24.032,148.6-112.008,171.753-127.963,27.951-19.26,87.771-81.155,180.71-89.341,72.016-6.343,105.479,12.388,157.434,35.467,69.73,30.976,168.93,92.28,256.514,89.405,100.992-3.315,140.276-41.7,177-64.9V0.24H0V283.054Z"/></svg>
-    <!-- end of header -->
-
-    
-    
-    <!-- About -->
-    <div id="about" class="mt-4 cards-1">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="above-heading">ABOUT</div>
-                    <h2 class="h2-heading">About GEMTRUST</h2>
-                    <div class="text-container">
-                        <p class="p-large">
-                            Gemtrust financial solutions is a financial literacy campaign targeted at just any and every class of persons. Gemtrust has put together an academy  of constant increasing content to educate our community on finance.
-                            From general money knowledge, to Forex education, to crypto asset trading and lots more, in our academy you will find simplified concepts and training courses put together in form of articles, video trainings and live training sessions.
-                            We are on a mission to spread financial literacy and help members of our community from all around the world earn money while learning with us.
-                            Don not wait to join us, Join our fast growing community and say yes to financial literacy.
-                        </p>
+                    <div class="col-12 text-center text-white">
+                        <h6 class="text-white text-uppercase">Gemtrust Financial Soutions</h6>
+                        <h1 class="display-3 my-4">Simple solutions to wealth creation</h1>
+                        <a href="#" class="btn btn-brand">Get Started</a>
+                        <a href="#" class="btn btn-outline-light ms-3">Our work</a>
                     </div>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
                 </div>
             </div>
         </div>
-    </div>
-    <!-- end of about -->
-
-
-    
-    <!-- Features -->
-    <div id="features" class="tabs">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="above-heading">FEATURES</div>
-                    <h2 class="h2-heading">Marketing Automation</h2>
-                    <p class="p-heading">Take your business strategy to the next level and automatize your marketing tasks to save time for product development. Tivo can provide results in less than 2 weeks</p>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <!-- Tabs Links -->
-                    <ul class="nav nav-tabs" id="argoTabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="nav-tab-1" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true"><i class="fas fa-list"></i>Core Values</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="nav-tab-2" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false"><i class="fas fa-envelope-open-text"></i>Vision</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="nav-tab-3" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false"><i class="fas fa-chart-bar"></i>Mision Statement</a>
-                        </li>
-                    </ul>
-                    <!-- end of tabs links -->
-
-                    <!-- Tabs Content -->
-                    <div class="tab-content" id="argoTabsContent">
-
-                        <!-- Tab -->
-                        <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
-                            
-                                <div class="cards-2">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-
-                                            <!-- Card -->
-                                            <div class="card">
-                                                <div class="card-image">
-                                                    <img class="img-fluid" src="images/description-1.png" alt="alternative">
-                                                </div>
-                                                <div class="card-body">
-                                                    <h4 class="card-title">Trust</h4>
-                                                    <p>We are building the largest thriving community financially, on the world’s most valuable asset – Trust.</p>
-                                                </div>
-                                            </div>
-                                            <!-- end of card -->
-
-                                            <!-- Card -->
-                                            <div class="card">
-                                                <div class="card-image">
-                                                    <img class="img-fluid" src="images/description-2.png" alt="alternative">
-                                                </div>
-                                                <div class="card-body">
-                                                    <h4 class="card-title">Transparency</h4>
-                                                    <p>Our Vision and Mission are written in plain words, so our members can run with us as we lead.</p>
-                                                </div>
-                                            </div>
-                                            <!-- end of card -->
-
-                                            <!-- Card -->
-                                            <div class="card">
-                                                <div class="card-image">
-                                                    <img class="img-fluid" src="images/description-3.png" alt="alternative">
-                                                </div>
-                                                <div class="card-body">
-                                                    <h4 class="card-title">Passion</h4>
-                                                    <p>From Leadership down the ranks, our core vision is driven by passion to bridge the gap between the rich and the poor.</p>
-                                                </div>
-                                            </div>
-                                            <!-- end of card -->
-
-                                        </div> <!-- end of col -->
-                                    </div> <!-- end of row -->
-                                </div> <!-- end of container -->
-
-
-                        </div> <!-- end of tab-pane -->
-                        <!-- end of tab -->
-
-                        <!-- Tab -->
-                        <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
-
-                            <div class="cards-2">
-                                <div class="row">
-                                    <div class="col-lg-12">
-
-                                        <!-- Card -->
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <p>To offer simple solutions to create abundant wealth.</p>
-                                            </div>
-                                        </div>
-                                        <!-- end of card -->
-
-                                        <!-- Card -->
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <p>To provide financial education to help our members sustain their wealth.</p>
-                                            </div>
-                                        </div>
-                                        <!-- end of card -->
-
-                                        <!-- Card -->
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <p>To raise an army of financially literate people.</p>
-                                            </div>
-                                        </div>
-                                        <!-- end of card -->
-
-                                    </div> <!-- end of col -->
-                                </div> <!-- end of row -->
-                            </div> <!-- end of container -->
-
-                        </div> <!-- end of tab-pane -->
-                        <!-- end of tab -->
-
-                        <!-- Tab -->
-                        <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3">
-
-                            <div class="mt-4 col-lg-12">
-                                <p class="p-heading">Take your business strategy to the next level and automatize your marketing tasks to save time for product development. Tivo can provide results in less than 2 weeks</p>
-                            </div> <!-- end of col -->
-
-                        </div> <!-- end of tab-pane -->
-                        <!-- end of tab -->
-                        
-                    </div> <!-- end of tab content -->
-                    <!-- end of tabs content -->
-
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of tabs -->
-    <!-- end of features -->
-
-
-    <!-- Details Lightboxes -->
-    <!-- Details Lightbox 1 -->
-	<div id="details-lightbox-1" class="lightbox-basic zoom-anim-dialog mfp-hide">
-        <div class="container">
-            <div class="row">
-                <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
-                <div class="col-lg-8">
-                    <div class="image-container">
-                        <img class="img-fluid" src="images/details-lightbox.png" alt="alternative">
-                    </div> <!-- end of image-container -->
-                </div> <!-- end of col -->
-                <div class="col-lg-4">
-                    <h3>List Building</h3>
-                    <hr>
-                    <h5>Core service</h5>
-                    <p>It's very easy to start using Tivo. You just need to fill out and submit the Sign Up Form and you will receive access to the app.</p>
-                    <ul class="list-unstyled li-space-lg">
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">List building framework</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">Easy database browsing</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">User administration</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">Automate user signup</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">Quick formatting tools</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">Fast email checking</div>
-                        </li>
-                    </ul>
-                    <a class="btn-solid-reg mfp-close" href="sign-up.html">SIGN UP</a> <a class="btn-outline-reg mfp-close as-button" href="#screenshots">BACK</a>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of lightbox-basic -->
-    <!-- end of details lightbox 1 -->
-
-    <!-- Details Lightbox 2 -->
-	<div id="details-lightbox-2" class="lightbox-basic zoom-anim-dialog mfp-hide">
-        <div class="container">
-            <div class="row">
-                <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
-                <div class="col-lg-8">
-                    <div class="image-container">
-                        <img class="img-fluid" src="images/details-lightbox.png" alt="alternative">
-                    </div> <!-- end of image-container -->
-                </div> <!-- end of col -->
-                <div class="col-lg-4">
-                    <h3>Campaign Monitoring</h3>
-                    <hr>
-                    <h5>Core service</h5>
-                    <p>It's very easy to start using Tivo. You just need to fill out and submit the Sign Up Form and you will receive access to the app.</p>
-                    <ul class="list-unstyled li-space-lg">
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">List building framework</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">Easy database browsing</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">User administration</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">Automate user signup</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">Quick formatting tools</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">Fast email checking</div>
-                        </li>
-                    </ul>
-                    <a class="btn-solid-reg mfp-close" href="sign-up.html">SIGN UP</a> <a class="btn-outline-reg mfp-close as-button" href="#screenshots">BACK</a>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of lightbox-basic -->
-    <!-- end of details lightbox 2 -->
-
-    <!-- Details Lightbox 3 -->
-	<div id="details-lightbox-3" class="lightbox-basic zoom-anim-dialog mfp-hide">
-        <div class="container">
-            <div class="row">
-                <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
-                <div class="col-lg-8">
-                    <div class="image-container">
-                        <img class="img-fluid" src="images/details-lightbox.png" alt="alternative">
-                    </div> <!-- end of image-container -->
-                </div> <!-- end of col -->
-                <div class="col-lg-4">
-                    <h3>Analytics Tools</h3>
-                    <hr>
-                    <h5>Core service</h5>
-                    <p>It's very easy to start using Tivo. You just need to fill out and submit the Sign Up Form and you will receive access to the app.</p>
-                    <ul class="list-unstyled li-space-lg">
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">List building framework</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">Easy database browsing</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">User administration</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">Automate user signup</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">Quick formatting tools</div>
-                        </li>
-                        <li class="media">
-                            <i class="fas fa-square"></i><div class="media-body">Fast email checking</div>
-                        </li>
-                    </ul>
-                    <a class="btn-solid-reg mfp-close" href="sign-up.html">SIGN UP</a> <a class="btn-outline-reg mfp-close as-button" href="#screenshots">BACK</a>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of lightbox-basic -->
-    <!-- end of details lightbox 3 -->
-    <!-- end of details lightboxes -->
-
-
-    <!-- Details -->
-    <div id="details" class="basic-1">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="text-container">
-                        <h2>Now Is The Time To Upgrade Your Marketing Solution</h2>
-                        <p>Target the right customers for your business with the help of Tivo's patented segmentation technology and deploy efficient marketing campaigns. Keep your customers happy and loyal.</p>
-                        <ul class="list-unstyled li-space-lg">
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body">Understand customers and meet their requirements</div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body">Targeted client base with Tivo's efficient technology</div>
-                            </li>
-                        </ul>
-                        <a class="btn-solid-reg page-scroll" href="sign-up.html">SIGN UP</a>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-                <div class="col-lg-6">
-                    <div class="image-container">
-                        <img class="img-fluid" src="images/details.png" alt="alternative">
-                    </div> <!-- end of image-container -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-1 -->
-    <!-- end of details -->
-
-
-    <!-- Video -->
-    <div id="video" class="basic-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <!-- Video Preview -->
-                    <div class="image-container">
-                        <div class="video-wrapper">
-                            <a class="popup-youtube" href="https://www.youtube.com/watch?v=fLCjQJCekTs" data-effect="fadeIn">
-                                <img class="img-fluid" src="images/video-image.png" alt="alternative">
-                                <span class="video-play-button">
-                                    <span></span>
-                                </span>
-                            </a>
-                        </div> <!-- end of video-wrapper -->
-                    </div> <!-- end of image-container -->
-                    <!-- end of video preview -->
-
-                    <div class="p-heading">What better way to show off Tivo marketing automation saas app than presenting you some great situations of each module and tool available to users in a video</div>        
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-2 -->
-    <!-- end of video -->
-
-
-    <!-- Pricing -->
-    <div id="pricing" class="cards-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="above-heading">PRICING</div>
-                    <h2 class="h2-heading">Pricing Options Table</h2>
-                    <p class="p-heading">
-                        Our rich compensation plan rewards every active member of our community who decides to voluntarily share our products and services with others. Our compensation plan adopts a 5x5 matrix that goes 4 levels deep.
-                        There are 7 packages available in Gemtrust Financial Solutions. Each package gives you lifetime access to...
-                    </p>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <!-- Card-->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">START PACKAGE</div>
-                            <div class="price"><span class="currency">$</span><span class="value">20</span></div>
-                            <div class="frequency">monthly</div>
-                            <div class="divider"></div>
-                            <ul class="list-unstyled li-space-lg">
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Financial Literacy package</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">Forex Academy</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">3 Online Finance Mentorship conference</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">2 Live Conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">VIP treat for all Live conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">1 Foreign Trip (All expense paid)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">VIP treat on Foreign Trips</div>
-                                </li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <a class="btn-solid-reg page-scroll" href="sign-up.html">SIGN UP</a>
-                            </div>
-                        </div>
-                    </div> <!-- end of card -->
-                    <!-- end of card -->
-                    
-                    <!-- Card-->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">BASIC PACKAGE</div>
-                            <div class="price"><span class="currency">$</span><span class="value">50</span></div>
-                            <div class="frequency">14 days trial</div>
-                            <div class="divider"></div>
-                            <ul class="list-unstyled li-space-lg">
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Financial Literacy package</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Forex Academy</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">3 Online Finance Mentorship conference</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">2 Live Conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">VIP treat for all Live conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">1 Foreign Trip (All expense paid)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">VIP treat on Foreign Trips</div>
-                                </li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <a class="btn-solid-reg page-scroll" href="sign-up.html">SIGN UP</a>
-                            </div>
-                        </div>
-                    </div> <!-- end of card -->
-                    <!-- end of card -->
-
-                    <!-- Card-->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">SILVER PACKAGE</div>
-                            <div class="price"><span class="currency">$</span><span class="value">100</span></div>
-                            <div class="frequency">14 days trial</div>
-                            <div class="divider"></div>
-                            <ul class="list-unstyled li-space-lg">
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Financial Literacy package</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Forex Academy</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">3 Online Finance Mentorship conference</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">2 Live Conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">VIP treat for all Live conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">1 Foreign Trip (All expense paid)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">VIP treat on Foreign Trips</div>
-                                </li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <a class="btn-solid-reg page-scroll" href="sign-up.html">SIGN UP</a>
-                            </div>
-                        </div>
-                    </div> <!-- end of card -->
-                    <!-- end of card -->
-
-                    <!-- Card-->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">GOLD PACKAGE</div>
-                            <div class="price"><span class="currency">$</span><span class="value">200</span></div>
-                            <div class="frequency">monthly</div>
-                            <div class="divider"></div>
-                            <ul class="list-unstyled li-space-lg">
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Financial Literacy package</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Forex Academy</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">3 Online Finance Mentorship conference</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">2 Live Conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">VIP treat for all Live conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">1 Foreign Trip (All expense paid)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">VIP treat on Foreign Trips</div>
-                                </li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <a class="btn-solid-reg page-scroll" href="sign-up.html">SIGN UP</a>
-                            </div>
-                        </div>
-                    </div> <!-- end of card -->
-                    <!-- end of card -->
-                    
-                    <!-- Card-->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">PLATINUM PACKAGE</div>
-                            <div class="price"><span class="currency">$</span><span class="value">500</span></div>
-                            <div class="frequency">monthly</div>
-                            <div class="divider"></div>
-                            <ul class="list-unstyled li-space-lg">
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Financial Literacy package</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Forex Academy</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">3 Online Finance Mentorship conference</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">2 Live Conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">VIP treat for all Live conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">1 Foreign Trip (All expense paid)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">VIP treat on Foreign Trips</div>
-                                </li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <a class="btn-solid-reg page-scroll" href="sign-up.html">SIGN UP</a>
-                            </div>
-                        </div>
-                    </div> <!-- end of card -->
-                    <!-- end of card -->
-
-                    <!-- Card-->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">EMERALD PACKAGE</div>
-                            <div class="price"><span class="currency">$</span><span class="value">1000</span></div>
-                            <div class="frequency">monthly</div>
-                            <div class="divider"></div>
-                            <ul class="list-unstyled li-space-lg">
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Financial Literacy package</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Forex Academy</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">3 Online Finance Mentorship conference</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">2 Live Conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">VIP treat for all Live conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">1 Foreign Trip (All expense paid)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">VIP treat on Foreign Trips</div>
-                                </li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <a class="btn-solid-reg page-scroll" href="sign-up.html">SIGN UP</a>
-                            </div>
-                        </div>
-                    </div> <!-- end of card -->
-                    <!-- end of card -->
-                    
-                    <!-- Card-->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">DIAMOND PACKAGE</div>
-                            <div class="price"><span class="currency">$</span><span class="value">5000</span></div>
-                            <div class="frequency">monthly</div>
-                            <div class="divider"></div>
-                            <ul class="list-unstyled li-space-lg">
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Financial Literacy package</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Forex Academy</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">3 Online Finance Mentorship conference</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">2 Live Conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">VIP treat for all Live conferences (Domestic)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">1 Foreign Trip (All expense paid)</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">VIP treat on Foreign Trips</div>
-                                </li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <a class="btn-solid-reg page-scroll" href="sign-up.html">SIGN UP</a>
-                            </div>
-                        </div>
-                    </div> <!-- end of card -->
-                    <!-- end of card -->
-
-                    <h4>Note: Terms and conditions apply.</h4>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of cards-2 -->
-    <!-- end of pricing -->
-
-
-    <!-- pricing exp -->
-    <div id="pricing" class="tabs">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-container">
-                    <p>
-                        For each package you buy, you can potentially earn up to 4000% on your package by just sharing and building a successful team with us.
-                        Here’s how it works;
-                        Let’s say you buy Gold package of $200, with our 5x5 matrix you can only have 5 direct referrals. For each direct referral you earn a 20% commission off their registration package.
-                    </p>
-                    <br>
-
-                    <table class="table-p" style="width:100%">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>You</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        
-                        <tr>
-                            <td>a. $40</td>
-                            <td>b. $40</td>
-                            <td>c. $40</td>
-                            <td>d. $40</td>
-                            <td>e. $40</td>
-                        </tr>
-                    </table>
-                    <br>
-
-                    <p>
-                        Total first level commission $200 <br>
-                        Each of your First Level referrals have access to 5 direct referrals too, making your second level a total of 25 persons. For each of these 25, you earn 10% off their registration.  And for levels 3 and 4 you earn 5% each.
-                    </p>
-                    <br>
-
-                    <table class="table-p" style="width:100%">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>You</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        
-                        <tr>
-                            <td>$40</td>
-                            <td>$40</td>
-                            <td>$40</td>
-                            <td>$40</td>
-                            <td>$40</td>
-                        </tr>
-                        
-                        <tr>
-                            <td>$100</td>
-                            <td>$100</td>
-                            <td>$100</td>
-                            <td>$100</td>
-                            <td>$100</td>
-                        </tr>
-
-                        <tr>
-                            <td>$250</td>
-                            <td>$250</td>
-                            <td>$250</td>
-                            <td>$250</td>
-                            <td>$250</td>
-                        </tr>
-                        
-                        <tr>
-                            <td>$1250</td>
-                            <td>$1250</td>
-                            <td>$1250</td>
-                            <td>$1250</td>
-                            <td>$1250</td>
-                        </tr>
-                    </table>
-
-                    <!-- <p>
-                        Total commission =$8200
-
-There are four leadership Levels for each category
-Associate:  Until your First Level completes
-Leader: Until second Level completes.
-Manager: Until Third Level Completes.
-Executive: Until Fourth Level Completes.
-Rank Advancement Bonus:
-
-Gold Associate:   - xxx
-	Leader:   - xxx
-	Manager: - $200
-	Executive: - $1000
-
-Platinum Associate:  - xxx
-	Leader	: 	xxx
-	Manager:	$500
-	Executive:	$2500
-
-Emerald Associate: 	xxx
-	Leader:		xxx
-	Manager:	$1000
-	Executive:	$5000
-
-Diamond Associate:	xxx
-	Leader:		xxx
-	Manager:	$5000
-	Executive:	$25000
-Manager spot qualifies you for all other benefits specified in the terms and conditions section.
-                    </p> -->
-
+        
+        <div class="slide slide2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center text-white">
+                        <h6 class="text-white text-uppercase">Gemtrust Financial Soutions</h6>
+                        <h1 class="display-3 my-4">Join our global community and earn up to 4000% of your package and more</h1>
+                        <a href="#" class="btn btn-brand">Get Started</a>
+                        <a href="#" class="btn btn-outline-light ms-3">Our work</a>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="slide slide3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-10 offset-lg-1 text-white">
+                        <h6 class="text-white text-uppercase">Earn From</h6>
+                        <h3 class="display-3 my-4">FOREX, CRYPTO, INDICES, STOCKS…</h3>
+                        <a href="#" class="btn btn-brand">Get Started</a>
+                        <a href="#" class="btn btn-outline-light ms-3">Our work</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide slide4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-10 offset-lg-1 text-white">
+                        <h6 class="text-white text-uppercase">GEMTRUST ACADEMY</h6>
+                        <h3 class="display-3 my-4">Articles, Videos, Free Signals, PAMM</h3>
+                        <a href="#" class="btn btn-brand">Get Started</a>
+                        <a href="#" class="btn btn-outline-light ms-3">Our work</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <!-- end of pricing exp -->
 
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 py-5">
+                    <div class="row">
 
-    <!-- Testimonials -->
-    <div class="slider-2">
+                        <div class="col-12">
+                            <div class="info-box">
+                                <img src="img/icon6.png" alt="">
+                                <div class="ms-4">
+                                    <h5>Trust</h5>
+                                    <p> We are building the largest thriving community financially, 
+                                        on the world’s most valuable asset – TRUST </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <div class="info-box">
+                                <img src="img/icon4.png" alt="">
+                                <div class="ms-4">
+                                    <h5>Loyality</h5>
+                                    <p> Our Goal of providing global financial Literacy if driven by our Loyalty to our community. 
+                                        When it comes to decision, you come first, because we value you. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <div class="info-box">
+                                <img src="img/icon5.png" alt="">
+                                <div class="ms-4">
+                                    <h5>Passion</h5>
+                                    <p>From leadership, down the ranks, our vision is driven by PASSION to raise 
+                                        an army of financially literate people globally </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <img src="img/about.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MILESTONE -->
+    <section id="milestone">
+        <div class="container">
+            <div class="row text-center justify-content-center gy-4">
+                <div class="col-lg-2 col-sm-6">
+                    <h1 class="display-4">90K+</h1>
+                    <p class="mb-0">Happy Clients</p>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <h1 class="display-4">45M</h1>
+                    <p class="mb-0">Lines of code</p>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <h1 class="display-4">190</h1>
+                    <p class="mb-0">Total Downloads</p>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <h1 class="display-4">380K</h1>
+                    <p class="mb-0">YouTube Subscribers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="text-center">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">      
-                    
-                    <!-- Text Slider -->
-                    <div class="slider-container">
-                        <div class="swiper-container text-slider swiper-container-horizontal">
-                            <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-2090px, 0px, 0px);"><div class="swiper-slide swiper-slide-duplicate swiper-slide-next swiper-slide-duplicate-prev" data-swiper-slide-index="3" style="width: 418px;">
-                                    <div class="image-wrapper">
-                                        <img class="img-fluid" src="images/testimonial-4.jpg" alt="alternative">
-                                    </div> <!-- end of image-wrapper -->
-                                    <div class="text-wrapper">
-                                        <div class="testimonial-text">Tivo is one of the greatest marketing automation apps out there. I especially love the Reporting Tools module because it gives me such a great amount of information based on little amounts of input gathered in just few weeks of light weight usage. Recommended!</div>
-                                        <div class="testimonial-author">Ronda Louis - Online Marketer</div>
-                                    </div> <!-- end of text-wrapper -->
-                                </div>
-                                
-                                <!-- Slide -->
-                                <div class="swiper-slide swiper-slide-duplicate-active" data-swiper-slide-index="0" style="width: 418px;">
-                                    <div class="image-wrapper">
-                                        <img class="img-fluid" src="images/testimonial-1.jpg" alt="alternative">
-                                    </div> <!-- end of image-wrapper -->
-                                    <div class="text-wrapper">
-                                        <div class="testimonial-text">I started to use Tivo with the free trial about a year ago and never stopped since then. It does all the repeating marketing tasks and allows me to focus on core development activities like new product research and design. I love it and recommend it to everyone.</div>
-                                        <div class="testimonial-author">Jude Thorn - Online Marketer</div>
-                                    </div> <!-- end of text-wrapper -->
-                                </div> <!-- end of swiper-slide -->
-                                <!-- end of slide -->
+                <div class="col-12">
+                    <div class="intro">
+                        <h6>Our Services</h6>
+                        <h1>What We Do?</h1>
+                        <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service">
+                        <img src="img/icon1.png" alt="">
+                        <h5>Financial Literacy Pack</h5>
+                        <p>Articles and videos to get you financially literate</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service">
+                        <img src="img/icon2.png" alt="">
+                        <h5>Forex Academy</h5>
+                        <p>Simplified Videos from Forex Basics to Advanced courses. Learn ICT from our finest traders</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service">
+                        <img src="img/icon3.png" alt="">
+                        <h5>Crypto Academy</h5>
+                        <p>Get abreast with the future of financing. Learn everything you need to know about Cryptocurrency, NFT’s, Metaverse, Web3</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service">
+                        <img src="img/icon4.png" alt="">
+                        <h5>Forex Trading Signals</h5>
+                        <p>Over 80% accuracy, earn extra profits from our expert signals on Forex and Indices</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service">
+                        <img src="img/icon5.png" alt="">
+                        <h5>Free PAMM Investment Package</h5>
+                        <p>We take the first step to getting you a financial investment package for free. Get yours today. Terms and Conditions apply</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service">
+                        <img src="img/icon6.png" alt="">
+                        <h5>The Employees Guide</h5>
+                        <p>A direct guide to wealth for employees of all job classes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                                <!-- Slide -->
-                                <div class="swiper-slide" data-swiper-slide-index="1" style="width: 418px;">
-                                    <div class="image-wrapper">
-                                        <img class="img-fluid" src="images/testimonial-2.jpg" alt="alternative">
-                                    </div> <!-- end of image-wrapper -->
-                                    <div class="text-wrapper">
-                                        <div class="testimonial-text">Awesome features for the money. I never thought such a low ammount of money would bring me so many leads per month. Before Tivo I used the services of an agency which cost 10x more and delivered far less. Highly recommended to marketers focused on results.</div>
-                                        <div class="testimonial-author">Roy Smith - Developer</div>
-                                    </div> <!-- end of text-wrapper -->
-                                </div> <!-- end of swiper-slide -->
-                                <!-- end of slide -->
-
-                                <!-- Slide -->
-                                <div class="swiper-slide" data-swiper-slide-index="2" style="width: 418px;">
-                                    <div class="image-wrapper">
-                                        <img class="img-fluid" src="images/testimonial-3.jpg" alt="alternative">
-                                    </div> <!-- end of image-wrapper -->
-                                    <div class="text-wrapper">
-                                        <div class="testimonial-text">Tivo is the best marketing automation app for small and medium sized business. It understands the mindset of young entrepreneurs and provides the necessary data for wise marketing decisions. Just give it a try and you will definitely not regret spending your time.</div>
-                                        <div class="testimonial-author">Marsha Singer - Online Marketer</div>
-                                    </div> <!-- end of text-wrapper -->
-                                </div> <!-- end of swiper-slide -->
-                                <!-- end of slide -->
-
-                                <!-- Slide -->
-                                <div class="swiper-slide swiper-slide-prev swiper-slide-duplicate-next" data-swiper-slide-index="3" style="width: 418px;">
-                                    <div class="image-wrapper">
-                                        <img class="img-fluid" src="images/testimonial-4.jpg" alt="alternative">
-                                    </div> <!-- end of image-wrapper -->
-                                    <div class="text-wrapper">
-                                        <div class="testimonial-text">Tivo is one of the greatest marketing automation apps out there. I especially love the Reporting Tools module because it gives me such a great amount of information based on little amounts of input gathered in just few weeks of light weight usage. Recommended!</div>
-                                        <div class="testimonial-author">Ronda Louis - Online Marketer</div>
-                                    </div> <!-- end of text-wrapper -->
-                                </div> <!-- end of swiper-slide -->
-                                <!-- end of slide -->
-
-                            <div class="swiper-slide swiper-slide-duplicate swiper-slide-active" data-swiper-slide-index="0" style="width: 418px;">
-                                    <div class="image-wrapper">
-                                        <img class="img-fluid" src="images/testimonial-1.jpg" alt="alternative">
-                                    </div> <!-- end of image-wrapper -->
-                                    <div class="text-wrapper">
-                                        <div class="testimonial-text">I started to use Tivo with the free trial about a year ago and never stopped since then. It does all the repeating marketing tasks and allows me to focus on core development activities like new product research and design. I love it and recommend it to everyone.</div>
-                                        <div class="testimonial-author">Jude Thorn - Online Marketer</div>
-                                    </div> <!-- end of text-wrapper -->
-                                </div></div> <!-- end of swiper-wrapper -->
-                            
-                            <!-- Add Arrows -->
-                            <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide"></div>
-                            <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"></div>
-                            <!-- end of add arrows -->
-
-                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div> <!-- end of swiper-container -->
-                    </div> <!-- end of slider-container -->
-                    <!-- end of text slider -->
-
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div>
-    <!-- end of Testimonials -->
-
-
-    <!-- Newsletter -->
-    <div class="form">
+    <section class="bg-light" id="partners">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-container">
-                        <div class="above-heading">NEWSLETTER</div>
-                        <h2>Stay Updated With The Latest News To Get More Qualified Leads</h2>
+                <div class="col-12">
+                    <div class="intro">
+                        <h6>Work</h6>
+                        <h1>Partners</h1>
+                        <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="projects-slider" class="owl-theme owl-carousel">
+            <div class="project">
+                <div class="overlay"></div>
+                <img src="img/project1.jpg" alt="">
+                <div class="content">
+                    <h2>Consulting Marketing</h2>
+                    <h6>Website Design</h6>
+                </div>
+            </div>
+            <div class="project">
+                <div class="overlay"></div>
+                <img src="img/project2.jpg" alt="">
+                <div class="content">
+                    <h2>Consulting Marketing</h2>
+                    <h6>Website Design</h6>
+                </div>
+            </div>
+            <div class="project">
+                <div class="overlay"></div>
+                <img src="img/project3.jpg" alt="">
+                <div class="content">
+                    <h2>Consulting Marketing</h2>
+                    <h6>Website Design</h6>
+                </div>
+            </div>
+            <div class="project">
+                <div class="overlay"></div>
+                <img src="img/project4.jpg" alt="">
+                <div class="content">
+                    <h2>Consulting Marketing</h2>
+                    <h6>Website Design</h6>
+                </div>
+            </div>
+            <div class="project">
+                <div class="overlay"></div>
+                <img src="img/project5.jpg" alt="">
+                <div class="content">
+                    <h2>Consulting Marketing</h2>
+                    <h6>Website Design</h6>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                        <!-- Newsletter Form -->
-                        <form id="newsletterForm" data-toggle="validator" data-focus="false">
-                            <div class="form-group">
-                                <input type="email" class="form-control-input" id="nemail" required>
-                                <label class="label-control" for="nemail">Email</label>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group checkbox">
-                                <input type="checkbox" id="nterms" value="Agreed-to-Terms" required>I've read and agree to Tivo's written <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-conditions.html">Terms Conditions</a> 
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="form-control-submit-button">SUBSCRIBE</button>
-                            </div>
-                            <div class="form-message">
-                                <div id="nmsgSubmit" class="h3 text-center hidden"></div>
-                            </div>
-                        </form>
-                        <!-- end of newsletter form -->
-
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="icon-container">
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-facebook-f fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-twitter fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-pinterest-p fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-instagram fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-linkedin-in fa-stack-1x"></i>
-                            </a>
-                        </span>
-                    </div> <!-- end of col -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of form -->
-    <!-- end of newsletter -->
-
-    
-    <!-- customers  -->
-    <div class="slider-1">
+    <section id="team">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    
-                    <!-- Image Slider -->
-                    <div class="slider-container">
-                        <div class="swiper-container image-slider swiper-container-horizontal">
-                            <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-1480px, 0px, 0px);">
-                                <div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="5" style="width: 360px; margin-right: 10px;">
-                                    <img class="img-fluid" src="images/customer-logo-6.png" alt="alternative">
-                                </div>
-                                <div class="swiper-slide" data-swiper-slide-index="0" style="width: 360px; margin-right: 10px;">
-                                    <img class="img-fluid" src="images/customer-logo-1.png" alt="alternative">
-                                </div>
-                                <div class="swiper-slide" data-swiper-slide-index="1" style="width: 360px; margin-right: 10px;">
-                                    <img class="img-fluid" src="images/customer-logo-2.png" alt="alternative">
-                                </div>
-                                <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="2" style="width: 360px; margin-right: 10px;">
-                                    <img class="img-fluid" src="images/customer-logo-3.png" alt="alternative">
-                                </div>
-                                <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="3" style="width: 360px; margin-right: 10px;">
-                                    <img class="img-fluid" src="images/customer-logo-4.png" alt="alternative">
-                                </div>
-                                <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="4" style="width: 360px; margin-right: 10px;">
-                                    <img class="img-fluid" src="images/customer-logo-5.png" alt="alternative">
-                                </div>
-                                <div class="swiper-slide" data-swiper-slide-index="5" style="width: 360px; margin-right: 10px;">
-                                    <img class="img-fluid" src="images/customer-logo-6.png" alt="alternative">
-                                </div>
-                                <div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0" style="width: 360px; margin-right: 10px;">
-                                    <img class="img-fluid" src="images/customer-logo-1.png" alt="alternative">
-                                </div>
-                            </div> <!-- end of swiper-wrapper -->
-                            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                        </div> <!-- end of swiper container -->
-                    </div> <!-- end of slider-container -->
-                    <!-- end of image slider -->
+                <div class="col-12">
+                    <div class="intro">
+                        <h6>Team</h6>
+                        <h1>Team Members</h1>
+                        <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-8">
+                    <div class="team-member">
+                        <div class="image">
+                            <img src="img/team_1.jpg" alt="">
+                            <div class="social-icons">
+                                <a href="#"><i class='bx bxl-facebook'></i></a>
+                                <a href="#"><i class='bx bxl-twitter'></i></a>
+                                <a href="#"><i class='bx bxl-instagram'></i></a>
+                                <a href="#"><i class='bx bxl-pinterest'></i></a>
+                            </div>
+                            <div class="overlay"></div>
+                        </div>
 
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div>
-    <!-- end of customers  -->
+                        <h5>Marvin McKinney</h5>
+                        <p>Marketing Coordinator</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8">
+                    <div class="team-member">
+                        <div class="image">
+                            <img src="img/team_2.jpg" alt="">
+                            <div class="social-icons">
+                                <a href="#"><i class='bx bxl-facebook'></i></a>
+                                <a href="#"><i class='bx bxl-twitter'></i></a>
+                                <a href="#"><i class='bx bxl-instagram'></i></a>
+                                <a href="#"><i class='bx bxl-pinterest'></i></a>
+                            </div>
+                            <div class="overlay"></div>
+                        </div>
 
+                        <h5>Kathryn Murphy</h5>
+                        <p>Ethical Hacker</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8">
+                    <div class="team-member">
+                        <div class="image">
+                            <img src="img/team_3.jpg" alt="">
+                            <div class="social-icons">
+                                <a href="#"><i class='bx bxl-facebook'></i></a>
+                                <a href="#"><i class='bx bxl-twitter'></i></a>
+                                <a href="#"><i class='bx bxl-instagram'></i></a>
+                                <a href="#"><i class='bx bxl-pinterest'></i></a>
+                            </div>
+                            <div class="overlay"></div>
+                        </div>
 
+                        <h5>Darrell Steward</h5>
+                        <p>Software Developer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Footer area -->
+    <section class="bg-light" id="reviews">
+
+        <div class="owl-theme owl-carousel reviews-slider container">
+            <div class="review">
+                <div class="person">
+                    <img src="img/team_1.jpg" alt="">
+                    <h5>Ralph Edwards</h5>
+                    <small>Market Development Manager</small>
+                </div>
+                <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut quis, rem culpa labore voluptate
+                    ullam! In, nostrum. Dicta, vero nihil. Delectus minus vitae rerum voluptatum, excepturi incidunt ut,
+                    enim nam exercitationem optio ducimus!</h3>
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <i class='bx bxs-quote-alt-left'></i>
+            </div>
+            <div class="review">
+                <div class="person">
+                    <img src="img/team_2.jpg" alt="">
+                    <h5>Ralph Edwards</h5>
+                    <small>Market Development Manager</small>
+                </div>
+                <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut quis, rem culpa labore voluptate
+                    ullam! In, nostrum. Dicta, vero nihil. Delectus minus vitae rerum voluptatum, excepturi incidunt ut,
+                    enim nam exercitationem optio ducimus!</h3>
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <i class='bx bxs-quote-alt-left'></i>
+            </div>
+            <div class="review">
+                <div class="person">
+                    <img src="img/team_3.jpg" alt="">
+                    <h5>Ralph Edwards</h5>
+                    <small>Market Development Manager</small>
+                </div>
+                <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut quis, rem culpa labore voluptate
+                    ullam! In, nostrum. Dicta, vero nihil. Delectus minus vitae rerum voluptatum, excepturi incidunt ut,
+                    enim nam exercitationem optio ducimus!</h3>
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <i class='bx bxs-quote-alt-left'></i>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="intro">
+                        <h6>Blog</h6>
+                        <h1>Blog Posts</h1>
+                        <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <article class="blog-post">
+                        <img src="img/project5.jpg" alt="">
+                        <a href="#" class="tag">Lorem ipsum</a>
+                        <div class="content">
+                            <small>01 Dec, 2022</small>
+                            <h5>Lorem ipsum</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut quis, rem culpa labore voluptate
+                                ullam! In, nostrum. Dicta,</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="blog-post">
+                        <img src="img/project4.jpg" alt="">
+                        <a href="#" class="tag">Lorem ipsum</a>
+                        <div class="content">
+                            <small>01 Dec, 2022</small>
+                            <h5>Lorem ipsum</h5>
+                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
+                                piece of classical Latin literature from</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="blog-post">
+                        <img src="img/project2.jpg" alt="">
+                        <a href="#" class="tag">Lorem ipsum</a>
+                        <div class="content">
+                            <small>01 Dec, 2022</small>
+                            <h5>Lorem ipsum</h5>
+                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
+                                piece of classical Latin literature from</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer and login modal -->
     @include("components.footer")
-    <!-- End footer area -->
-    
-    	
-    <!-- Scripts -->
-    <script src="{{ asset('js/jquery.min.js') }}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
-    <script src="{{ asset('js/popper.min.js') }}"></script> <!-- Popper tooltip library for Bootstrap -->
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script> <!-- Bootstrap framework -->
-    <script src="{{ asset('js/jquery.easing.min.js') }}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
-    <script src="{{ asset('js/swiper.min.js') }}"></script> <!-- Swiper for image and text sliders -->
-    <script src="{{ asset('js/jquery.magnific-popup.js') }}"></script> <!-- Magnific Popup for lightboxes -->
-    <script src="{{ asset('js/validator.min.js') }}"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
-    <script src="{{ asset('js/scripts.js') }}"></script> <!-- Custom scripts -->
-</body>
+    <!-- end of footer and login modal -->
 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
 </html>
