@@ -1,61 +1,76 @@
-
-    <!-- Footer -->
-    <svg class="footer-frame" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 79"><defs><style>.cls-2{fill:#356d74;}</style></defs><title>footer-frame</title><path class="cls-2" d="M0,72.427C143,12.138,255.5,4.577,328.644,7.943c147.721,6.8,183.881,60.242,320.83,53.737,143-6.793,167.826-68.128,293-60.9,109.095,6.3,115.68,54.364,225.251,57.319,113.58,3.064,138.8-47.711,251.189-41.8,104.012,5.474,109.713,50.4,197.369,46.572,89.549-3.91,124.375-52.563,227.622-50.155A338.646,338.646,0,0,1,1920,23.467V79.75H0V72.427Z" transform="translate(0 -0.188)"/></svg>
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="footer-col first">
-                        <h4>About GEMTRUST</h4>
-                        <p class="p-small">Gemtrust financial solutions is a financial literacy campaign targeted at just any and every class of persons. Gemtrust has put together an academy  of constant increasing content to educate our community on finance.</p>
+<footer>
+        <div class="footer-top text-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h4 class="navbar-brand">Gemtrust<span class="dot">.</span></h4>
+                        <p>Gemtrust financial solutions is a financial literacy campaign targeted at just any and every class of persons. Gemtrust has put together an academy of constant increasing content to educate our community on finance.</p>
+                        <div class="col-auto social-icons">
+                            <a href="#"><i class='bx bxl-facebook'></i></a>
+                            <a href="#"><i class='bx bxl-twitter'></i></a>
+                            <a href="#"><i class='bx bxl-instagram'></i></a>
+                            <a href="#"><i class='bx bxl-pinterest'></i></a>
+                        </div>
+                        <div class="col-auto conditions-section">
+                            <a href="#">privacy</a>
+                            <a href="terms_conditions">terms</a>
+                            <a href="#">disclaimer</i></a>
+                        </div>
                     </div>
-                </div> <!-- end of col -->
-                <div class="col-md-4">
-                    <div class="footer-col middle">
-                        <h4>Important Links</h4>
-                        <ul class="list-unstyled li-space-lg p-small">
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body">Our business partners <a class="white" href="#your-link">startupguide.com</a></div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body">Read our <a class="white" href="terms-conditions">Terms & Conditions</a>, <a class="white" href="privacy-policy.html">Privacy Policy</a></div>
-                            </li>
-                        </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p class="mb-0">Copyright © 2022. All rights Reserved</p> Developed By <a
+                hrefs="">Prosper JS</a>
+        </div>
+    </footer>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="container-fluid">
+                        <div class="row gy-4">
+                            <div class="col-lg-4 col-sm-12 bg-cover"
+                                style="background-image: url(img/c2.jpg); min-height:300px;">
+                                <div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <form class="p-lg-5 col-12 row g-3">
+                                    <div>
+                                        <h1>Log In</h1>
+                                        <p>Fell free to contact us and we will get back to you as soon as possible</p>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="emailAddress" class="form-label">Email address</label>
+                                        <input type="emailAddress" class="form-control" placeholder="Johndoe@example.com"
+                                            id="emailAddress" aria-describedby="emailHelp">
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <label for="password" class="form-label">Password name</label>
+                                        <input type="password" class="form-control" placeholder="*******" id="password"
+                                            aria-describedby="emailHelp">
+                                    </div>
+
+                                    <div class="col-12">
+                                        You don't have an account? Then please <a href="#">Sign Up</a>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-brand">LOG IN</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </div> <!-- end of col -->
-                <div class="col-md-4">
-                    <div class="footer-col last">
-                        <h4>Contact</h4>
-                        <ul class="list-unstyled li-space-lg p-small">
-                            <li class="media">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div class="media-body">22 Innovative, San Francisco, CA 94043, US</div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-envelope"></i>
-                                <div class="media-body"><a class="white" href="mailto:contact@tivo.com">contact@tivo.com</a> <i class="fas fa-globe"></i><a class="white" href="#your-link">www.tivo.com</a></div>
-                            </li>
-                        </ul>
-                    </div> 
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of footer -->  
-    <!-- end of footer -->
+                </div>
 
-
-    <!-- Copyright -->
-    <div class="copyright">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="p-small">Copyright © 2022 <a href="">GemTrust Solutions</a><br>
-                        Develop By <a href="" target="_blank">Prosper JS</a>
-                    </p>
-                </div> <!-- end of col -->
-            </div> <!-- enf of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of copyright --> 
-    <!-- end of copyright -->
+            </div>
+        </div>
+    </div>
