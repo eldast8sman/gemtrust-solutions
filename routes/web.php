@@ -20,4 +20,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(PageController::class)->group(function(){
     Route::get('/', 'index');
+    Route::get('terms_conditions', 'terms');
 }); 
