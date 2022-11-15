@@ -26,7 +26,9 @@ class StorePackageRequest extends FormRequest
         return [
             'package' => 'required|string|unique:packages,package',
             'description' => 'string',
+            'level' => 'required|numeric|min:1',
             'reg_amount' => 'required|numeric|min:1',
+            'discount' => 'numeric',
             'upline1' => 'numeric|min:1',
             'upline2' => 'numeric|min:1',
             'upline3' => 'numeric|min:1',

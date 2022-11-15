@@ -24,9 +24,10 @@ class UpdatePackageRequest extends FormRequest
     public function rules()
     {
         return [
-            'package' => 'required|string',
+            'package' => 'string',
             'description' => 'string',
-            'reg_amount' => 'required|numeric|min:1',
+            'level' => 'numeric|min:1',
+            'reg_amount' => 'numeric|min:1',
             'upline1' => 'numeric|min:1',
             'upline2' => 'numeric|min:1',
             'upline3' => 'numeric|min:1',
