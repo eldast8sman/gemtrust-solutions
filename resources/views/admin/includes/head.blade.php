@@ -29,3 +29,5 @@
 
     <!-- Template Stylesheet -->
     <link href=" {{ asset('dashboard/css/style.css') }}" rel="stylesheet">
+
+    <script src=" {{ asset('dashboard/js/login.js) }} "></script>
