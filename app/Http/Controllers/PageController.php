@@ -7,10 +7,22 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
     public function index(){
-        return view('index');
+        return view('pages/home');
     }
 
     public function terms(){
-        return view('terms_conditions');
+        return view('pages/terms_conditions');
+    }
+
+    public function admin(){
+        return view('admin/home');
+    }
+
+    public function adminSignup(){
+        return view('admin/signup');
+    }
+
+    public function adminSignin(){
+        return view('admin/signin');
     }
 }
