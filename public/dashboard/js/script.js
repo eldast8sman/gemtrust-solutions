@@ -1,6 +1,6 @@
 var BASE_URL = "http://127.0.0.1:8000/";
-var ADMIN_URL = BASE_URL + "dashboard/"
-var API_URL = BASE_URL + "api/";
+var ADMIN_URL = BASE_URL + "admin/"
+var API_URL = BASE_URL + "api/admin/";
 
 function adminLogin() {
 
@@ -22,99 +22,130 @@ function adminLogin() {
     } 
     else {
 
-        let params = {
+        let params = JSON.stringify({
             "email": email,
             "password": password
-        }
+        })
 
         $.ajax({
             type: "POST",
             url: API_URL + "login",
             data: params,
             dataType: "json",
+            headers: {
+                "Content-Type": "application/json"
+            },
             success: function(response) {
                 if (response.status == "success") {
-                    res = response.data;
-                    sessionStorage.setItem("token", res.token);
-                    sessionStorage.setItem("name", res.name);
-                    sessionStorage.setItem("email", res.email);
-                    toaster_success("Login was successful");
+                    
+                    alertBox("Login Successful", response.message, "success")
 
-                    window.location = ADMIN_URL
-                } else {
-                    toaster_error(response.message);
+                    let res = response.data;
+                    sessionStorage.setItem("adminToken", res.authorization.token);
+                    sessionStorage.setItem("adminName", res.name);
+                    sessionStorage.setItem("adminEmail", res.email);
+
+                    setInterval(window.location = ADMIN_URL, 3000)
+
+                }
+                else {
+                    alertBox("Error", response.message, "error")
                 }
             },
             error: function(response) {
-                toaster_error("Oops! Something went wrong "+response.responseText);
+                alertBox("Error", response.responseJSON.message, "error")
             }
         })
     }
 
 }
 
-$("a#dash_logout").click(function(e){
-    e.preventDefault();
 
-    toaster_success("Logging Out");
+function adminLogout() {
 
-    $.ajax({
-        type: "POST",
-        url: API_URL+"logout",
-        headers: {
-            "Authorization": "Bearer "+sessionStorage.getItem('token'),
-            "Content-Type": "application/json"
-        },
-        success: function(response){
-            sessionStorage.setItem("token", "");
-            sessionStorage.setItem("name", "");
-            sessionStorage.setItem("email", "");
-            toaster_success("Successfully Logged Out");
-
-            window.location = ADMIN_URL;
-        },
-        error: function(response){
-            console.log(response.responseText);
-            toaster_error("Oops! "+response.responseText);
-        }
-    })
-});
-
-if($("input#action").val() == "update"){
-    var admin_id = $("input#admin_id").val();
-    var password_div = $("input#admin_password").parent();
-    password_div.hide();
     $.ajax({
         type: "GET",
-        url: API_URL+"users/"+admin_id,
-        dataType: "json",
+        url: API_URL+"logout",
         headers: {
-            "Authorization": "Bearer "+sessionStorage.getItem('token'),
+            "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
             "Content-Type": "application/json"
         },
         success: function(response){
-            if(response.status == "success"){
-                data = response.data;
+            
+            if (response.status == "success") {
+                sessionStorage.clear() 
 
-                $("input#admin_name").val(data.name);
-                $("input#admin_email").val(data.email);
+                alertBox("Logout Successful", response.message, "success")
+
+                setInterval(window.location = ADMIN_URL, 3000)
+            }
+            else {
+                alertBox("Error", response.message, "error")
             }
         },
         error: function(response){
-            console.log(response.responseText);
+            alertBox("Error", response.responseJSON.message, "error")
         }
     })
 }
 
-$(".admin_form").submit(function(e){
-    e.preventDefault();
+
+function fetchAdmins() {
+
+    let getUrl = document.URL;
+
+    if (getUrl == "http://127.0.0.1:8000/admin/viewAdmins") {
+        $.ajax({
+            type: "GET",
+            url: API_URL+"admins",
+            headers: {
+                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function(response){
+                
+                if (response.status == "success") {
+
+                    let sn = 1;
+
+                    $('#tableBody').html('');
+                        
+                    let tableSet = response.data.forEach(element => {
+                        let tableBody = "<tr>";
+                            tableBody += "<th scope='row'>" + sn++ +"</th>";
+                            tableBody += "<td>"+ element.name +"</td>";
+                            tableBody += "<td>"+ element.email +"</td>";
+                            tableBody += "<td>"+ element.created_at +"</td>";
+                        tableBody += "</tr>";
+                        
+                        $('#tableBody').append(tableBody);
+                    });
+
+                    dataTable();
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function(response){
+                alertBox("Error", response.responseJSON.message, "error")
+            }
+        })
+    }
+    else {
+        console.log("no loads")
+    }
+}
+
+fetchAdmins()
+
+function registerAdmin() {
 
     var name = $("input#admin_name").val();
     var email = $("input#admin_email").val();
     var password = $("input#admin_password").val();
 
     if((name != "") && (email != "")){
-        if($("input#action").val() == "create"){
             if(password == ""){
                 toaster_error("Password must be provided");
                 return false;
@@ -147,36 +178,8 @@ $(".admin_form").submit(function(e){
                     }
                 });
             }
-        } else if($("input#action").val() == "update"){
-            var admin_id = $("input#admin_id").val();
-            var req = {
-                "name": name,
-                "email": email
-            }
-            
-            $.ajax({
-                type: "PUT",
-                url: API_URL+"users/"+admin_id,
-                data: JSON.stringify(req),
-                contentType: "json",
-                headers: {
-                    "Authorization": "Bearer "+sessionStorage.getItem('token'),
-                    "Content-Type": "application/json"
-                },
-                success: function(response){
-                    if(response.status == "success"){
-                        toaster_success(response.message);
-                        window.location = ADMIN_URL + "admins";
-                    } else {
-                        toaster_error(response.message);
-                    }
-                },
-                error: function(response){
-                    toaster_error(response.responseText);
-                }
-            });
-        }
-    } else {
+    } 
+    else {
         var error_message = "";
         if(name == ""){
             error_message += "No Name was given";
@@ -189,7 +192,35 @@ $(".admin_form").submit(function(e){
     }
 
     return false;
-});
+};
+
+if($("input#action").val() == "update"){
+    var admin_id = $("input#admin_id").val();
+    var password_div = $("input#admin_password").parent();
+    password_div.hide();
+    $.ajax({
+        type: "GET",
+        url: API_URL+"users/"+admin_id,
+        dataType: "json",
+        headers: {
+            "Authorization": "Bearer "+sessionStorage.getItem('token'),
+            "Content-Type": "application/json"
+        },
+        success: function(response){
+            if(response.status == "success"){
+                data = response.data;
+
+                $("input#admin_name").val(data.name);
+                $("input#admin_email").val(data.email);
+            }
+        },
+        error: function(response){
+            console.log(response.responseText);
+        }
+    })
+}
+
+
 
 var admin_del_buttons = document.querySelectorAll(".del_admin");
 for(let i=0; i < admin_del_buttons.length; i++){
@@ -219,145 +250,6 @@ for(let i=0; i < admin_del_buttons.length; i++){
         })
     }
 }
-
-$("form.minister_form").submit(function(e){
-    e.preventDefault();
-
-    var appearance = $("select#minister_appearance").val();
-    var name = $("input#minister_name").val();
-    var position = $("input#minister_position").val();
-
-    if((appearance != "") && (name != "") && (position != "")){
-        var fd = new FormData(document.querySelector(".minister_form"));
-        toaster_success("Minister Data Uploading");
-        if($("input#action").val() == "create"){
-            var url = API_URL+"ministers";
-        } else if($("input#action").val() == "update"){
-            var minister_id = $("input#minister_id").val();
-            var url = API_URL+"ministers/"+minister_id;
-        }
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: fd,
-            dataType: "json",
-            processData: false,
-            contentType: false,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                "Authorization": "Bearer "+sessionStorage.getItem('token')
-            },
-            success: function(response){
-                if(response.status == "success"){
-                    toaster_success(response.message);
-                    if($('input#action').val() == "create"){
-                        window.location = ADMIN_URL+"ministers";
-                    } else {
-                        window.location = ADMIN_URL+"ministers/"+response.data.slug
-                    }
-                } else {
-                    toaster_error(response.message);
-                }
-            },
-            error: function(response){
-                console.log(response.responseText);
-                toaster_error(response.responseText);
-            }
-        });
-        return false;
-    } else {
-        var error_message = "";
-        if(appearance == ""){
-            error_message += "Appearance Position must be selected! ";
-        }
-        if(name == ""){
-            error_message += "Minister Name must be provided! ";
-        }
-        if(position == ""){
-            error_message += "Minister's Post must be provided! ";
-        }
-        toaster_error(error_message);
-    }
-});
-
-del_minister = document.querySelector("#delete_minister");
-if(del_minister){
-    del_minister.onclick = function(e){
-        var minister_id = e.target.dataset['id'];
-    
-        $.ajax({
-            type: "DELETE",
-            url: API_URL+"ministers/"+minister_id,
-            dataType: "json",
-            headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('token'),
-                "Content-Type": "application/json"
-            },
-            success: function(response){
-                if(response.status == "success"){
-                    toaster_success(response.message);
-    
-                    window.location = ADMIN_URL+"ministers";
-                } else {
-                    toaster_error(response.message);
-                }
-            },
-            error: function(response){
-                toaster_error(response.responseText);
-            }
-        })
-    }
-}
-
-
-$("form.series_form").submit(function(e){
-    e.preventDefault();
-
-    var title = $("input#series_title").val();
-    console.log(title);
-    if(title != ""){
-        var fd = new FormData(document.querySelector(".series_form"));
-        toaster_success("Series Data Uploading");
-        if($("input#action").val() == "create"){
-            var url = API_URL+"series";
-        } else if($("input#action").val() == "update"){
-            var series_id = $("input#series_id").val();
-            var url = API_URL+"series/"+series_id;
-        }
-        
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: fd,
-            dataType: "json",
-            processData: false,
-            contentType: false,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                "Authorization": "Bearer "+sessionStorage.getItem('token')
-            },
-            success: function(response){
-                if(response.status == "success"){
-                    toaster_success(response.message);
-                    if($('input#action').val() == "create"){
-                        window.location = ADMIN_URL+"message-series";
-                    } else {
-                        window.location = ADMIN_URL+"message-series/"+response.data.slug
-                    }
-                } else {
-                    toaster_error(response.message);
-                }
-            },
-            error: function(response){
-                console.log(response.responseText);
-                toaster_error(response.responseText);
-            }
-        });
-        return false;
-    } else {
-        toaster_error('Title must be provided');
-    }
-})
 
 var series_message_div = document.querySelectorAll(".show_series_message");
 for(let i=0; i<=series_message_div.length-1; i++){
@@ -711,4 +603,12 @@ function alertBox(title, text, icon) {
         buttons: false,
         dangerMode: false,
     }) 
+}
+
+function dataTable() {
+    $('#resultTable').DataTable({
+        "scrollX": true,
+        "bPaginate": true,
+        "info": true, 
+    });
 }

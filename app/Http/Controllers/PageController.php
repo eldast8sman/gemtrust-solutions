@@ -18,11 +18,15 @@ class PageController extends Controller
         return view('admin/home');
     }
 
-    public function adminSignup(){
-        return view('admin/signup');
+    public function viewAdmins(){
+        return view('admin/viewAdmins');
+    }
+    
+    public function registerAdmin(){
+        return view('admin/registerAdmin');
     }
 
-    public function adminSignin(){
+    public function adminLogin(){
         return view('admin/signin');
     }
 }

@@ -22,6 +22,7 @@ Route::controller(PageController::class)->group(function(){
     Route::get('/', 'index');
     Route::get('terms_conditions', 'terms');
     Route::get('admin', 'admin');
-    Route::get('admin/signup', 'adminSignup');
-    Route::get('admin/login', 'adminSignin');
+    Route::get('admin/viewAdmins', 'viewAdmins');
+    Route::get('admin/registerAdmin', 'registerAdmin');
+    Route::get('admin/login', 'adminLogin');
 }); 

@@ -63,8 +63,16 @@
     <script src=" {{ asset('dashboard/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
     <script src=" {{ asset('dashboard/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
+	<!--Data Table js-->
+	<script src=" {{ asset('dashboard/lib/datatable/js/jquery.dataTables.min.js') }} "></script>
+	<script src=" {{ asset('dashboard/lib/datatable/js/dataTables.bootstrap5.min.js') }} "></script>
+    
     <!-- Template Javascript -->
     <script src=" {{ asset('dashboard/js/main.js') }}"></script>
+    <script src=" {{ asset('dashboard/js/sweetalert.min.js') }}"></script>
+    <script src=" {{ asset('dashboard/js/script.js') }}"></script>
+    
+
 </body>
 
 </html>

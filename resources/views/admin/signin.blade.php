@@ -90,8 +90,8 @@
 
     <!-- Template Javascript -->
     <script src=" {{ asset('dashboard/js/main.js') }}"></script>
-    <script src=" {{ asset('dashboard/js/sweetalert.min.js) }}"></script>
-    <script src=" {{ asset('dashboard/js/script.js) }}"></script>
+    <script src=" {{ asset('dashboard/js/sweetalert.min.js') }}"></script>
+    <script src=" {{ asset('dashboard/js/script.js') }}"></script>
 </body>
 
 </html>

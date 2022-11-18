@@ -30,4 +30,7 @@
     <!-- Template Stylesheet -->
     <link href=" {{ asset('dashboard/css/style.css') }}" rel="stylesheet">
 
-    <script src=" {{ asset('dashboard/js/login.js) }} "></script>
+    <script src=" {{ asset('dashboard/js/login.js') }} "></script>
+    
+	<!--Data Table css-->
+    <link href=" {{ asset('dashboard/lib/datatable/css/dataTables.bootstrap5.min.css') }} " rel="stylesheet" />
