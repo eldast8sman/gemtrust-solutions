@@ -18,7 +18,7 @@ class FileController extends Controller
      * 
      * @return $filepaths
      */
-    public function uploadFile($filepath, $controller="", $disk='local'){
+    public static function uploadFile($filepath, $controller="", $disk='local'){
         if($filepath instanceof UploadedFile){
             $time = time();
             $filename = Str::random().$time;
@@ -62,6 +62,31 @@ class FileController extends Controller
                 } else {
                     return false;
                 }
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public static function check_file($id){
+        $file = UploadFile::find($id);
+        if(!empty($file)){
+            if(Storage::disk($file->disk)->exists($file->filepath)){
+                return $file;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public static function delete_file($id){
+        if($file = self::check_file($id)){
+            if(Storage::disk($file->disk)->delete($file->filepath)){
+                return $file;
+            } else {
+                return false;
             }
         } else {
             return false;

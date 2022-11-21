@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Article;
+use App\Models\Section;
+use App\Models\UploadFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FileController;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
-use App\Models\UploadFile;
-use Illuminate\Support\Collection;
 
 class ArticleController extends Controller
 {
@@ -75,6 +77,9 @@ class ArticleController extends Controller
                         if(!empty($article->compressed)){
                             $article->compressed = UploadFile::find($article->compressed);
                         }
+                        if(!empty($article->section_id)){
+                            $article->section = Section::find($article->section_id);
+                        }
                     }
                     return response([
                         'status' => 'success',
@@ -114,7 +119,40 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        //
+        $all = $request->all();
+        if($upload_image = FileController::uploadfile($request->file('filename'), "Article", "local")){
+            $all['filename'] = $upload_image['image'];
+            if(isset($upload_image['compressed']) && !empty($upload_image['compressed'])){
+                $all['compressed'] = $upload_image['compressed'];
+            }
+            if(!empty($all['section_id'])){
+                $section = Section::find($all['section_id']);
+                if(!empty($section)){
+                    $section = $section->section;
+                } else {
+                    $section = "";
+                }
+            } else {
+                $section = "";
+            }
+            $release_date = date('l, dS F, Y', strtotime($all['release_date']));
+            $all['all_details'] = $all['title'].' '.$all['author'].' '.$all['content'].' '.$section.' '.$release_date;
+            if($article = Article::create($all)){
+                return response([
+                    'status' => 'success',
+                    'message' => 'Article added successfully',
+                    'data' => $article
+                ], 200);
+            } else {
+                return response([
+                    'status' => 'failed',
+                    'message' => 'Article Upload Failed'
+                ], 500);
+            }
+        } else {
+            $all['filename'] = "";
+            $all['compressed'] = "";
+        }
     }
 
     /**
@@ -123,9 +161,31 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show($id)
     {
-        //
+        $article = Article::find($id);
+        if(!empty($article)){
+            if(!empty($article->filename)){
+                $article->filename = UploadFile::find($article->filename);
+            }
+            if(!empty($article->compressed)){
+                $article->compressed = UploadFile::find($article->compressed);
+            }
+            if(!empty($article->section_id)){
+                $article->section = $article->section_id;
+            }
+
+            return response([
+                'status' => 'success',
+                'message' => 'Article fetched successfully',
+                'data' => $article
+            ], 200);
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'No Article was fetched'
+            ], 404);
+        }
     }
 
     /**
@@ -146,9 +206,17 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateArticleRequest $request, Article $article)
+    public function update(UpdateArticleRequest $request, $id)
     {
-        //
+        $article = Article::find($id);
+        if(!empty($article)){
+            
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'No Article was fetched'
+            ], 404);
+        }
     }
 
     /**

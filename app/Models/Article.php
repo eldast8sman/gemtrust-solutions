@@ -24,6 +24,10 @@ class Article extends Model
         'all_details'
     ];
 
+    protected $hidden = [
+        'all_details'
+    ];
+
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
