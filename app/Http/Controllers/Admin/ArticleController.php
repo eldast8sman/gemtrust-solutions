@@ -120,7 +120,7 @@ class ArticleController extends Controller
     public function store(StoreArticleRequest $request)
     {
         $all = $request->all();
-        if($upload_image = FileController::uploadfile($request->file('filename'), "Article", "local")){
+        if($upload_image = FileController::uploadFile($request->file('filename'), "Article", "local")){
             $all['filename'] = $upload_image['image'];
             if(isset($upload_image['compressed']) && !empty($upload_image['compressed'])){
                 $all['compressed'] = $upload_image['compressed'];
@@ -210,7 +210,45 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
         if(!empty($article)){
-            
+            if(!empty($request->file('filename'))){
+                if($upload_image = FileController::uploadFile($request->file('filename'), "Article", "local")){
+                    FileController::delete_file($article->filename);
+                    FileController::delete_file($article->compressed);
+
+                    $request->filename = $upload_image['image'];
+                    if(isset($upload_image['compressed']) && !empty($upload_image['compressed'])){
+                        $all['compressed'] = $upload_image['compressed'];
+                    }
+                }
+                $all = $request->all();
+                if($article->update($all)){
+                    if(!empty($article->section)){
+                        if(!empty($section = Section::find($article->section_id))){
+                            $section = $section->section;
+                        } else {
+                            $section = "";
+                        }
+                    } else {
+                        $section = "";
+                    }
+                    $release_date = date('l, dS F, Y', strtotime($article->release_date));
+                    $article->all_details = $article->title.' '.$article->author.' '.$article->content.' '.$section.' '.$release_date;
+                    $article->save();
+
+                    return response([
+                        'status' => 'success',
+                        'message' => 'Article updated successfully',
+                        'data' => $article
+                    ], 200);
+                } else {
+                    return response([
+                        'status' => 'failed',
+                        'message' => 'Could not update Article'
+                    ], 500);
+                }
+            } else {
+                unset($request->filename);
+            }
         } else {
             return response([
                 'status' => 'failed',
@@ -225,8 +263,30 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+        if(!empty($article)){
+            if($article->delete()){
+                FileController::delete_file($article->filename);
+                FileController::delete_file($article->compressed);
+
+                return response([
+                    'status' => 'success',
+                    'message' => 'Article was successfully deleted',
+                    'data' => $article
+                ], 200);
+            } else {
+                return response([
+                    'status' => 'failed',
+                    'message' => 'Article Delete failed'
+                ], 500);
+            }
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'No Article was fetched'
+            ], 404);
+        }
     }
 }
