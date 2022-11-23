@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     
     <!-- Favicon -->
-    <link href="dashboard/img/favicon.ico" rel="icon">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

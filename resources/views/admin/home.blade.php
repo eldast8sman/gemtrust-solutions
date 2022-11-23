@@ -5,6 +5,10 @@
 
 @extends('admin.layouts.default')
 
+@section('pageActive')
+    active
+@endsection
+
 @section('content')
 
             <!-- Sale & Revenue Start -->

@@ -1,5 +1,5 @@
 
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href=" {{ asset('css/bootstrap.min.css') }} ">

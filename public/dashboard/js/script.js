@@ -2,24 +2,18 @@ var BASE_URL = "http://127.0.0.1:8000/";
 var ADMIN_URL = BASE_URL + "admin/"
 var API_URL = BASE_URL + "api/admin/";
 
+
 function adminLogin() {
 
     var email = $('#emailAddress').val();
     var password = $("#password").val();
 
-    if (email === "" || password === "") {
-        var error_message = "";
-
-        if (email == "") {
-            error_message += "Email must be provided";
-        }
-        if (password == "") {
-            error_message += "Password must be provided";
-        }
-
-        alertBox("Form Field Required", error_message, "warning")
-
-    } 
+    if (email === "") {
+        alertBox("Form Field Required", "Email must be provided", "warning")
+    }
+    else if (password === "") {
+        alertBox("Form Field Required", "Password must be provided", "warning")
+    }
     else {
 
         let params = JSON.stringify({
@@ -45,7 +39,7 @@ function adminLogin() {
                     sessionStorage.setItem("adminName", res.name);
                     sessionStorage.setItem("adminEmail", res.email);
 
-                    setInterval(window.location = ADMIN_URL, 3000)
+                    setInterval(window.location = ADMIN_URL, 5000)
 
                 }
                 else {
@@ -56,37 +50,66 @@ function adminLogin() {
                 alertBox("Error", response.responseJSON.message, "error")
             }
         })
+
     }
 
 }
 
 
-function adminLogout() {
+function registerAdmin() {
 
-    $.ajax({
-        type: "GET",
-        url: API_URL+"logout",
-        headers: {
-            "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
-            "Content-Type": "application/json"
-        },
-        success: function(response){
-            
-            if (response.status == "success") {
-                sessionStorage.clear() 
+    var fullName = $("#admin_fullname").val();
+    var emailAddress = $("#admin_emailAddress").val();
+    var password = $("#admin_Password").val();
+    var cPassword = $("#admin_cPassword").val();
 
-                alertBox("Logout Successful", response.message, "success")
+    if (fullName === "") {
+        alertBox("Form Field Required", "Administrator full name must be provided", "warning")
+    }
+    else if (emailAddress === "") {
+        alertBox("Form Field Required", "Administrator email address must be provided", "warning")
+    }
+    else if (password === "") {
+        alertBox("Form Field Required", "Administrator password must be provided", "warning")
+    }
+    else if (cPassword === "") {
+        alertBox("Form Field Required", "Please confirm administrator password", "warning")
+    }
+    else if (cPassword !== password) {
+        alertBox("Form Field Required", "Administrator Password doesn't match", "warning")
+    } 
+    else {
+        const params = JSON.stringify({
+            "name": fullName,
+            "email": emailAddress,
+            "password": password
+        })
 
-                setInterval(window.location = ADMIN_URL, 3000)
+        $.ajax({
+            type: "POST",
+            url: API_URL+"admins",
+            data: params,
+            contentType: "json",
+            headers: {
+                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function(response){
+                if (response.status == "success") {
+                    alertBox("Login Successful", response.message, "success")
+
+                    setInterval(window.location = ADMIN_URL+"viewAdmins", 5000)
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function(response){
+                alertBox("Error", response.responseJSON.message, "error")
             }
-            else {
-                alertBox("Error", response.message, "error")
-            }
-        },
-        error: function(response){
-            alertBox("Error", response.responseJSON.message, "error")
-        }
-    })
+        });
+    }
+
 }
 
 
@@ -132,67 +155,11 @@ function fetchAdmins() {
             }
         })
     }
-    else {
-        console.log("no loads")
-    }
+    
 }
 
 fetchAdmins()
 
-function registerAdmin() {
-
-    var name = $("input#admin_name").val();
-    var email = $("input#admin_email").val();
-    var password = $("input#admin_password").val();
-
-    if((name != "") && (email != "")){
-            if(password == ""){
-                toaster_error("Password must be provided");
-                return false;
-            } else {
-                var req = {
-                    "name": name,
-                    "email": email,
-                    "password": password
-                }
-                $.ajax({
-                    type: "POST",
-                    url: API_URL+"register",
-                    data: JSON.stringify(req),
-                    contentType: "json",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        "Authorization": "Bearer "+sessionStorage.getItem('token'),
-                        "Content-Type": "application/json"
-                    },
-                    success: function(response){
-                        if(response.status == "success"){
-                            toaster_success(response.message);
-                            window.location = ADMIN_URL + "admins";
-                        } else {
-                            toaster_error(response.message);
-                        }
-                    },
-                    error: function(response){
-                        toaster_error(response.responseText);
-                    }
-                });
-            }
-    } 
-    else {
-        var error_message = "";
-        if(name == ""){
-            error_message += "No Name was given";
-        }
-        if(email == ""){
-            error_message += "Email must be provided";
-        }
-
-        toaster_error(error_message);
-    }
-
-    return false;
-};
 
 if($("input#action").val() == "update"){
     var admin_id = $("input#admin_id").val();
@@ -595,6 +562,37 @@ if(del_book){
     }
 }
 
+
+
+function adminLogout() {
+
+    $.ajax({
+        type: "GET",
+        url: API_URL+"logout",
+        headers: {
+            "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+            "Content-Type": "application/json"
+        },
+        success: function(response){
+            
+            if (response.status == "success") {
+                sessionStorage.clear() 
+
+                alertBox("Logout Successful", response.message, "success")
+
+                setInterval(window.location = ADMIN_URL, 3000)
+            }
+            else {
+                alertBox("Error", response.message, "error")
+            }
+        },
+        error: function(response){
+            alertBox("Error", response.responseJSON.message, "error")
+        }
+    })
+}
+
+
 function alertBox(title, text, icon) {
     swal({
         title: title,
@@ -612,3 +610,7 @@ function dataTable() {
         "info": true, 
     });
 }
+
+let adminNames = document.querySelectorAll("#adminName").forEach(element => {
+    element.innerText = sessionStorage.getItem('adminName');
+})

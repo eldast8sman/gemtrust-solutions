@@ -1,6 +1,6 @@
 
 @section('pageTitle')
-    Gemtrust Dashboard || Home
+    Gemtrust Dashboard || View Administrators
 @endsection
 
 @extends('admin.layouts.default')
@@ -13,6 +13,7 @@
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
                             <h6 class="mb-4">Administrators Table</h6>
+                            
                             <table class="table" id="resultTable">
                                 <thead>
                                     <tr>
@@ -20,6 +21,7 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Date Created</th>
+                                        <!-- <th colspan="2" scope="col">Actions</th> -->
                                     </tr>
                                 </thead>
                                 <tbody id="tableBody">
