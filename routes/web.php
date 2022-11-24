@@ -21,4 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::controller(PageController::class)->group(function(){
     Route::get('/', 'index');
     Route::get('terms_conditions', 'terms');
+    Route::get('admin', 'admin');
+    Route::get('admin/viewAdmins', 'viewAdmins');
+    Route::get('admin/registerAdmin', 'registerAdmin');
+    Route::get('admin/login', 'adminLogin');
 }); 
