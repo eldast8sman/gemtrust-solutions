@@ -50,6 +50,14 @@ Route::prefix('admin')->group(function(){
             Route::post('/packages/{id}/add-partner', 'addPartner');
             Route::delete('/packages/remove-partner/{id}', 'removePartner');
         });
+
+        Route::controller(App\Http\Controllers\Admin\ArticleController::class)->group(function(){
+            Route::get('/articles', 'index');
+            Route::post('/articles', 'store');
+            Route::get('/articles/{id}', 'show');
+            Route::put('/articles/{id}', 'update');
+            Route::delete('/articles/{id}', 'destroy');
+        });
     });
 
     Route::controller(App\Http\Controllers\Admin\AuthController::class)->group(function(){
