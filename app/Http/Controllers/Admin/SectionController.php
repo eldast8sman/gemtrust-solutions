@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Section;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SectionController extends Controller
 {
@@ -13,7 +14,7 @@ class SectionController extends Controller
             return response([
                 'status' => 'success',
                 'message' => 'Sections fetched successfully',
-                'data' => $sections
+                'data' => $sections->get()
             ], 200);
         } else {
             return response([

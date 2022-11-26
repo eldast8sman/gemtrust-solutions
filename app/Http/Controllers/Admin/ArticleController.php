@@ -22,9 +22,13 @@ class ArticleController extends Controller
     public function index()
     {
         $search = !empty($_GET['search']) ? (string)$_GET['search'] : "";
-        $limit = !empty($_GET['limit']) ? (string)$_GET['limit'] : "";
-        if(!empty($search)){
+        $limit = !empty($_GET['limit']) ? (string)$_GET['limit'] : 20;
+        if(empty($search)){
             $articles = Article::orderBy('created_at', 'desc')->paginate($limit);
+            foreach($articles as $article){
+                $article->filename = UploadFile::find($article->filename);
+                $article->compressed = UploadFile::find($article->compressed);
+            }
             if(!empty($articles)){
                 return response([
                     'status' => 'success',
@@ -38,6 +42,7 @@ class ArticleController extends Controller
                 ], 404);
             }
         } else {
+            $page = !empty($_GET['page']) ? (int)$_GET['page'] : 1;
             $found = [];
             $search_array = explode(' ', $search);
             foreach($search_array as $search){
@@ -63,13 +68,14 @@ class ArticleController extends Controller
                 $articles = [];
                 foreach($keys as $id){
                     if(!empty($article = Article::find($id))){
+                        $article->filename = UploadFile::find($article->filename);
+                        $article->compressed = UploadFile::find($article->compressed);
                         $articles[] = $article;
                     }
                 }
 
                 if(!empty($articles)){
-                    $articles = Collection::make($articles);
-                    $articles = $articles->paginate($limit);
+                    $articles = self::paginate_array($articles, $limit, $page, []);
                     foreach($articles as $article){
                         if(!empty($article->filename)){
                             $article->filename = UploadFile::find($article->filename);
@@ -138,6 +144,11 @@ class ArticleController extends Controller
             $release_date = date('l, dS F, Y', strtotime($all['release_date']));
             $all['all_details'] = $all['title'].' '.$all['author'].' '.$all['content'].' '.$section.' '.$release_date;
             if($article = Article::create($all)){
+                $article->filename = UploadFile::find($article->filename);
+                $article->compressed = UploadFile::find($article->compressed);
+                if(!empty($article->section_id)){
+                    $article->section = Section::find($article->section_id);
+                }
                 return response([
                     'status' => 'success',
                     'message' => 'Article added successfully',
@@ -210,44 +221,55 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
         if(!empty($article)){
+            $all = $request->all();
             if(!empty($request->file('filename'))){
                 if($upload_image = FileController::uploadFile($request->file('filename'), "Article", "local")){
                     FileController::delete_file($article->filename);
                     FileController::delete_file($article->compressed);
 
-                    $request->filename = $upload_image['image'];
+                    $all['filename'] = $upload_image['image'];
                     if(isset($upload_image['compressed']) && !empty($upload_image['compressed'])){
                         $all['compressed'] = $upload_image['compressed'];
                     }
                 }
-                $all = $request->all();
-                if($article->update($all)){
-                    if(!empty($article->section)){
-                        if(!empty($section = Section::find($article->section_id))){
-                            $section = $section->section;
-                        } else {
-                            $section = "";
-                        }
+            } else {
+                unset($all['filename']);
+            }
+
+            if($article->update($all)){
+                if(!empty($article->section)){
+                    if(!empty($section = Section::find($article->section_id))){
+                        $section = $section->section;
                     } else {
                         $section = "";
                     }
-                    $release_date = date('l, dS F, Y', strtotime($article->release_date));
-                    $article->all_details = $article->title.' '.$article->author.' '.$article->content.' '.$section.' '.$release_date;
-                    $article->save();
-
-                    return response([
-                        'status' => 'success',
-                        'message' => 'Article updated successfully',
-                        'data' => $article
-                    ], 200);
                 } else {
-                    return response([
-                        'status' => 'failed',
-                        'message' => 'Could not update Article'
-                    ], 500);
+                    $section = "";
                 }
+                $release_date = date('l, dS F, Y', strtotime($article->release_date));
+                $article->all_details = $article->title.' '.$article->author.' '.$article->content.' '.$section.' '.$release_date;
+                $article->save();
+
+                if(!empty($article->filename)){
+                    $article->filename = UploadFile::find($article->filename);
+                }
+                if(!empty($article->compressed)){
+                    $article->compressed = UploadFile::find($article->compressed);
+                }
+                if(!empty($article->section_id)){
+                    $article->section = Section::find($article->section_id);
+                }
+
+                return response([
+                    'status' => 'success',
+                    'message' => 'Article updated successfully',
+                    'data' => $article
+                ], 200);
             } else {
-                unset($request->filename);
+                return response([
+                    'status' => 'failed',
+                    'message' => 'Could not update Article'
+                ], 500);
             }
         } else {
             return response([

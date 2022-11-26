@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\SectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -55,8 +56,16 @@ Route::prefix('admin')->group(function(){
             Route::get('/articles', 'index');
             Route::post('/articles', 'store');
             Route::get('/articles/{id}', 'show');
-            Route::put('/articles/{id}', 'update');
+            Route::post('/articles/{id}', 'update');
             Route::delete('/articles/{id}', 'destroy');
+        });
+        
+        Route::controller(SectionController::class)->group(function(){
+            Route::get('/sections', 'index');
+            Route::post('/sections', 'store');
+            Route::get('/sections/{id}', 'show');
+            Route::put('/sections/{id}', 'update');
+            Route::delete('/sections/{id}', 'destroy');
         });
     });
 
