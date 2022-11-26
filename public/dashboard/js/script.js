@@ -1,4 +1,4 @@
-var BASE_URL = "http://127.0.0.1:8000/";
+var BASE_URL = "http://localhost/";
 var ADMIN_URL = BASE_URL + "admin/"
 var API_URL = BASE_URL + "api/admin/";
 
@@ -129,8 +129,8 @@ function registerAdmin() {
 function fetchAdmins() {
 
     let getPage = document.title;
-
     if (getPage == "Gemtrust Dashboard || View Administrators") {
+
         $.ajax({
             type: "GET",
             url: API_URL+"admins",

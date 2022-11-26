@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePackageRequest extends FormRequest
+class StoreArticleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,13 @@ class UpdatePackageRequest extends FormRequest
     public function rules()
     {
         return [
-            'package' => 'string',
-            'description' => 'string',
-            'level' => 'numeric|min:1',
-            'reg_amount' => 'numeric|min:1',
-            'upline1' => 'numeric|min:1',
-            'upline2' => 'numeric|min:1',
-            'upline3' => 'numeric|min:1',
-            'upline4' => 'numeric|min:1'
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'filename' => 'required|mimes:jpg,jpeg,png,gif',
+            'section_id' => 'integer|exists:sections,id',
+            'minimum_level' => 'required|integer|min:0',
+            'author' => 'string',
+            'release_date' => 'required|string'
         ];
     }
 }

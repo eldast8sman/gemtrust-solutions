@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('package', 255);
             $table->text('description')->nullable();
+            $table->integer('level')->nullable();
             $table->double('reg_amount')->default(0);
+            $table->float('discount')->default(0);
             $table->double('upline1')->default(0);
             $table->double('upline2')->default(0);
             $table->double('upline3')->default(0);

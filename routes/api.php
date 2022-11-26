@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\SectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,22 @@ Route::prefix('admin')->group(function(){
             Route::delete('/packages/{id}', 'destroy');
             Route::post('/packages/{id}/add-partner', 'addPartner');
             Route::delete('/packages/remove-partner/{id}', 'removePartner');
+        });
+
+        Route::controller(App\Http\Controllers\Admin\ArticleController::class)->group(function(){
+            Route::get('/articles', 'index');
+            Route::post('/articles', 'store');
+            Route::get('/articles/{id}', 'show');
+            Route::post('/articles/{id}', 'update');
+            Route::delete('/articles/{id}', 'destroy');
+        });
+        
+        Route::controller(SectionController::class)->group(function(){
+            Route::get('/sections', 'index');
+            Route::post('/sections', 'store');
+            Route::get('/sections/{id}', 'show');
+            Route::put('/sections/{id}', 'update');
+            Route::delete('/sections/{id}', 'destroy');
         });
     });
 
