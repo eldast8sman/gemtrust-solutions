@@ -25,7 +25,7 @@ class FileController extends Controller
             $extension = $filepath->extension();
             $name = $filename.'.'.$extension;
             if(($extension == "jpg") || ($extension == "jpeg") || ($extension == "gif") || ($extension == "png")){
-                if($stored = Storage::disk($disk)->putFileAs('img', $filepath, $name)){
+                if($stored = Storage::disk($disk)->putFileAs('public/img', $filepath, $name)){
                     $filepaths = [];
                     $image = UploadFile::create([
                         'filename' => $filename,
@@ -42,9 +42,9 @@ class FileController extends Controller
                     $image = Image::make($filepath)->resize(100, null, function($constraint){
                         $constraint->aspectRatio();
                         $constraint->upsize();
-                    })->encode($extension, 50);
+                    })->encode($extension, 50)->save();
 
-                    if($compressed = Storage::putFileAs('img/compressed', $filepath, $name)){
+                    if($compressed = Storage::putFileAs('public/img/compressed', $filepath, $name)){
                         $comp_image = UploadFile::create([
                             'filename' => $filename,
                             'extension' => $extension,
