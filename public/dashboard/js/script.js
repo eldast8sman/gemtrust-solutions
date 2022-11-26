@@ -129,8 +129,8 @@ function registerAdmin() {
 function fetchAdmins() {
 
     let getPage = document.title;
-    if (getPage == "Gemtrust Dashboard || View Administrators") {
 
+    if (getPage == "Gemtrust Dashboard || View Administrators") {
         $.ajax({
             type: "GET",
             url: API_URL+"admins",
