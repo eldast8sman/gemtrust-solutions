@@ -12,7 +12,7 @@
                 <div class="row g-4">
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Register Administrator</h6>
+                            <h3 class="mb-4">Register Administrator</h3>
 
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="admin_fullname"

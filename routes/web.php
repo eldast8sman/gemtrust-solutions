@@ -21,8 +21,21 @@ use Illuminate\Support\Facades\Route;
 Route::controller(PageController::class)->group(function(){
     Route::get('/', 'index');
     Route::get('terms_conditions', 'terms');
+
+    Route::get('admin/login', 'adminLogin');
+
+    // admininstrator route
     Route::get('admin', 'admin');
     Route::get('admin/viewAdmins', 'viewAdmins');
     Route::get('admin/registerAdmin', 'registerAdmin');
-    Route::get('admin/login', 'adminLogin');
+
+    // packages route
+    Route::get('admin/packages/', 'viewPackages');
+    Route::get('admin/package/{id}', 'viewSinglePackage');
+    Route::get('admin/addPackage', 'addPackage');
+
+    // partners route
+    Route::get('admin/partners/', 'viewPartners');
+    Route::get('admin/partner/{id}', 'viewSinglePartner');
+    Route::get('admin/addPartner', 'addPartner');
 }); 
