@@ -6,27 +6,52 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function index(){
+    public function index() {
         return view('pages/home');
     }
 
-    public function terms(){
+    public function terms() {
         return view('pages/terms_conditions');
     }
 
-    public function admin(){
+    public function admin() {
         return view('admin/home');
     }
 
-    public function viewAdmins(){
+    public function viewAdmins() {
         return view('admin/viewAdmins');
     }
     
-    public function registerAdmin(){
+    public function registerAdmin() {
         return view('admin/registerAdmin');
     }
 
-    public function adminLogin(){
+    public function adminLogin() {
         return view('admin/signin');
     }
+    
+    public function viewPackages() {
+        return view("admin/viewPackages");
+    }
+
+    public function viewSinglePackage($id) {
+        return view("admin/viewSinglePackage", ["package_id" => $id]);
+    }
+
+    public function addPackage() {
+        return view('admin/addPackage');
+    }
+    
+    public function viewPartners() {
+        return view("admin/viewPartners");
+    }
+
+    public function viewSinglePartner($id) {
+        return view("admin/viewSinglePartner", ["partner_id" => $id]);
+    }
+
+    public function addPartner() {
+        return view('admin/addPartner');
+    }
+
 }
