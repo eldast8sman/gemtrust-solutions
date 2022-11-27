@@ -94,7 +94,7 @@ Route::prefix('signal-provider')->group(function(){
     Route::controller(App\Http\Controllers\SignalProvider\AuthController::class)->group(function(){
         Route::post('/login', 'login');
         Route::post('/activate', 'activate');
-        Route::get('/resend-token/{old_token}', 'resend_token');
+        Route::get('/resend-verification-link/{old_token}', 'resend_token');
         Route::get('/logut', 'logout');
     });
 });

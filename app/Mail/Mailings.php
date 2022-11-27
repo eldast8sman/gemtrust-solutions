@@ -14,11 +14,11 @@ class Mailings extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $subject;
-    private $markdown;
+    public $subject;
+    public $markdown;
     public $data;
-    private $from_mail;
-    private $from_name;
+    public $from_mail;
+    public $from_name;
 
     /**
      * Create a new message instance.
@@ -55,7 +55,7 @@ class Mailings extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.'.$this->markdown,
+            view: $this->markdown,
             with: [
                 'data' => $this->data
             ]

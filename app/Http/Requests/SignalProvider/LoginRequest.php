@@ -29,7 +29,6 @@ class LoginRequest extends FormRequest
             'password' => [
                 'required',
                 'string',
-                'confirmed',
                 Password::min(8)->mixedCase()->numbers()->symbols()
             ]
         ];

@@ -77,7 +77,7 @@ class AuthController extends Controller
             $provider->status = 0;
             $provider->save();
 
-            Mail::to($provider)->send(new Mailings('Verification Link Reset', 'resend_verify_token', [
+            Mail::to($provider)->send(new Mailings('Verification Link Reset', 'emails.resend_verify_token', [
                 'title' => 'Verification Link Reset',
                 'name' => $provider->name,
                 'link' => env('APP_URL', 'https://gemtrustsolutions.com').'/signal-provider/activate/'.$token
