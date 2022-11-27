@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\SignalProviderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +67,14 @@ Route::prefix('admin')->group(function(){
             Route::get('/sections/{id}', 'show');
             Route::put('/sections/{id}', 'update');
             Route::delete('/sections/{id}', 'destroy');
+        });
+
+        Route::controller(SignalProviderController::class)->group(function(){
+            Route::get('/signal-providers', 'index');
+            Route::post('/signal-providers', 'store');
+            Route::get('/signal-providers/{id}', 'show');
+            Route::put('/signal-providers/{id}', 'update');
+            Route::delete('/signal-providers/{id}', 'destroy');
         });
     });
 
