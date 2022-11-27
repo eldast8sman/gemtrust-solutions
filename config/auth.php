@@ -47,7 +47,11 @@ return [
         'admin-api' => [
             'driver' => 'jwt',
             'provider' => 'admins'
-        ]
+        ],
+        'signalprovider-api' => [
+            'driver' => 'jwt',
+            'provider' => 'signalproviders'
+        ],
     ],
 
     /*
@@ -75,7 +79,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
-        ]
+        ],
+        'signalproviders' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\SignalProvider::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -110,7 +118,13 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
-        ]
+        ],
+        'signalproviders' => [
+            'provider' => 'signalproviders',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
     /*
