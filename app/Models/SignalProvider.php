@@ -36,16 +36,22 @@ class SignalProvider extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'email_verified_at',
         'password',
         'verify_token',
-        'token'
+        'verify_token_expiry',
+        'token',
+        'token_expiry',
+        'status'
     ];
 
     protected $hidden = [
         'password',
         'verify_token',
-        'token'
+        'verify-token-expiry',
+        'token',
+        'token-expiry'
     ];
 
     protected $casts = [

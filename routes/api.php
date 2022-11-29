@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\SignalProviderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +68,14 @@ Route::prefix('admin')->group(function(){
             Route::put('/sections/{id}', 'update');
             Route::delete('/sections/{id}', 'destroy');
         });
+
+        Route::controller(SignalProviderController::class)->group(function(){
+            Route::get('/signal-providers', 'index');
+            Route::post('/signal-providers', 'store');
+            Route::get('/signal-providers/{id}', 'show');
+            Route::put('/signal-providers/{id}', 'update');
+            Route::delete('/signal-providers/{id}', 'destroy');
+        });
     });
 
     Route::controller(App\Http\Controllers\Admin\AuthController::class)->group(function(){
@@ -78,5 +87,14 @@ Route::prefix('admin')->group(function(){
         Route::put('change-password', 'changePassword');
         Route::delete('admins/{id}', 'destroy');
         Route::get('/logout', 'logout');
+    });
+});
+
+Route::prefix('signal-provider')->group(function(){
+    Route::controller(App\Http\Controllers\SignalProvider\AuthController::class)->group(function(){
+        Route::post('/login', 'login');
+        Route::post('/activate', 'activate');
+        Route::get('/resend-verification-link/{old_token}', 'resend_token');
+        Route::get('/logut', 'logout');
     });
 });
