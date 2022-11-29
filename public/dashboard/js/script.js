@@ -23,6 +23,7 @@ function adminLogin() {
         btnFunc.setAttribute("disabled", "disabled");
         btnFunc.innerHTML = '<div class="spinner-border"></div>';
 
+        
         let params = JSON.stringify({
             "email": email,
             "password": password
