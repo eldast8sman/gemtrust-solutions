@@ -361,7 +361,7 @@
                 </div>
                 <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut quis, rem culpa labore voluptate
                     ullam! In, nostrum. Dicta, vero nihil. Delectus minus vitae rerum voluptatum, excepturi incidunt ut,
-                    enim nam exercitationem optio ducimus!</h3>
+                    enim nam exercitationem opti ducimus!</h3>
                 <div class="stars">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
