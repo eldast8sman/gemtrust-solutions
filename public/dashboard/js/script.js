@@ -5,6 +5,8 @@ var API_URL = BASE_URL + "api/admin/";
 let btnFunc = document.getElementById("btnFunc");
 let packageArray;
 let partnerArray;
+let sectionArray;
+let adminArray;
 
 function adminLogin() {
 
@@ -51,7 +53,7 @@ function adminLogin() {
                     sessionStorage.setItem("adminName", res.name);
                     sessionStorage.setItem("adminEmail", res.email);
 
-                    setInterval(window.location = ADMIN_URL, 5000)
+                    setInterval(window.location = "/admin", 5000)
 
                 }
                 else {
@@ -113,7 +115,7 @@ function registerAdmin() {
                 if (response.status == "success") {
                     alertBox("Login Successful", response.message, "success")
 
-                    setInterval(window.location = ADMIN_URL+"viewAdmins", 5000)
+                    setInterval(window.location = "/admin/viewAdmins", 5000)
                 }
                 else {
                     alertBox("Error", response.message, "error")
@@ -152,7 +154,8 @@ function fetchAdmins() {
                             tableBody += "<th scope='row'>" + sn++ +"</th>";
                             tableBody += "<td>"+ element.name +"</td>";
                             tableBody += "<td>"+ element.email +"</td>";
-                            tableBody += "<td>"+ element.created_at +"</td>";
+                            tableBody += "<td>"+ formatDate(element.created_at) +"</td>";
+                            tableBody += "<td><a href='/admin/admin/"+ element.id +"' class='btn btn-primary py-2 w-100'>View</a></td>";
                         tableBody += "</tr>";
                         
                         $('#tableBody').append(tableBody);
@@ -172,6 +175,141 @@ function fetchAdmins() {
 
 }
 fetchAdmins()
+
+function fetchSingleAdmin() {
+
+    let getPage = document.title;
+
+    if (getPage == "Gemtrust Dashboard || View Single Admin") {
+
+        let admin_id = $("#admin_id").val();
+
+        $.ajax({
+            type: "GET",
+            url: API_URL+"admins/" + admin_id,
+            headers: {
+                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function(response){
+                
+                if (response.status == "success") {
+
+                    $('#singleAdminHtml').html('');
+
+                    let element = response.data;
+                    adminArray = element;
+                    
+                    let adminBody = "<div class='col-sm-12 col-xl-12'>";
+                        adminBody += "<div class='bg-light rounded h-100 p-4'>";
+
+                            adminBody += "<div class='row g-4'>";
+
+                                adminBody += "<h3 class='mb-4'>Administrator Details</h3>";
+
+                                adminBody += "<div class='col-sm-6'>";
+                                    adminBody += "<label>FullName</label>";
+                                    adminBody += "<h6 class='mb-4'>"+ element.name +"</h6>";
+                                adminBody += "</div>";
+
+                                adminBody += "<div class='col-sm-6'>";
+                                    adminBody += "<label>Email</label>";
+                                    adminBody += "<h6 class='mb-4' id='adminEmail' >"+ element.email +"</h6>";
+                                adminBody += "</div>";
+                                
+                                adminBody += "<div class='col-sm-6'>";
+                                    adminBody += "<label>Date Created</label>";
+                                    adminBody += "<h6 class='mb-4'>"+ formatDate(element.created_at) +"</h6>";
+                                adminBody += "</div>";
+
+                                adminBody += "<div class='col-sm-6'>";
+                                    adminBody += "<label>Last Updated</label>";
+                                    adminBody += "<h6 class='mb-4'>"+ formatDate(element.updated_at) +"</h6>";
+                                adminBody += "</div>";
+
+                                adminBody += "<div class='col-sm-6'>";
+                                    adminBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#adminEditModal' title='click here to edit Admin' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                                adminBody += "</div>";
+
+                                adminBody += "<div class='col-sm-6'>";
+                                    adminBody += "<button type='button' title='click here to delete Section' class='btn btn-danger py-3 w-100 mb-4' onclick='alert("+ '"Under Development :( "' +")' >Delete</button>";
+                                adminBody += "</div>";
+
+                            adminBody += "</div>";
+                        adminBody += "</div>";
+                    adminBody += "</div>";
+                    
+                    $('#singleAdminHtml').html(adminBody);
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function(response){
+                alertBox("Error", response.responseJSON.message, "error")
+            }
+        })
+    }
+     
+}
+fetchSingleAdmin()
+
+function updateAdminPassword() {
+    let emailAddress = $('#adminEmail').val();
+    let currentPassword = $('#e_currentPassword').val();
+    let newPassword = $('#e_newPassword').val();
+    let cPassword = $('#e_confirmPassword').val();
+
+    const params = JSON.stringify({
+        "email": emailAddress,
+        "current_password": currentPassword,
+        "password": newPassword,
+        "password_confirmation": cPassword
+    })
+    
+    swal({
+        title: "Update Administrator",
+        text: "Are you sure you want to save the changes?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+
+        if (willDelete) {
+            
+            $.ajax({
+                type: "PUT",
+                url: API_URL+"change-password",
+                data: params,
+                dataType: "JSON",
+                headers: {
+                    "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                    "Content-Type": "application/json"
+                },
+                success: function(response){
+                    
+                    if (response.status == "success") {
+                        alertBox("Administrator Updated", response.message, "success")
+
+                        setInterval(window.location.reload(), 5000)
+                    }
+                    else {
+                        alertBox("Error", response.message, "error")
+                    }
+                },
+                error: function (response) {
+                    alertBox("Error", response.responseJSON.message, "error")
+                }
+            })
+
+        }
+        else {
+            alertBox("Cancel", "Administrator update request cancelled", "info")
+        }
+    })
+
+}
 
 function addPackage() {
 
@@ -247,7 +385,7 @@ function addPackage() {
                 if (response.status == "success") {
                     alertBox("Package Added", response.message, "success")
 
-                    setInterval(window.location = ADMIN_URL+"packages", 5000)
+                    setInterval(window.location = "/admin/packages", 5000)
                 }
                 else {
                     alertBox("Error", response.message, "error")
@@ -292,7 +430,7 @@ function fetchPackages() {
                                 packageBody += "<h6 class='mb-4'>"+ element.package +"</h6>";
                                 packageBody += "<label for='amount'>Amount</label>";
                                 packageBody += "<h6 class='mb-4'>&#8358;"+ element.reg_amount +"</h6>";
-                                packageBody += "<a href='"+ ADMIN_URL+"package/"+ element.id +"' class='btn btn-primary py-3 w-50 mt-2'>View Package</a>";
+                                packageBody += "<a href='/admin/package/"+ element.id +"' class='btn btn-primary py-3 w-50 mt-2'>View Package</a>";
                             packageBody += "</div>";
                         packageBody += "</div>";
                         
@@ -377,12 +515,12 @@ function fetchSinglePackage() {
 
                                 packageBody += "<div class='col-sm-6'>";
                                     packageBody += "<label for='created_at'>Date Created</label>";
-                                    packageBody += "<h5 class='mb-4'>"+ element.created_at +"</h5>";
+                                    packageBody += "<h5 class='mb-4'>"+ formatDate(element.created_at) +"</h5>";
                                 packageBody += "</div>";
 
                                 packageBody += "<div class='col-sm-6'>";
                                     packageBody += "<label for='updated_at'>Last Update</label>";
-                                    packageBody += "<h5 class='mb-4'>"+ element.updated_at +"</h5>";
+                                    packageBody += "<h5 class='mb-4'>"+ formatDate(element.updated_at) +"</h5>";
                                 packageBody += "</div>";
 
                                 packageBody += "<div class='col-sm-12'>";
@@ -666,7 +804,7 @@ function deletePackage(packageId) {
                     if (response.status == "success") {
                         alertBox("Package Deleted", response.message, "success")
     
-                        setInterval(window.location = ADMIN_URL+"packages", 5000)
+                        setInterval(window.location = "/admin/packages", 5000)
                     }
                     else {
                         alertBox("Error", response.message, "error")
@@ -818,7 +956,7 @@ function addPartner() {
                 if (response.status == "success") {
                     alertBox("Partner Added", response.message, "success")
 
-                    setInterval(window.location = ADMIN_URL+"partners", 5000)
+                    setInterval(window.location = "/admin/partners", 5000)
                 }
                 else {
                     alertBox("Error", response.message, "error")
@@ -863,7 +1001,7 @@ function fetchPartners() {
                                 partnerBody += "<h6 class='mb-4'>"+ element.partner +"</h6>";
                                 partnerBody += "<label for='description' >Description</label>";
                                 partnerBody += "<h6 class='mb-4'>"+ element.description +"</h6>";
-                                partnerBody += "<a href='"+ ADMIN_URL+"partner/"+ element.id +"' class='btn btn-primary py-3 w-50 mt-2'>View Partner</a>";
+                                partnerBody += "<a href='/admin/partner/"+ element.id +"' class='btn btn-primary py-3 w-50 mt-2'>View Partner</a>";
                             partnerBody += "</div>";
                         partnerBody += "</div>";
                         
@@ -936,12 +1074,12 @@ function fetchSinglePartners() {
 
                                 partnerBody += "<div class='col-sm-6'>";
                                     partnerBody += "<label for='created_at'>Date Created</label>";
-                                    partnerBody += "<h5 class='mb-4'>"+ element.created_at +"</h5>";
+                                    partnerBody += "<h5 class='mb-4'>"+ formatDate(element.created_at) +"</h5>";
                                 partnerBody += "</div>";
 
                                 partnerBody += "<div class='col-sm-6'>";
                                     partnerBody += "<label for='updated_at'>Last Update</label>";
-                                    partnerBody += "<h5 class='mb-4'>"+ element.updated_at +"</h5>";
+                                    partnerBody += "<h5 class='mb-4'>"+ formatDate(element.updated_at) +"</h5>";
                                 partnerBody += "</div>";
 
                                 partnerBody += "<div class='col-sm-12'>";
@@ -1130,7 +1268,7 @@ function deletePartner(partnerId) {
                     if (response.status == "success") {
                         alertBox("Partner Deleted", response.message, "success")
     
-                        setInterval(window.location = ADMIN_URL+"partners", 5000)
+                        setInterval(window.location = "/admin/partners", 5000)
                     }
                     else {
                         alertBox("Error", response.message, "error")
@@ -1148,6 +1286,416 @@ function deletePartner(partnerId) {
     })
 
 }
+
+function fetchSections() {
+
+    let getPage = document.title;
+
+    if (getPage == "Gemtrust Dashboard || View Sections") {
+        $.ajax({
+            type: "GET",
+            url: API_URL+"sections",
+            headers: {
+                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function(response){
+                
+                if (response.status == "success") {
+
+                    $('#sectionHtml').html('');
+                    $('#sectionHtml').html("<h3 class='mb-4'>Sections</h3>");
+
+                    response.data.forEach(element => {
+                        
+                        let sectionBody = "<div class='col-sm-12 col-xl-6'>";
+                            sectionBody += "<div class='bg-light rounded h-100 p-4'>";
+                                sectionBody += "<label>Section Name</label>";
+                                sectionBody += "<h6 class='mb-4'>"+ element.section +"</h6>";
+                                sectionBody += "<label for='amount'>Description</label>";
+                                sectionBody += "<p class='mb-4'>"+ element.description +"</p>";
+                                sectionBody += "<a href='/admin/section/"+ element.id +"' class='btn btn-primary py-3 w-50 mt-2'>View Section</a>";
+                            sectionBody += "</div>";
+                        sectionBody += "</div>";
+
+                        $('#sectionHtml').append(sectionBody);
+                    });
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function(response){
+                alertBox("Error", response.responseJSON.message, "error")
+            }
+        })
+    }
+
+}
+fetchSections()
+
+function fetchSingleSection() {
+
+    let getPage = document.title;
+
+    if (getPage == "Gemtrust Dashboard || View Single Section") {
+
+        let section_id = $("#section_id").val();
+
+        $.ajax({
+            type: "GET",
+            url: API_URL+"sections/" + section_id,
+            headers: {
+                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function(response){
+                
+                if (response.status == "success") {
+
+                    $('#singleSectionHtml').html('');
+
+                    let element = response.data;
+                    sectionArray = element;
+                    
+                    let sectionBody = "<div class='col-sm-12 col-xl-12'>";
+                        sectionBody += "<div class='bg-light rounded h-100 p-4'>";
+
+                            sectionBody += "<div class='row g-4'>";
+
+                                sectionBody += "<h3 class='mb-4'>Section Details</h3>";
+
+                                sectionBody += "<div class='col-sm-12'>";
+                                    sectionBody += "<label>Section Name</label>";
+                                    sectionBody += "<h6 class='mb-4'>"+ element.section +"</h6>";
+                                sectionBody += "</div>";
+
+                                sectionBody += "<div class='col-sm-12'>";
+                                    sectionBody += "<label for='amount'>Description</label>";
+                                    sectionBody += "<p class='mb-4'>"+ element.description +"</p>";
+                                sectionBody += "</div>";
+
+                                sectionBody += "<div class='col-sm-6'>";
+                                    sectionBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#sectionEditModal' onclick='loadEditSectionModal()' title='click here to edit Section' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                                sectionBody += "</div>";
+
+                                sectionBody += "<div class='col-sm-6'>";
+                                    sectionBody += "<button type='button' title='click here to delete Section' class='btn btn-danger py-3 w-100 mb-4' onclick='deleteSection("+ '"' + element.id + '"' +")' >Delete</button>";
+                                sectionBody += "</div>";
+
+                            sectionBody += "</div>";
+                        sectionBody += "</div>";
+                    sectionBody += "</div>";
+                    
+                    $('#singleSectionHtml').html(sectionBody);
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function(response){
+                alertBox("Error", response.responseJSON.message, "error")
+            }
+        })
+    }
+
+}
+fetchSingleSection()
+
+function loadEditSectionModal() {
+    document.getElementById('e_sectionName').value = sectionArray.section;
+    document.getElementById('e_description').value = sectionArray.description;
+}
+
+function addSection() {
+
+    let sectionName = $("#sectionName").val();
+    let description = $("#description").val();
+
+    if (sectionName === "") {
+        alertBox("Form Field Required", "Section name is required", "warning")
+    }
+    else if (description === "") {
+        alertBox("Form Field Required", "Section description is required", "warning")
+    }
+    else {
+
+        btnFunc.setAttribute("class", "btn btn-warning py-3 w-100 mb-4");
+        btnFunc.setAttribute("disabled", "disabled");
+        btnFunc.innerHTML = '<div class="spinner-border"></div>';
+
+        const params = JSON.stringify({
+            "section": sectionName,
+            "description": description,
+        });
+
+        $.ajax({
+            type: "POST",
+            url: API_URL+"sections",
+            data: params,
+            dataType: "json",
+            headers: {
+                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function(response){
+                btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
+                btnFunc.removeAttribute("disabled");
+                btnFunc.innerText = 'Add Section';
+                
+                if (response.status == "success") {
+                    alertBox("Section Added", response.message, "success")
+
+                    setInterval(window.location = "/admin/sections", 5000)
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function(response){
+                btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
+                btnFunc.removeAttribute("disabled");
+                btnFunc.innerText = 'Add Section';
+
+                alertBox("Error", response.responseJSON.message, "error")
+            }
+        });
+    }
+
+}
+
+function updateSection() {
+
+    let sectionId = $('#section_id').val();
+    let sectionName = $('#e_sectionName').val();
+    let description = $('#e_description').val();
+
+    const params = JSON.stringify({
+        "section": sectionName,
+        "description": description
+    });
+    
+    swal({
+        title: "Update Section",
+        text: "Are you sure you want to save the changes?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+
+        if (willDelete) {
+            
+            $.ajax({
+                type: "PUT",
+                url: API_URL+"sections/" + sectionId,
+                data: params,
+                dataType: "JSON",
+                headers: {
+                    "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                    "Content-Type": "application/json"
+                },
+                success: function(response){
+                    
+                    if (response.status == "success") {
+                        alertBox("Section Updated", response.message, "success")
+
+                        setInterval(window.location.reload(), 5000)
+                    }
+                    else {
+                        alertBox("Error", response.message, "error")
+                    }
+                },
+                error: function (response) {
+                    alertBox("Error", response.responseJSON.message, "error")
+                }
+            })
+
+        }
+        else {
+            alertBox("Cancel", "Section update request cancelled", "info")
+        }
+    })
+
+}
+
+function deleteSection(sectionId) {
+    swal({
+        title: "Delete Section",
+        text: "Are you sure you want to delete this Section?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+
+        if (willDelete) {
+            
+            $.ajax({
+                type: "DELETE",
+                url: API_URL+"sections/" + sectionId,
+                headers: {
+                    "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                    "Content-Type": "application/json"
+                },
+                success: function(response){
+                    
+                    if (response.status == "success") {
+                        alertBox("Section Deleted", response.message, "success")
+    
+                        setInterval(window.location = "/admin/sections", 5000)
+                    }
+                    else {
+                        alertBox("Error", response.message, "error")
+                    }
+                },
+                error: function (response) {
+                    alertBox("Error", response.responseJSON.message, "error")
+                }
+            })
+
+        }
+        else {
+            alertBox("Cancel", "Section delete request cancelled", "info")
+        }
+    })
+
+}
+
+function addSignalProvider() {
+
+    let fullName = $("#signal_fullname").val();
+    let emailAddress = $("#signal_email").val();
+    let phoneNumber = $("#signal_phoneNumber").val();
+
+    if (fullName === "") {
+        alertBox("Form Field Required", "Full name is required", "warning")
+    }
+    else if (emailAddress === "") {
+        alertBox("Form Field Required", "Email address is required", "warning")
+    }
+    else if (phoneNumber === "") {
+        alertBox("Form Field Required", "Phone number is required", "warning")
+    }
+    else if (phoneNumber.length > 11 || phoneNumber.length < 11 ) {
+        alertBox("Form Field Required", "Phone number can't be lesser or greater than 11 digits", "warning")
+    }
+    else {
+
+        btnFunc.setAttribute("class", "btn btn-warning py-3 w-100 mb-4");
+        btnFunc.setAttribute("disabled", "disabled");
+        btnFunc.innerHTML = '<div class="spinner-border"></div>';
+
+        const params = JSON.stringify({
+            "name": fullName,
+            "email": emailAddress,
+            "phone": phoneNumber,
+        });
+
+        $.ajax({
+            type: "POST",
+            url: API_URL+"signal-providers",
+            data: params,
+            dataType: "json",
+            headers: {
+                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function(response){
+                btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
+                btnFunc.removeAttribute("disabled");
+                btnFunc.innerText = 'Add Signal Provider';
+                
+                if (response.status == "success") {
+                    alertBox("Signal Provider Added", response.message, "success")
+
+                    setInterval(window.location = "/admin/signalsProvider", 5000)
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function(response){
+                btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
+                btnFunc.removeAttribute("disabled");
+                btnFunc.innerText = 'Add Signal Provider';
+
+                alertBox("Error", response.responseJSON.message, "error")
+            }
+        });
+    }
+
+}
+
+function fetchSignalProvider() {
+
+    let getPage = document.title;
+
+    if (getPage == "Gemtrust Dashboard || View Signals Provider") {
+        $.ajax({
+            type: "GET",
+            url: API_URL+"signal-providers",
+            headers: {
+                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function(response){
+                
+                if (response.status == "success") {
+
+                    $('#SignalHtml').html('');
+                    $('#SignalHtml').html("<h3 class='mb-4'>Signals Provider</h3>");
+
+                    response.data.forEach(element => {
+                        
+                        let signalProviderBody = "<div class='col-sm-6 col-xl-6'>";
+                            signalProviderBody += "<div class='bg-light rounded h-100 p-4'>";
+
+                            signalProviderBody += "<div class='row g-4'>";
+
+                                signalProviderBody += "<div class='col-sm-6'>";
+                                    signalProviderBody += "<label for=''>Fullname</label>";
+                                    signalProviderBody += "<h6 class='mb-4'>"+ element.name +"</h6>";
+                                signalProviderBody += "</div>";
+                                
+                                signalProviderBody += "<div class='col-sm-6'>";
+                                    signalProviderBody += "<label for=''>Email Address</label>";
+                                    signalProviderBody += "<h6 class='mb-4'>"+ element.email +"</h6>";
+                                signalProviderBody += "</div>";
+
+                                signalProviderBody += "<div class='col-sm-6'>";
+                                    signalProviderBody += "<label for=''>Phone Number</label>";
+                                    signalProviderBody += "<h6 class='mb-4'>"+ element.phone +"</h6>";
+                                signalProviderBody += "</div>";
+                                
+                                signalProviderBody += "<div class='col-sm-6'>";
+                                    signalProviderBody += "<label for=''>Status</label>";
+                                    signalProviderBody += "<h6 class='mb-4'>"+ element.status +"</h6>";
+                                signalProviderBody += "</div>";
+
+                                signalProviderBody += "</div>";
+                            signalProviderBody += "</div>";
+                        signalProviderBody += "</div>";
+
+                        $('#SignalHtml').append(signalProviderBody);
+                    });
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function(response){
+                alertBox("Error", response.responseJSON.message, "error")
+            }
+        })
+    }
+
+}
+fetchSignalProvider()
+
+
+
+
 
 
 
@@ -1542,7 +2090,7 @@ function adminLogout() {
 
                 alertBox("Logout Successful", response.message, "success")
 
-                setInterval(window.location = ADMIN_URL, 3000)
+                setInterval(window.location = "/admin", 3000)
             }
             else {
                 alertBox("Error", response.message, "error")
@@ -1573,6 +2121,10 @@ function dataTable() {
     });
 }
 
+function formatDate(date_string) {
+    let date = new Date(date_string);
+    return date.toUTCString();
+}
 document.querySelectorAll("#adminName").forEach(element => {
     element.innerText = sessionStorage.getItem('adminName');
 })

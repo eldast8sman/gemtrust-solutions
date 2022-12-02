@@ -26,7 +26,8 @@ Route::controller(PageController::class)->group(function(){
 
     // admininstrator route
     Route::get('admin', 'admin');
-    Route::get('admin/viewAdmins', 'viewAdmins');
+    Route::get('admin/admins', 'viewAdmins');
+    Route::get('admin/admin/{id}', 'viewSingleAdmin');
     Route::get('admin/registerAdmin', 'registerAdmin');
 
     // packages route
@@ -38,4 +39,20 @@ Route::controller(PageController::class)->group(function(){
     Route::get('admin/partners/', 'viewPartners');
     Route::get('admin/partner/{id}', 'viewSinglePartner');
     Route::get('admin/addPartner', 'addPartner');
-}); 
+
+    // sections route
+    Route::get('admin/sections/', 'viewSections');
+    Route::get('admin/section/{id}', 'viewSingleSection');
+    Route::get('admin/addSection', 'addSection');
+
+    // article route
+    Route::get('admin/articles/', 'viewArticles');
+    Route::get('admin/article/{id}', 'viewSingleArticle');
+    Route::get('admin/addArticle', 'addArticle');
+
+    // signal providers route
+    Route::get('admin/signalsProvider/', 'viewSignalsProvider');
+    Route::get('admin/signalProvider/{id}', 'viewSingleSignalProvider');
+    Route::get('admin/addSignalProvider', 'addSignalProvider');
+
+});

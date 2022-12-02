@@ -21,6 +21,7 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Date Created</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody id="tableBody">

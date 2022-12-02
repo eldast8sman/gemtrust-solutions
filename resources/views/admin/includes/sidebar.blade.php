@@ -15,19 +15,11 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="button.html" class="dropdown-item">Buttons</a>
-                            <a href="typography.html" class="dropdown-item">Typography</a>
-                            <a href="element.html" class="dropdown-item">Other Elements</a>
-                        </div>
-                    </div>
-                    
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Administrator</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="/admin/viewAdmins" class="dropdown-item">View Admin</a>
+                            <a href="/admin/admins" class="dropdown-item">View Admin</a>
                             <a href="/admin/registerAdmin" class="dropdown-item">Add Admin</a>
                         </div>
                     </div>
@@ -44,31 +36,31 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-box me-2"></i></i>Packages</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/admin/packages" class="dropdown-item">View Packages</a>
-                            <a href="/admin/addPackage" class="dropdown-item">Add Packages</a>
+                            <a href="/admin/addPackage" class="dropdown-item">Add Package</a>
                         </div>
                     </div>
                     
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-box me-2"></i></i>Sections</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="/admin/packages" class="dropdown-item">View Packages</a>
-                            <a href="/admin/addPackage" class="dropdown-item">Add Packages</a>
+                            <a href="/admin/sections" class="dropdown-item">View Sections</a>
+                            <a href="/admin/addSection" class="dropdown-item">Add Section</a>
                         </div>
                     </div>
                     
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-box me-2"></i></i>Articles</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="/admin/packages" class="dropdown-item">View Packages</a>
-                            <a href="/admin/addPackage" class="dropdown-item">Add Packages</a>
+                            <a href="/admin/articles" class="dropdown-item">View Articles</a>
+                            <a href="/admin/addArticle" class="dropdown-item">Add Article</a>
                         </div>
                     </div>
                     
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-box me-2"></i></i>Signal Providers</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="/admin/packages" class="dropdown-item">View Packages</a>
-                            <a href="/admin/addPackage" class="dropdown-item">Add Packages</a>
+                            <a href="/admin/signalsProvider" class="dropdown-item">View Signals Provider</a>
+                            <a href="/admin/addSignalProvider" class="dropdown-item">Add Signal Provider</a>
                         </div>
                     </div>
 
