@@ -22,6 +22,10 @@ class PageController extends Controller
         return view('admin/viewAdmins');
     }
     
+    public function viewSingleAdmin($id) {
+        return view('admin/viewSingleAdmin', ["admin_id" => $id]);
+    }
+
     public function registerAdmin() {
         return view('admin/registerAdmin');
     }
@@ -52,6 +56,30 @@ class PageController extends Controller
 
     public function addPartner() {
         return view('admin/addPartner');
+    }
+    
+    public function viewSections() {
+        return view("admin/viewSections");
+    }
+
+    public function viewSingleSection($id) {
+        return view("admin/viewSingleSection", ["section_id" => $id]);
+    }
+
+    public function addSection() {
+        return view('admin/addSection');
+    }
+    
+    public function viewSignalsProvider() {
+        return view("admin/viewSignalsProvider");
+    }
+
+    public function viewSingleSignalProvider($id) {
+        return view("admin/viewSingleSignal", ["signalProvider_id" => $id]);
+    }
+
+    public function addSignalProvider() {
+        return view('admin/addSignalProvider');
     }
 
 }

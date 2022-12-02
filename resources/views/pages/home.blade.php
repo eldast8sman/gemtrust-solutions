@@ -232,8 +232,8 @@
                     <div class="intro">
                         <h6>Work</h6>
                         <h1>Partners</h1>
-                        <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
-                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
+                        <!-- <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p> -->
                     </div>
                 </div>
             </div>
@@ -361,7 +361,7 @@
                 </div>
                 <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut quis, rem culpa labore voluptate
                     ullam! In, nostrum. Dicta, vero nihil. Delectus minus vitae rerum voluptatum, excepturi incidunt ut,
-                    enim nam exercitationem optio ducimus!</h3>
+                    enim nam exercitationem opti ducimus!</h3>
                 <div class="stars">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
@@ -417,8 +417,8 @@
                     <div class="intro">
                         <h6>Blog</h6>
                         <h1>Blog Posts</h1>
-                        <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
-                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
+                        <!-- <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p> -->
                     </div>
                 </div>
             </div>
@@ -426,36 +426,36 @@
                 <div class="col-md-4">
                     <article class="blog-post">
                         <img src="img/project5.jpg" alt="">
-                        <a href="#" class="tag">Lorem ipsum</a>
+                        <a href="#" class="tag">Coming Soon</a>
                         <div class="content">
                             <small>01 Dec, 2022</small>
-                            <h5>Lorem ipsum</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut quis, rem culpa labore voluptate
-                                ullam! In, nostrum. Dicta,</p>
+                            <h5>Coming Soon</h5>
+                            <!-- <p>Coming Soon dolor sit amet consectetur, adipisicing elit. Aut quis, rem culpa labore voluptate
+                                ullam! In, nostrum. Dicta,</p> -->
                         </div>
                     </article>
                 </div>
                 <div class="col-md-4">
                     <article class="blog-post">
                         <img src="img/project4.jpg" alt="">
-                        <a href="#" class="tag">Lorem ipsum</a>
+                        <a href="#" class="tag">Coming Soon</a>
                         <div class="content">
                             <small>01 Dec, 2022</small>
-                            <h5>Lorem ipsum</h5>
-                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
-                                piece of classical Latin literature from</p>
+                            <h5>Coming Soon</h5>
+                            <!-- <p>Contrary to popular belief, Coming Soon is not simply random text. It has roots in a
+                                piece of classical Latin literature from</p> -->
                         </div>
                     </article>
                 </div>
                 <div class="col-md-4">
                     <article class="blog-post">
                         <img src="img/project2.jpg" alt="">
-                        <a href="#" class="tag">Lorem ipsum</a>
+                        <a href="#" class="tag">Coming Soon</a>
                         <div class="content">
                             <small>01 Dec, 2022</small>
-                            <h5>Lorem ipsum</h5>
-                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
-                                piece of classical Latin literature from</p>
+                            <h5>Coming Soon</h5>
+                            <!-- <p>Contrary to popular belief, Coming Soon is not simply random text. It has roots in a
+                                piece of classical Latin literature from</p> -->
                         </div>
                     </article>
                 </div>
