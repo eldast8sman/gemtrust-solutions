@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Gemtrust Dashboard || Admin Login</title>
+    <title>Gemtrust Dashboard || Signal Provider || Account Activation</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -49,26 +49,22 @@
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <a href="" class="">
-                                <h3 class="text-primary">Gemtrust Admin</h3>
+                                <h3 class="text-primary">Account Activation</h3>
                             </a>
-                            <h3>Sign In</h3>
                         </div>
+
+                        <input type="hidden" id="verifyToken" value="{{ $verifyToken }}" disabled>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="emailAddress" placeholder="name@example.com">
-                            <label for="emailAddress">Email address</label>
+                            <input type="password" class="form-control" id="sp_password" placeholder="Enter New Password">
+                            <label for="sp_password">New Password</label>
                         </div>
+
                         <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="password" placeholder="Password">
-                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="sp_cPassword" placeholder="Comfirm Your Password">
+                            <label for="sp_cPassword">Comfirm Password</label>
                         </div>
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                            </div>
-                            <a href="">Forgot Password</a>
-                        </div>
-                        <button type="button" class="btn btn-primary py-3 w-100 mb-4" id="btnFunc" onclick="adminLogin()">Sign In</button>
+
+                        <button type="button" class="btn btn-primary py-3 w-100 mb-4" id="btnFunc" onclick="activateAccount()">Set Password</button>
                     </div>
                 </div>
             </div>
@@ -90,7 +86,7 @@
     <!-- Template Javascript -->
     <script src=" {{ asset('dashboard/js/main.js') }}"></script>
     <script src=" {{ asset('dashboard/js/sweetalert.min.js') }}"></script>
-    <script src=" {{ asset('dashboard/js/script.js') }}"></script>
+    <script src=" {{ asset('dashboard/js/sp_script.js') }}"></script>
 </body>
 
 </html>

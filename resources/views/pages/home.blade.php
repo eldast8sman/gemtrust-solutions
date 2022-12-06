@@ -5,7 +5,7 @@
     <!-- BOTTOM NAV -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="/">Gemtrust<span class="dot">.</span></a>
+            <a class="navbar-brand" href="/"><img src="{{ asset('img/logo.png') }}" alt="Website Logo" style="width: 100px; height: auto"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -25,16 +25,16 @@
                         <a class="nav-link" href="#partners">partners</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#team">Team</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#reviews">Reviews</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#blog">Blog</a>
+                        <a class="nav-link" href="#team">Team</a>
                     </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#blog">Blog</a>
+                    </li> -->
                 </ul>
-                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                <a href="/user" 
                     class="btn btn-brand ms-lg-3">Login</a>
             </div>
         </div>
@@ -105,7 +105,7 @@
 
                         <div class="col-12">
                             <div class="info-box">
-                                <img src="img/icon6.png" alt="">
+                                <img src="{{ asset('img/trust.jpeg') }}" alt="trust" style="border-radius: 50%;" >
                                 <div class="ms-4">
                                     <h5>Trust</h5>
                                     <p> We are building the largest thriving community financially, 
@@ -115,7 +115,7 @@
                         </div>
                         <div class="col-12 mt-4">
                             <div class="info-box">
-                                <img src="img/icon4.png" alt="">
+                                <img src="{{ asset('img/loyality.png') }}" alt="loyality" style="border-radius: 50%;" >
                                 <div class="ms-4">
                                     <h5>Loyality</h5>
                                     <p> Our Goal of providing global financial Literacy if driven by our Loyalty to our community. 
@@ -125,7 +125,7 @@
                         </div>
                         <div class="col-12 mt-4">
                             <div class="info-box">
-                                <img src="img/icon5.png" alt="">
+                                <img src="{{ asset('img/passion.jpeg') }}" alt="passion" style="border-radius: 50%;" >
                                 <div class="ms-4">
                                     <h5>Passion</h5>
                                     <p>From leadership, down the ranks, our vision is driven by PASSION to raise 
@@ -173,50 +173,50 @@
                     <div class="intro">
                         <h6>Our Services</h6>
                         <h1>What We Do?</h1>
-                        <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
-                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
+                        <!-- <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p> -->
                     </div>
                 </div>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6">
-                    <div class="service">
-                        <img src="img/icon1.png" alt="">
+                    <div class="service" style="height: 350px;">
+                        <img src="{{ asset('img/financial_literacy_pack.png') }}" alt="financial_literacy_pack" style="border-radius: 50%;" >
                         <h5>Financial Literacy Pack</h5>
                         <p>Articles and videos to get you financially literate</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="service">
-                        <img src="img/icon2.png" alt="">
+                    <div class="service" style="height: 350px;">
+                        <img src="{{ asset('img/forex_acedemy.png') }}" alt="forex_acedemy" style="border-radius: 50%;" >
                         <h5>Forex Academy</h5>
                         <p>Simplified Videos from Forex Basics to Advanced courses. Learn ICT from our finest traders</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="service">
-                        <img src="img/icon3.png" alt="">
+                    <div class="service" style="height: 350px;">
+                        <img src="{{ asset('img/crypto_acedemy.png') }}" alt="crypto_acedemy" style="border-radius: 50%;" >
                         <h5>Crypto Academy</h5>
                         <p>Get abreast with the future of financing. Learn everything you need to know about Cryptocurrency, NFT’s, Metaverse, Web3</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="service">
-                        <img src="img/icon4.png" alt="">
+                    <div class="service" style="height: 350px;">
+                        <img src="{{ asset('img/free_forex_signals.png') }}" alt="free_forex_signals" style="border-radius: 50%;" >
                         <h5>Forex Trading Signals</h5>
                         <p>Over 80% accuracy, earn extra profits from our expert signals on Forex and Indices</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="service">
-                        <img src="img/icon5.png" alt="">
+                    <div class="service" style="height: 350px;">
+                        <img src="{{ asset('img/pamm.png') }}" alt="pamm" style="border-radius: 50%;" >
                         <h5>Free PAMM Investment Package</h5>
                         <p>We take the first step to getting you a financial investment package for free. Get yours today. Terms and Conditions apply</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="service">
-                        <img src="img/icon6.png" alt="">
+                    <div class="service" style="height: 350px;">
+                        <img src="{{ asset('img/the_employee_guide.png') }}" alt="the_employee_guide" style="border-radius: 50%;" >
                         <h5>The Employees Guide</h5>
                         <p>A direct guide to wealth for employees of all job classes</p>
                     </div>
@@ -282,74 +282,6 @@
         </div>
     </section>
 
-    <section id="team">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="intro">
-                        <h6>Team</h6>
-                        <h1>Team Members</h1>
-                        <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
-                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-8">
-                    <div class="team-member">
-                        <div class="image">
-                            <img src="img/team_1.jpg" alt="">
-                            <div class="social-icons">
-                                <a href="#"><i class='bx bxl-facebook'></i></a>
-                                <a href="#"><i class='bx bxl-twitter'></i></a>
-                                <a href="#"><i class='bx bxl-instagram'></i></a>
-                                <a href="#"><i class='bx bxl-pinterest'></i></a>
-                            </div>
-                            <div class="overlay"></div>
-                        </div>
-
-                        <h5>Marvin McKinney</h5>
-                        <p>Marketing Coordinator</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-8">
-                    <div class="team-member">
-                        <div class="image">
-                            <img src="img/team_2.jpg" alt="">
-                            <div class="social-icons">
-                                <a href="#"><i class='bx bxl-facebook'></i></a>
-                                <a href="#"><i class='bx bxl-twitter'></i></a>
-                                <a href="#"><i class='bx bxl-instagram'></i></a>
-                                <a href="#"><i class='bx bxl-pinterest'></i></a>
-                            </div>
-                            <div class="overlay"></div>
-                        </div>
-
-                        <h5>Kathryn Murphy</h5>
-                        <p>Ethical Hacker</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-8">
-                    <div class="team-member">
-                        <div class="image">
-                            <img src="img/team_3.jpg" alt="">
-                            <div class="social-icons">
-                                <a href="#"><i class='bx bxl-facebook'></i></a>
-                                <a href="#"><i class='bx bxl-twitter'></i></a>
-                                <a href="#"><i class='bx bxl-instagram'></i></a>
-                                <a href="#"><i class='bx bxl-pinterest'></i></a>
-                            </div>
-                            <div class="overlay"></div>
-                        </div>
-
-                        <h5>Darrell Steward</h5>
-                        <p>Software Developer</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="bg-light" id="reviews">
 
         <div class="owl-theme owl-carousel reviews-slider container">
@@ -410,15 +342,83 @@
         </div>
     </section>
 
-    <section id="blog">
+    <section id="team">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="intro">
+                        <h6>Team</h6>
+                        <h1>Team Members</h1>
+                        <!-- <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-8">
+                    <div class="team-member">
+                        <div class="image">
+                            <img src="img/team_1.jpg" alt="">
+                            <div class="social-icons">
+                                <a href="#"><i class='bx bxl-facebook'></i></a>
+                                <a href="#"><i class='bx bxl-twitter'></i></a>
+                                <a href="#"><i class='bx bxl-instagram'></i></a>
+                                <a href="#"><i class='bx bxl-pinterest'></i></a>
+                            </div>
+                            <div class="overlay"></div>
+                        </div>
+
+                        <h5>Marvin McKinney</h5>
+                        <p>Marketing Coordinator</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8">
+                    <div class="team-member">
+                        <div class="image">
+                            <img src="img/team_2.jpg" alt="">
+                            <div class="social-icons">
+                                <a href="#"><i class='bx bxl-facebook'></i></a>
+                                <a href="#"><i class='bx bxl-twitter'></i></a>
+                                <a href="#"><i class='bx bxl-instagram'></i></a>
+                                <a href="#"><i class='bx bxl-pinterest'></i></a>
+                            </div>
+                            <div class="overlay"></div>
+                        </div>
+
+                        <h5>Kathryn Murphy</h5>
+                        <p>Ethical Hacker</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8">
+                    <div class="team-member">
+                        <div class="image">
+                            <img src="img/team_3.jpg" alt="">
+                            <div class="social-icons">
+                                <a href="#"><i class='bx bxl-facebook'></i></a>
+                                <a href="#"><i class='bx bxl-twitter'></i></a>
+                                <a href="#"><i class='bx bxl-instagram'></i></a>
+                                <a href="#"><i class='bx bxl-pinterest'></i></a>
+                            </div>
+                            <div class="overlay"></div>
+                        </div>
+
+                        <h5>Darrell Steward</h5>
+                        <p>Software Developer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section id="blog">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="intro">
                         <h6>Blog</h6>
                         <h1>Blog Posts</h1>
-                        <!-- <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
-                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p> -->
+                        <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
                     </div>
                 </div>
             </div>
@@ -430,8 +430,8 @@
                         <div class="content">
                             <small>01 Dec, 2022</small>
                             <h5>Coming Soon</h5>
-                            <!-- <p>Coming Soon dolor sit amet consectetur, adipisicing elit. Aut quis, rem culpa labore voluptate
-                                ullam! In, nostrum. Dicta,</p> -->
+                            <p>Coming Soon dolor sit amet consectetur, adipisicing elit. Aut quis, rem culpa labore voluptate
+                                ullam! In, nostrum. Dicta,</p>
                         </div>
                     </article>
                 </div>
@@ -442,8 +442,8 @@
                         <div class="content">
                             <small>01 Dec, 2022</small>
                             <h5>Coming Soon</h5>
-                            <!-- <p>Contrary to popular belief, Coming Soon is not simply random text. It has roots in a
-                                piece of classical Latin literature from</p> -->
+                            <p>Contrary to popular belief, Coming Soon is not simply random text. It has roots in a
+                                piece of classical Latin literature from</p>
                         </div>
                     </article>
                 </div>
@@ -454,13 +454,13 @@
                         <div class="content">
                             <small>01 Dec, 2022</small>
                             <h5>Coming Soon</h5>
-                            <!-- <p>Contrary to popular belief, Coming Soon is not simply random text. It has roots in a
-                                piece of classical Latin literature from</p> -->
+                            <p>Contrary to popular belief, Coming Soon is not simply random text. It has roots in a
+                                piece of classical Latin literature from</p>
                         </div>
                     </article>
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
 @stop

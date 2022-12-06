@@ -34,7 +34,7 @@
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-auto">
-                    <p> <i class='bx bxs-envelope'></i> info@gemtrust.cfcing.org</p>
+                    <p> <i class='bx bxs-envelope'></i> info@gemtrustsolutions.com</p>
                     <p> <i class='bx bxs-phone-call'></i> 123 456-7890</p>
                 </div>
                 <div class="col-auto social-icons">

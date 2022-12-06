@@ -7,13 +7,13 @@
 
 @section('content')
 
-            <!-- View Signals -->
+            <!-- View Signals Provider -->
 
             <div class="container-fluid pt-4 px-4">
-                <div class="row g-4" id="SignalHtml">
+                <div class="row g-4" id="SignalsProviderHtml">
                 </div>
             </div>
             
-            <!-- End of View Signals -->
+            <!-- End of View Signals Provider -->
 
 @endsection
