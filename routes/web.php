@@ -50,9 +50,13 @@ Route::controller(PageController::class)->group(function(){
     Route::get('admin/article/{id}', 'viewSingleArticle');
     Route::get('admin/addArticle', 'addArticle');
 
-    // signal providers route
+    // admin signal providers route
     Route::get('admin/signalsProvider/', 'viewSignalsProvider');
-    Route::get('admin/signalProvider/{id}', 'viewSingleSignalProvider');
+    Route::get('admin/signalProvider/{id}', 'viewSignalProvider');
     Route::get('admin/addSignalProvider', 'addSignalProvider');
 
+    // signal Provider route
+    Route::get('signalsProvider', 'signalsProvider');
+    Route::get('signalsProvider/login', 'signalsProviderLogin');
+    Route::get('signalsProvider/verifyAccount/{verify_token}', 'sp_accountVerification');
 });

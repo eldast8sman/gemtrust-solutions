@@ -1,5 +1,5 @@
-var BASE_URL = "http://127.0.0.1:8000/";
-var ADMIN_URL = BASE_URL + "admin/"
+var BASE_URL = "https://develop.gemtrustsolutions.com/";
+var ADMIN_URL = "/admin/"
 var API_URL = BASE_URL + "api/admin/";
 
 let btnFunc = document.getElementById("btnFunc");
@@ -7,6 +7,7 @@ let packageArray;
 let partnerArray;
 let sectionArray;
 let adminArray;
+let signalProviderArray;
 
 function adminLogin() {
 
@@ -25,7 +26,7 @@ function adminLogin() {
         btnFunc.setAttribute("disabled", "disabled");
         btnFunc.innerHTML = '<div class="spinner-border"></div>';
 
-        
+
         let params = JSON.stringify({
             "email": email,
             "password": password
@@ -39,13 +40,13 @@ function adminLogin() {
             headers: {
                 "Content-Type": "application/json"
             },
-            success: function(response) {
+            success: function (response) {
                 btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
                 btnFunc.removeAttribute("disabled");
                 btnFunc.innerText = "Sign In";
 
                 if (response.status == "success") {
-                    
+
                     alertBox("Login Successful", response.message, "success")
 
                     let res = response.data;
@@ -53,14 +54,14 @@ function adminLogin() {
                     sessionStorage.setItem("adminName", res.name);
                     sessionStorage.setItem("adminEmail", res.email);
 
-                    setInterval(window.location = "/admin", 5000)
+                    setInterval(window.location = ADMIN_URL, 5000)
 
                 }
                 else {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response) {
+            error: function (response) {
                 btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
                 btnFunc.removeAttribute("disabled");
                 btnFunc.innerText = "Sign In";
@@ -94,7 +95,7 @@ function registerAdmin() {
     }
     else if (cPassword !== password) {
         alertBox("Form Field Required", "Administrator Password doesn't match", "warning")
-    } 
+    }
     else {
         const params = JSON.stringify({
             "name": fullName,
@@ -104,24 +105,24 @@ function registerAdmin() {
 
         $.ajax({
             type: "POST",
-            url: API_URL+"admins",
+            url: API_URL + "admins",
             data: params,
             contentType: "json",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
+            success: function (response) {
                 if (response.status == "success") {
                     alertBox("Login Successful", response.message, "success")
 
-                    setInterval(window.location = "/admin/viewAdmins", 5000)
+                    setInterval(window.location = ADMIN_URL + "viewAdmins", 5000)
                 }
                 else {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 alertBox("Error", response.responseJSON.message, "error")
             }
         });
@@ -136,28 +137,28 @@ function fetchAdmins() {
     if (getPage == "Gemtrust Dashboard || View Administrators") {
         $.ajax({
             type: "GET",
-            url: API_URL+"admins",
+            url: API_URL + "admins",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
-                
+            success: function (response) {
+
                 if (response.status == "success") {
 
                     let sn = 1;
 
                     $('#tableBody').html('');
-                        
+
                     response.data.forEach(element => {
                         let tableBody = "<tr>";
-                            tableBody += "<th scope='row'>" + sn++ +"</th>";
-                            tableBody += "<td>"+ element.name +"</td>";
-                            tableBody += "<td>"+ element.email +"</td>";
-                            tableBody += "<td>"+ formatDate(element.created_at) +"</td>";
-                            tableBody += "<td><a href='/admin/admin/"+ element.id +"' class='btn btn-primary py-2 w-100'>View</a></td>";
+                        tableBody += "<th scope='row'>" + sn++ + "</th>";
+                        tableBody += "<td>" + element.name + "</td>";
+                        tableBody += "<td>" + element.email + "</td>";
+                        tableBody += "<td>" + formatDate(element.created_at) + "</td>";
+                        tableBody += "<td><a href='" + ADMIN_URL + "admin/" + element.id + "' class='btn btn-primary py-2 w-100'>View</a></td>";
                         tableBody += "</tr>";
-                        
+
                         $('#tableBody').append(tableBody);
                     });
 
@@ -167,7 +168,7 @@ function fetchAdmins() {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 alertBox("Error", response.responseJSON.message, "error")
             }
         })
@@ -186,71 +187,71 @@ function fetchSingleAdmin() {
 
         $.ajax({
             type: "GET",
-            url: API_URL+"admins/" + admin_id,
+            url: API_URL + "admins/" + admin_id,
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
-                
+            success: function (response) {
+
                 if (response.status == "success") {
 
                     $('#singleAdminHtml').html('');
 
                     let element = response.data;
                     adminArray = element;
-                    
+
                     let adminBody = "<div class='col-sm-12 col-xl-12'>";
-                        adminBody += "<div class='bg-light rounded h-100 p-4'>";
+                    adminBody += "<div class='bg-light rounded h-100 p-4'>";
 
-                            adminBody += "<div class='row g-4'>";
+                    adminBody += "<div class='row g-4'>";
 
-                                adminBody += "<h3 class='mb-4'>Administrator Details</h3>";
+                    adminBody += "<h3 class='mb-4'>Administrator Details</h3>";
 
-                                adminBody += "<div class='col-sm-6'>";
-                                    adminBody += "<label>FullName</label>";
-                                    adminBody += "<h6 class='mb-4'>"+ element.name +"</h6>";
-                                adminBody += "</div>";
-
-                                adminBody += "<div class='col-sm-6'>";
-                                    adminBody += "<label>Email</label>";
-                                    adminBody += "<h6 class='mb-4' id='adminEmail' >"+ element.email +"</h6>";
-                                adminBody += "</div>";
-                                
-                                adminBody += "<div class='col-sm-6'>";
-                                    adminBody += "<label>Date Created</label>";
-                                    adminBody += "<h6 class='mb-4'>"+ formatDate(element.created_at) +"</h6>";
-                                adminBody += "</div>";
-
-                                adminBody += "<div class='col-sm-6'>";
-                                    adminBody += "<label>Last Updated</label>";
-                                    adminBody += "<h6 class='mb-4'>"+ formatDate(element.updated_at) +"</h6>";
-                                adminBody += "</div>";
-
-                                adminBody += "<div class='col-sm-6'>";
-                                    adminBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#adminEditModal' title='click here to edit Admin' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
-                                adminBody += "</div>";
-
-                                adminBody += "<div class='col-sm-6'>";
-                                    adminBody += "<button type='button' title='click here to delete Section' class='btn btn-danger py-3 w-100 mb-4' onclick='alert("+ '"Under Development :( "' +")' >Delete</button>";
-                                adminBody += "</div>";
-
-                            adminBody += "</div>";
-                        adminBody += "</div>";
+                    adminBody += "<div class='col-sm-6'>";
+                    adminBody += "<label>FullName</label>";
+                    adminBody += "<h6 class='mb-4'>" + element.name + "</h6>";
                     adminBody += "</div>";
-                    
+
+                    adminBody += "<div class='col-sm-6'>";
+                    adminBody += "<label>Email</label>";
+                    adminBody += "<h6 class='mb-4' id='adminEmail' >" + element.email + "</h6>";
+                    adminBody += "</div>";
+
+                    adminBody += "<div class='col-sm-6'>";
+                    adminBody += "<label>Date Created</label>";
+                    adminBody += "<h6 class='mb-4'>" + formatDate(element.created_at) + "</h6>";
+                    adminBody += "</div>";
+
+                    adminBody += "<div class='col-sm-6'>";
+                    adminBody += "<label>Last Updated</label>";
+                    adminBody += "<h6 class='mb-4'>" + formatDate(element.updated_at) + "</h6>";
+                    adminBody += "</div>";
+
+                    adminBody += "<div class='col-sm-6'>";
+                    adminBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#adminEditModal' title='click here to edit Admin' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                    adminBody += "</div>";
+
+                    adminBody += "<div class='col-sm-6'>";
+                    adminBody += "<button type='button' title='click here to delete Section' class='btn btn-danger py-3 w-100 mb-4' onclick='alert(" + '"Under Development :( "' + ")' >Delete</button>";
+                    adminBody += "</div>";
+
+                    adminBody += "</div>";
+                    adminBody += "</div>";
+                    adminBody += "</div>";
+
                     $('#singleAdminHtml').html(adminBody);
                 }
                 else {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 alertBox("Error", response.responseJSON.message, "error")
             }
         })
     }
-     
+
 }
 fetchSingleAdmin()
 
@@ -266,7 +267,7 @@ function updateAdminPassword() {
         "password": newPassword,
         "password_confirmation": cPassword
     })
-    
+
     swal({
         title: "Update Administrator",
         text: "Are you sure you want to save the changes?",
@@ -274,40 +275,40 @@ function updateAdminPassword() {
         buttons: true,
         dangerMode: true,
     })
-    .then((willDelete) => {
+        .then((willDelete) => {
 
-        if (willDelete) {
-            
-            $.ajax({
-                type: "PUT",
-                url: API_URL+"change-password",
-                data: params,
-                dataType: "JSON",
-                headers: {
-                    "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
-                    "Content-Type": "application/json"
-                },
-                success: function(response){
-                    
-                    if (response.status == "success") {
-                        alertBox("Administrator Updated", response.message, "success")
+            if (willDelete) {
 
-                        setInterval(window.location.reload(), 5000)
+                $.ajax({
+                    type: "PUT",
+                    url: API_URL + "change-password",
+                    data: params,
+                    dataType: "JSON",
+                    headers: {
+                        "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                        "Content-Type": "application/json"
+                    },
+                    success: function (response) {
+
+                        if (response.status == "success") {
+                            alertBox("Administrator Updated", response.message, "success")
+
+                            setInterval(window.location.reload(), 5000)
+                        }
+                        else {
+                            alertBox("Error", response.message, "error")
+                        }
+                    },
+                    error: function (response) {
+                        alertBox("Error", response.responseJSON.message, "error")
                     }
-                    else {
-                        alertBox("Error", response.message, "error")
-                    }
-                },
-                error: function (response) {
-                    alertBox("Error", response.responseJSON.message, "error")
-                }
-            })
+                })
 
-        }
-        else {
-            alertBox("Cancel", "Administrator update request cancelled", "info")
-        }
-    })
+            }
+            else {
+                alertBox("Cancel", "Administrator update request cancelled", "info")
+            }
+        })
 
 }
 
@@ -370,28 +371,28 @@ function addPackage() {
 
         $.ajax({
             type: "POST",
-            url: API_URL+"packages",
+            url: API_URL + "packages",
             data: params,
             contentType: "json",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
+            success: function (response) {
                 btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
                 btnFunc.removeAttribute("disabled");
                 btnFunc.innerHTML = 'Add Package';
-                
+
                 if (response.status == "success") {
                     alertBox("Package Added", response.message, "success")
 
-                    setInterval(window.location = "/admin/packages", 5000)
+                    setInterval(window.location = ADMIN_URL + "packages", 5000)
                 }
                 else {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
                 btnFunc.removeAttribute("disabled");
                 btnFunc.innerText = 'Add Package';
@@ -410,13 +411,13 @@ function fetchPackages() {
     if (getPage == "Gemtrust Dashboard || Packages") {
         $.ajax({
             type: "GET",
-            url: API_URL+"packages",
+            url: API_URL + "packages",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
-                
+            success: function (response) {
+
                 if (response.status == "success") {
 
                     $('#packageHtml').html('');
@@ -425,15 +426,15 @@ function fetchPackages() {
                     response.data.forEach(element => {
 
                         let packageBody = "<div class='col-sm-12 col-xl-6'>";
-                            packageBody += "<div class='bg-light rounded h-100 p-4'>";
-                                packageBody += "<label for='"+ element.package +"'>Package Name</label>";
-                                packageBody += "<h6 class='mb-4'>"+ element.package +"</h6>";
-                                packageBody += "<label for='amount'>Amount</label>";
-                                packageBody += "<h6 class='mb-4'>&#8358;"+ element.reg_amount +"</h6>";
-                                packageBody += "<a href='/admin/package/"+ element.id +"' class='btn btn-primary py-3 w-50 mt-2'>View Package</a>";
-                            packageBody += "</div>";
+                        packageBody += "<div class='bg-light rounded h-100 p-4'>";
+                        packageBody += "<label for='" + element.package + "'>Package Name</label>";
+                        packageBody += "<h6 class='mb-4'>" + element.package + "</h6>";
+                        packageBody += "<label for='amount'>Amount</label>";
+                        packageBody += "<h6 class='mb-4'>&#8358;" + element.reg_amount + "</h6>";
+                        packageBody += "<a href='" + ADMIN_URL + "package/" + element.id + "' class='btn btn-primary py-3 w-50 mt-2'>View Package</a>";
                         packageBody += "</div>";
-                        
+                        packageBody += "</div>";
+
                         $('#packageHtml').append(packageBody);
                     });
 
@@ -442,7 +443,7 @@ function fetchPackages() {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 alertBox("Error", response.responseJSON.message, "error")
             }
         })
@@ -460,13 +461,13 @@ function fetchSinglePackage() {
 
         $.ajax({
             type: "GET",
-            url: API_URL+"packages/" + packageId,
+            url: API_URL + "packages/" + packageId,
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
-                
+            success: function (response) {
+
                 if (response.status == "success") {
 
                     $('#singlePackageHtml').html('');
@@ -477,120 +478,120 @@ function fetchSinglePackage() {
                     let sn = 1;
 
                     let packageBody = "<div class='col-sm-6 col-xl-6'>";
-                        packageBody += "<div class='bg-light rounded h-100 p-4'>";
+                    packageBody += "<div class='bg-light rounded h-100 p-4'>";
 
-                            packageBody += "<div class='row g-4'>";
+                    packageBody += "<div class='row g-4'>";
 
-                                packageBody += "<h3 class='mb-4'>Package Details</h3>";
+                    packageBody += "<h3 class='mb-4'>Package Details</h3>";
 
-                                packageBody += "<div class='col-sm-6'>";
-                                    packageBody += "<label for='package Name'>Package Name</label>";
-                                    packageBody += "<h4 class='mb-4'>"+ element.package +"</h4>";
-                                packageBody += "</div>";
+                    packageBody += "<div class='col-sm-6'>";
+                    packageBody += "<label for='package Name'>Package Name</label>";
+                    packageBody += "<h4 class='mb-4'>" + element.package + "</h4>";
+                    packageBody += "</div>";
 
-                                packageBody += "<div class='col-sm-6'>";
-                                    packageBody += "<label for='amount'>Amount</label>";
-                                    packageBody += "<h4 class='mb-4'>&#8358;"+ element.reg_amount +"</h4>";
-                                packageBody += "</div>";
+                    packageBody += "<div class='col-sm-6'>";
+                    packageBody += "<label for='amount'>Amount</label>";
+                    packageBody += "<h4 class='mb-4'>&#8358;" + element.reg_amount + "</h4>";
+                    packageBody += "</div>";
 
-                                packageBody += "<div class='col-sm-6'>";
-                                    packageBody += "<label for='upline1'>upline1</label>";
-                                    packageBody += "<h4 class='mb-4'>&#8358;"+ element.upline1 +"</h4>";
-                                packageBody += "</div>";
+                    packageBody += "<div class='col-sm-6'>";
+                    packageBody += "<label for='upline1'>upline1</label>";
+                    packageBody += "<h4 class='mb-4'>&#8358;" + element.upline1 + "</h4>";
+                    packageBody += "</div>";
 
-                                packageBody += "<div class='col-sm-6'>";
-                                    packageBody += "<label for='upline2'>upline2</label>";
-                                    packageBody += "<h4 class='mb-4'>&#8358;"+ element.upline2 +"</h4>";
-                                packageBody += "</div>";
+                    packageBody += "<div class='col-sm-6'>";
+                    packageBody += "<label for='upline2'>upline2</label>";
+                    packageBody += "<h4 class='mb-4'>&#8358;" + element.upline2 + "</h4>";
+                    packageBody += "</div>";
 
-                                packageBody += "<div class='col-sm-6'>";
-                                    packageBody += "<label for='upline3'>Upline3</label>";
-                                    packageBody += "<h4 class='mb-4'>&#8358;"+ element.upline3 +"</h4>";
-                                packageBody += "</div>";
+                    packageBody += "<div class='col-sm-6'>";
+                    packageBody += "<label for='upline3'>Upline3</label>";
+                    packageBody += "<h4 class='mb-4'>&#8358;" + element.upline3 + "</h4>";
+                    packageBody += "</div>";
 
-                                packageBody += "<div class='col-sm-6'>";
-                                    packageBody += "<label for='upline4'>Upline4</label>";
-                                    packageBody += "<h4 class='mb-4'>&#8358;"+ element.upline4 +"</h4>";
-                                packageBody += "</div>";
+                    packageBody += "<div class='col-sm-6'>";
+                    packageBody += "<label for='upline4'>Upline4</label>";
+                    packageBody += "<h4 class='mb-4'>&#8358;" + element.upline4 + "</h4>";
+                    packageBody += "</div>";
 
-                                packageBody += "<div class='col-sm-6'>";
-                                    packageBody += "<label for='created_at'>Date Created</label>";
-                                    packageBody += "<h5 class='mb-4'>"+ formatDate(element.created_at) +"</h5>";
-                                packageBody += "</div>";
+                    packageBody += "<div class='col-sm-6'>";
+                    packageBody += "<label for='created_at'>Date Created</label>";
+                    packageBody += "<h5 class='mb-4'>" + formatDate(element.created_at) + "</h5>";
+                    packageBody += "</div>";
 
-                                packageBody += "<div class='col-sm-6'>";
-                                    packageBody += "<label for='updated_at'>Last Update</label>";
-                                    packageBody += "<h5 class='mb-4'>"+ formatDate(element.updated_at) +"</h5>";
-                                packageBody += "</div>";
+                    packageBody += "<div class='col-sm-6'>";
+                    packageBody += "<label for='updated_at'>Last Update</label>";
+                    packageBody += "<h5 class='mb-4'>" + formatDate(element.updated_at) + "</h5>";
+                    packageBody += "</div>";
 
-                                packageBody += "<div class='col-sm-12'>";
-                                    packageBody += "<label for='Description'>Description</label>";
-                                    packageBody += "<h5 class='mb-4'>"+ element.description +"</h5>";
-                                packageBody += "</div>";
-                                
-                                packageBody += "<div class='col-sm-6' >";
-                                    packageBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#packageEditModal' onclick='loadEditPackageModal()' title='click here to edit Package' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
-                                packageBody += "</div>";
+                    packageBody += "<div class='col-sm-12'>";
+                    packageBody += "<label for='Description'>Description</label>";
+                    packageBody += "<h5 class='mb-4'>" + element.description + "</h5>";
+                    packageBody += "</div>";
 
-                                packageBody += "<div class='col-sm-6'>";
-                                    packageBody += "<button type='button' title='click here to delete Package' class='btn btn-danger py-3 w-100 mb-4' onclick='deletePackage("+ '"' + element.id + '"' +")' >Delete</button>";
-                                packageBody += "</div>";
+                    packageBody += "<div class='col-sm-6' >";
+                    packageBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#packageEditModal' onclick='loadEditPackageModal()' title='click here to edit Package' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                    packageBody += "</div>";
 
-                            packageBody += "</div>";
-                        packageBody += "</div>";
+                    packageBody += "<div class='col-sm-6'>";
+                    packageBody += "<button type='button' title='click here to delete Package' class='btn btn-danger py-3 w-100 mb-4' onclick='deletePackage(" + '"' + element.id + '"' + ")' >Delete</button>";
+                    packageBody += "</div>";
+
+                    packageBody += "</div>";
+                    packageBody += "</div>";
                     packageBody += "</div>";
 
                     packageBody += "<div class='col-sm-6 col-xl-6'>";
-                        packageBody += "<div class='bg-light rounded h-100 p-4'>";
+                    packageBody += "<div class='bg-light rounded h-100 p-4'>";
 
-                            packageBody += "<div class='row g-4'>";
+                    packageBody += "<div class='row g-4'>";
 
-                                packageBody += "<h3 class='mb-4'>Package\'s Partners</h3>";
+                    packageBody += "<h3 class='mb-4'>Package\'s Partners</h3>";
 
-                                packageBody += '<table class="table table-bordered table-responsive">';
-                                    packageBody += '<thead>';
-                                        packageBody += '<tr>';
-                                            packageBody += '<th scope="col">#</th>';
-                                            packageBody += '<th scope="col">Partner</th>';
-                                            packageBody += '<th scope="col">Amount</th>';
-                                            packageBody += '<th scope="col">Action</th>';
-                                        packageBody += '</tr>';
-                                    packageBody += '</thead>';
+                    packageBody += '<table class="table table-bordered table-responsive">';
+                    packageBody += '<thead>';
+                    packageBody += '<tr>';
+                    packageBody += '<th scope="col">#</th>';
+                    packageBody += '<th scope="col">Partner</th>';
+                    packageBody += '<th scope="col">Amount</th>';
+                    packageBody += '<th scope="col">Action</th>';
+                    packageBody += '</tr>';
+                    packageBody += '</thead>';
 
-                                    packageBody += '<tbody>';
-                                        element.partners.forEach(partner => {
-                                            packageBody += "<tr>";
-                                                packageBody += "<th scope='row'>" + sn++ +"</th>";
-                                                packageBody += "<td>"+ partner.partner +"</td>";
-                                                packageBody += "<td>&#8358;"+ partner.amount +"</td>";
-                                                packageBody += "<td><button type='button' title='click here to remove Partner' class='btn btn-danger py-2 w-100' onclick='removePartner("+ '"' + partner.id + '"' +")' >Remove</button></td>";
-                                            packageBody += "</tr>"
-                                        })
-                                    packageBody += '</tbody>';
+                    packageBody += '<tbody>';
+                    element.partners.forEach(partner => {
+                        packageBody += "<tr>";
+                        packageBody += "<th scope='row'>" + sn++ + "</th>";
+                        packageBody += "<td>" + partner.partner + "</td>";
+                        packageBody += "<td>&#8358;" + partner.amount + "</td>";
+                        packageBody += "<td><button type='button' title='click here to remove Partner' class='btn btn-danger py-2 w-100' onclick='removePartner(" + '"' + partner.id + '"' + ")' >Remove</button></td>";
+                        packageBody += "</tr>"
+                    })
+                    packageBody += '</tbody>';
 
-                                packageBody += '</table>';
-                                
-                                packageBody += "<div class='col-sm-12'>";
-                                    packageBody += '<div class="form-floating mb-2">';
-                                        packageBody += '<select class="form-select" id="partner_package_select" >';
-                                        packageBody += '</select>';
-                                        packageBody += '<label for="partner_package_select">Select Partner</label>';
-                                    packageBody += '</div>';
+                    packageBody += '</table>';
 
-                                    packageBody += '<div class="form-floating mb-3">';
-                                        packageBody += '<input type="number" class="form-control" id="partnerAmount" placeholder="Partner Amount">';
-                                        packageBody += '<label for="partnerAmount">Partner Amount</label>';
-                                    packageBody += '</div>';
-                                packageBody += '</div>';
+                    packageBody += "<div class='col-sm-12'>";
+                    packageBody += '<div class="form-floating mb-2">';
+                    packageBody += '<select class="form-select" id="partner_package_select" >';
+                    packageBody += '</select>';
+                    packageBody += '<label for="partner_package_select">Select Partner</label>';
+                    packageBody += '</div>';
 
-                                packageBody += "<div class='col-sm-12'>";
-                                    packageBody += "<button type='button' title='click here to add Partner' class='btn btn-success py-3 w-100 mb-4' onclick='add_partner_package()' >Add Partner</button>";
-                                packageBody += "</div>";
+                    packageBody += '<div class="form-floating mb-3">';
+                    packageBody += '<input type="number" class="form-control" id="partnerAmount" placeholder="Partner Amount">';
+                    packageBody += '<label for="partnerAmount">Partner Amount</label>';
+                    packageBody += '</div>';
+                    packageBody += '</div>';
 
-                            packageBody += "</div>";
-                        packageBody += "</div>";
+                    packageBody += "<div class='col-sm-12'>";
+                    packageBody += "<button type='button' title='click here to add Partner' class='btn btn-success py-3 w-100 mb-4' onclick='add_partner_package()' >Add Partner</button>";
                     packageBody += "</div>";
-                    
+
+                    packageBody += "</div>";
+                    packageBody += "</div>";
+                    packageBody += "</div>";
+
                     $('#singlePackageHtml').html(packageBody);
 
                     load_package_partner()
@@ -599,7 +600,7 @@ function fetchSinglePackage() {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 alertBox("Error", response.responseJSON.message, "error")
             }
         })
@@ -612,20 +613,20 @@ function load_package_partner() {
 
     $.ajax({
         type: "GET",
-        url: API_URL+"partners",
+        url: API_URL + "partners",
         headers: {
-            "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+            "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
             "Content-Type": "application/json"
         },
-        success: function(response){
-            
+        success: function (response) {
+
             if (response.status == "success") {
 
                 $('#partner_package_select').html('');
                 $('#partner_package_select').html('<option value="" selected >select partner</option>');
 
                 response.data.forEach(element => {
-                    $('#partner_package_select').append('<option value="'+ element.id +'">'+ element.partner +'</option>');
+                    $('#partner_package_select').append('<option value="' + element.id + '">' + element.partner + '</option>');
                 });
 
             }
@@ -633,7 +634,7 @@ function load_package_partner() {
                 alertBox("Error", response.message, "error")
             }
         },
-        error: function(response){
+        error: function (response) {
             alertBox("Error", response.responseJSON.message, "error")
         }
     })
@@ -641,7 +642,7 @@ function load_package_partner() {
 }
 
 function add_partner_package() {
-    
+
     let packageId = $('#package_id').val();
     let partnerId = $('#partner_package_select').val();
     let partnerAmount = $('#partnerAmount').val();
@@ -659,7 +660,7 @@ function add_partner_package() {
             "partner_id": partnerId,
             "amount": partnerAmount,
         })
-        
+
         swal({
             title: "Add Partner Package",
             text: "Are you sure you want to add this partner to the package?",
@@ -667,40 +668,40 @@ function add_partner_package() {
             buttons: true,
             dangerMode: true,
         })
-        .then((willDelete) => {
+            .then((willDelete) => {
 
-            if (willDelete) {
-                
-                $.ajax({
-                    type: "POST",
-                    url: API_URL+"packages/" + packageId + "/add-partner",
-                    data: params,
-                    dataType: "JSON",
-                    headers: {
-                        "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
-                        "Content-Type": "application/json"
-                    },
-                    success: function(response){
-                        
-                        if (response.status == "success") {
-                            alertBox("Partner Added", response.message, "success")
+                if (willDelete) {
 
-                            setInterval(window.location.reload(), 5000)
+                    $.ajax({
+                        type: "POST",
+                        url: API_URL + "packages/" + packageId + "/add-partner",
+                        data: params,
+                        dataType: "JSON",
+                        headers: {
+                            "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                            "Content-Type": "application/json"
+                        },
+                        success: function (response) {
+
+                            if (response.status == "success") {
+                                alertBox("Partner Added", response.message, "success")
+
+                                setInterval(window.location.reload(), 5000)
+                            }
+                            else {
+                                alertBox("Error", response.message, "error")
+                            }
+                        },
+                        error: function (response) {
+                            alertBox("Error", response.responseJSON.message, "error")
                         }
-                        else {
-                            alertBox("Error", response.message, "error")
-                        }
-                    },
-                    error: function (response) {
-                        alertBox("Error", response.responseJSON.message, "error")
-                    }
-                })
+                    })
 
-            }
-            else {
-                alertBox("Cancel", "Add Partner to Package request cancelled", "info")
-            }
-        })
+                }
+                else {
+                    alertBox("Cancel", "Add Partner to Package request cancelled", "info")
+                }
+            })
     }
 
 }
@@ -735,7 +736,7 @@ function updatePackage() {
         "upline3": e_upline3,
         "upline4": e_upline4
     })
-    
+
     swal({
         title: "Update Package",
         text: "Are you sure you want to save the changes?",
@@ -743,40 +744,40 @@ function updatePackage() {
         buttons: true,
         dangerMode: true,
     })
-    .then((willDelete) => {
+        .then((willDelete) => {
 
-        if (willDelete) {
-            
-            $.ajax({
-                type: "PUT",
-                url: API_URL+"packages/" + packageId,
-                data: params,
-                dataType: "JSON",
-                headers: {
-                    "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
-                    "Content-Type": "application/json"
-                },
-                success: function(response){
-                    
-                    if (response.status == "success") {
-                        alertBox("Package Updated", response.message, "success")
+            if (willDelete) {
 
-                        setInterval(window.location.reload(), 5000)
+                $.ajax({
+                    type: "PUT",
+                    url: API_URL + "packages/" + packageId,
+                    data: params,
+                    dataType: "JSON",
+                    headers: {
+                        "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                        "Content-Type": "application/json"
+                    },
+                    success: function (response) {
+
+                        if (response.status == "success") {
+                            alertBox("Package Updated", response.message, "success")
+
+                            setInterval(window.location.reload(), 5000)
+                        }
+                        else {
+                            alertBox("Error", response.message, "error")
+                        }
+                    },
+                    error: function (response) {
+                        alertBox("Error", response.responseJSON.message, "error")
                     }
-                    else {
-                        alertBox("Error", response.message, "error")
-                    }
-                },
-                error: function (response) {
-                    alertBox("Error", response.responseJSON.message, "error")
-                }
-            })
+                })
 
-        }
-        else {
-            alertBox("Cancel", "Package update request cancelled", "info")
-        }
-    })
+            }
+            else {
+                alertBox("Cancel", "Package update request cancelled", "info")
+            }
+        })
 
 }
 
@@ -788,38 +789,38 @@ function deletePackage(packageId) {
         buttons: true,
         dangerMode: true,
     })
-    .then((willDelete) => {
+        .then((willDelete) => {
 
-        if (willDelete) {
-            
-            $.ajax({
-                type: "DELETE",
-                url: API_URL+"packages/" + packageId,
-                headers: {
-                    "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
-                    "Content-Type": "application/json"
-                },
-                success: function(response){
-                    
-                    if (response.status == "success") {
-                        alertBox("Package Deleted", response.message, "success")
-    
-                        setInterval(window.location = "/admin/packages", 5000)
-                    }
-                    else {
-                        alertBox("Error", response.message, "error")
-                    }
-                },
-                error: function (response) {
-                    alertBox("Error", response.responseJSON.message, "error")
-                }
-            })
+            if (willDelete) {
 
-        }
-        else {
-            alertBox("Cancel", "Package delete request cancelled", "info")
-        }
-    })
+                $.ajax({
+                    type: "DELETE",
+                    url: API_URL + "packages/" + packageId,
+                    headers: {
+                        "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                        "Content-Type": "application/json"
+                    },
+                    success: function (response) {
+
+                        if (response.status == "success") {
+                            alertBox("Package Deleted", response.message, "success")
+
+                            setInterval(window.location = ADMIN_URL + "packages", 5000)
+                        }
+                        else {
+                            alertBox("Error", response.message, "error")
+                        }
+                    },
+                    error: function (response) {
+                        alertBox("Error", response.responseJSON.message, "error")
+                    }
+                })
+
+            }
+            else {
+                alertBox("Cancel", "Package delete request cancelled", "info")
+            }
+        })
 
 }
 
@@ -831,38 +832,38 @@ function removePartner(partnerId) {
         buttons: true,
         dangerMode: true,
     })
-    .then((willDelete) => {
+        .then((willDelete) => {
 
-        if (willDelete) {
-            
-            $.ajax({
-                type: "DELETE",
-                url: API_URL+"packages/remove-partner/" + partnerId,
-                headers: {
-                    "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
-                    "Content-Type": "application/json"
-                },
-                success: function(response){
-                    
-                    if (response.status == "success") {
-                        alertBox("Partner Removed", response.message, "success")
-    
-                        setInterval(window.location.reload(), 5000)
-                    }
-                    else {
-                        alertBox("Error", response.message, "error")
-                    }
-                },
-                error: function (response) {
-                    alertBox("Error", response.responseJSON.message, "error")
-                }
-            })
+            if (willDelete) {
 
-        }
-        else {
-            alertBox("Cancel", "Partner removal request cancelled", "info")
-        }
-    })
+                $.ajax({
+                    type: "DELETE",
+                    url: API_URL + "packages/remove-partner/" + partnerId,
+                    headers: {
+                        "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                        "Content-Type": "application/json"
+                    },
+                    success: function (response) {
+
+                        if (response.status == "success") {
+                            alertBox("Partner Removed", response.message, "success")
+
+                            setInterval(window.location.reload(), 5000)
+                        }
+                        else {
+                            alertBox("Error", response.message, "error")
+                        }
+                    },
+                    error: function (response) {
+                        alertBox("Error", response.responseJSON.message, "error")
+                    }
+                })
+
+            }
+            else {
+                alertBox("Cancel", "Partner removal request cancelled", "info")
+            }
+        })
 }
 
 function loadBanks() {
@@ -872,19 +873,19 @@ function loadBanks() {
     if (getPage == "Gemtrust Dashboard || Add Partner") {
         $.ajax({
             type: "GET",
-            url: API_URL+"banks",
+            url: API_URL + "banks",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
+            success: function (response) {
                 if (response.status == "success") {
 
                     $("#bank").html("");
                     $("#bank").html('<option selected="">select bank name</option>');
-                    
+
                     response.data.forEach(element => {
-                        let bankOption = '<option selected="'+ element.name +'">'+ element.name +'</option>';
+                        let bankOption = '<option selected="' + element.name + '">' + element.name + '</option>';
 
                         $("#bank").append(bankOption);
                     })
@@ -893,7 +894,7 @@ function loadBanks() {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 alertBox("Error", response.responseJSON.message, "error")
             }
         });
@@ -936,33 +937,33 @@ function addPartner() {
             "description": description,
             "bank": bank,
             "account_number": accountNumber,
-            "account_name": accountName  
+            "account_name": accountName
         });
 
         $.ajax({
             type: "POST",
-            url: API_URL+"partners",
+            url: API_URL + "partners",
             data: params,
             dataType: "json",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
+            success: function (response) {
                 btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
                 btnFunc.removeAttribute("disabled");
                 btnFunc.innerText = 'Add Partner';
-                
+
                 if (response.status == "success") {
                     alertBox("Partner Added", response.message, "success")
 
-                    setInterval(window.location = "/admin/partners", 5000)
+                    setInterval(window.location = ADMIN_URL + "partners", 5000)
                 }
                 else {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
                 btnFunc.removeAttribute("disabled");
                 btnFunc.innerText = 'Add Partner';
@@ -981,13 +982,13 @@ function fetchPartners() {
     if (getPage == "Gemtrust Dashboard || View Partners") {
         $.ajax({
             type: "GET",
-            url: API_URL+"partners",
+            url: API_URL + "partners",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
-                
+            success: function (response) {
+
                 if (response.status == "success") {
 
                     $('#partnerHtml').html('');
@@ -996,15 +997,15 @@ function fetchPartners() {
                     response.data.forEach(element => {
 
                         let partnerBody = "<div class='col-sm-12 col-xl-6'>";
-                            partnerBody += "<div class='bg-light rounded h-100 p-4'>";
-                                partnerBody += "<label for='partner' >Partner</label>";
-                                partnerBody += "<h6 class='mb-4'>"+ element.partner +"</h6>";
-                                partnerBody += "<label for='description' >Description</label>";
-                                partnerBody += "<h6 class='mb-4'>"+ element.description +"</h6>";
-                                partnerBody += "<a href='/admin/partner/"+ element.id +"' class='btn btn-primary py-3 w-50 mt-2'>View Partner</a>";
-                            partnerBody += "</div>";
+                        partnerBody += "<div class='bg-light rounded h-100 p-4'>";
+                        partnerBody += "<label for='partner' >Partner</label>";
+                        partnerBody += "<h6 class='mb-4'>" + element.partner + "</h6>";
+                        partnerBody += "<label for='description' >Description</label>";
+                        partnerBody += "<h6 class='mb-4'>" + element.description + "</h6>";
+                        partnerBody += "<a href='" + ADMIN_URL + "partner/" + element.id + "' class='btn btn-primary py-3 w-50 mt-2'>View Partner</a>";
                         partnerBody += "</div>";
-                        
+                        partnerBody += "</div>";
+
                         $('#partnerHtml').append(partnerBody);
                     });
 
@@ -1013,7 +1014,7 @@ function fetchPartners() {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 alertBox("Error", response.responseJSON.message, "error")
             }
         })
@@ -1031,13 +1032,13 @@ function fetchSinglePartners() {
 
         $.ajax({
             type: "GET",
-            url: API_URL+"partners/" + partner_id,
+            url: API_URL + "partners/" + partner_id,
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
-                
+            success: function (response) {
+
                 if (response.status == "success") {
 
                     $('#singlePartnerHtml').html('');
@@ -1046,66 +1047,66 @@ function fetchSinglePartners() {
                     partnerArray = element;
 
                     let partnerBody = "<div class='col-sm-7 col-xl-7'>";
-                        partnerBody += "<div class='bg-light rounded h-100 p-4'>";
+                    partnerBody += "<div class='bg-light rounded h-100 p-4'>";
 
-                            partnerBody += "<div class='row g-4'>";
+                    partnerBody += "<div class='row g-4'>";
 
-                                partnerBody += "<h3 class='mb-4'>Partner Details</h3>";
+                    partnerBody += "<h3 class='mb-4'>Partner Details</h3>";
 
-                                partnerBody += "<div class='col-sm-6'>";
-                                    partnerBody += "<label for='partner'>Partner</label>";
-                                    partnerBody += "<h4 class='mb-4'>"+ element.partner +"</h4>";
-                                partnerBody += "</div>";
-                                
-                                partnerBody += "<div class='col-sm-6'>";
-                                    partnerBody += "<label for='Bank'>Bank</label>";
-                                    partnerBody += "<h4 class='mb-4'>"+ element.bank +"</h4>";
-                                partnerBody += "</div>";
+                    partnerBody += "<div class='col-sm-6'>";
+                    partnerBody += "<label for='partner'>Partner</label>";
+                    partnerBody += "<h4 class='mb-4'>" + element.partner + "</h4>";
+                    partnerBody += "</div>";
 
-                                partnerBody += "<div class='col-sm-6'>";
-                                    partnerBody += "<label for='Account Number'>Account Number</label>";
-                                    partnerBody += "<h4 class='mb-4'>"+ element.account_number +"</h4>";
-                                partnerBody += "</div>";
+                    partnerBody += "<div class='col-sm-6'>";
+                    partnerBody += "<label for='Bank'>Bank</label>";
+                    partnerBody += "<h4 class='mb-4'>" + element.bank + "</h4>";
+                    partnerBody += "</div>";
 
-                                partnerBody += "<div class='col-sm-6'>";
-                                    partnerBody += "<label for='Account Name'>Account Name</label>";
-                                    partnerBody += "<h4 class='mb-4'>"+ element.account_name +"</h4>";
-                                partnerBody += "</div>";
+                    partnerBody += "<div class='col-sm-6'>";
+                    partnerBody += "<label for='Account Number'>Account Number</label>";
+                    partnerBody += "<h4 class='mb-4'>" + element.account_number + "</h4>";
+                    partnerBody += "</div>";
 
-                                partnerBody += "<div class='col-sm-6'>";
-                                    partnerBody += "<label for='created_at'>Date Created</label>";
-                                    partnerBody += "<h5 class='mb-4'>"+ formatDate(element.created_at) +"</h5>";
-                                partnerBody += "</div>";
+                    partnerBody += "<div class='col-sm-6'>";
+                    partnerBody += "<label for='Account Name'>Account Name</label>";
+                    partnerBody += "<h4 class='mb-4'>" + element.account_name + "</h4>";
+                    partnerBody += "</div>";
 
-                                partnerBody += "<div class='col-sm-6'>";
-                                    partnerBody += "<label for='updated_at'>Last Update</label>";
-                                    partnerBody += "<h5 class='mb-4'>"+ formatDate(element.updated_at) +"</h5>";
-                                partnerBody += "</div>";
+                    partnerBody += "<div class='col-sm-6'>";
+                    partnerBody += "<label for='created_at'>Date Created</label>";
+                    partnerBody += "<h5 class='mb-4'>" + formatDate(element.created_at) + "</h5>";
+                    partnerBody += "</div>";
 
-                                partnerBody += "<div class='col-sm-12'>";
-                                    partnerBody += "<label for='Description'>Description</label>";
-                                    partnerBody += "<h5 class='mb-4'>"+ element.description +"</h5>";
-                                partnerBody += "</div>";
-                                
-                                partnerBody += "<div class='col-sm-6' >";
-                                    partnerBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#partnerEditModal' onclick='loadEditPartner()' title='click here to edit Partner' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
-                                partnerBody += "</div>";
+                    partnerBody += "<div class='col-sm-6'>";
+                    partnerBody += "<label for='updated_at'>Last Update</label>";
+                    partnerBody += "<h5 class='mb-4'>" + formatDate(element.updated_at) + "</h5>";
+                    partnerBody += "</div>";
 
-                                partnerBody += "<div class='col-sm-6'>";
-                                    partnerBody += "<button type='button' title='click here to delete Partner' class='btn btn-danger py-3 w-100 mb-4' onclick='deletePartner("+ '"' + element.id + '"' +")' >Delete</button>";
-                                partnerBody += "</div>";
+                    partnerBody += "<div class='col-sm-12'>";
+                    partnerBody += "<label for='Description'>Description</label>";
+                    partnerBody += "<h5 class='mb-4'>" + element.description + "</h5>";
+                    partnerBody += "</div>";
 
-                            partnerBody += "</div>";
-                        partnerBody += "</div>";
+                    partnerBody += "<div class='col-sm-6' >";
+                    partnerBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#partnerEditModal' onclick='loadEditPartner()' title='click here to edit Partner' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                    partnerBody += "</div>";
+
+                    partnerBody += "<div class='col-sm-6'>";
+                    partnerBody += "<button type='button' title='click here to delete Partner' class='btn btn-danger py-3 w-100 mb-4' onclick='deletePartner(" + '"' + element.id + '"' + ")' >Delete</button>";
+                    partnerBody += "</div>";
+
+                    partnerBody += "</div>";
+                    partnerBody += "</div>";
                     partnerBody += "</div>";
 
                     partnerBody += "<div class='col-sm-5 col-xl-5'>";
-                        partnerBody += "<div class='bg-light rounded h-100 p-4'>";
-                            partnerBody += "<div class='row g-4' id='partnerWalletHtml'>";
-                            partnerBody += "</div>";
-                        partnerBody += "</div>";
+                    partnerBody += "<div class='bg-light rounded h-100 p-4'>";
+                    partnerBody += "<div class='row g-4' id='partnerWalletHtml'>";
                     partnerBody += "</div>";
-                    
+                    partnerBody += "</div>";
+                    partnerBody += "</div>";
+
                     $('#singlePartnerHtml').html(partnerBody);
 
                     loadPartnerWallet(element.id)
@@ -1115,7 +1116,7 @@ function fetchSinglePartners() {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 alertBox("Error", response.responseJSON.message, "error")
             }
         })
@@ -1128,40 +1129,40 @@ function loadPartnerWallet(partnerId) {
 
     $.ajax({
         type: "GET",
-        url: API_URL+"partners/" + partnerId + "/wallet",
+        url: API_URL + "partners/" + partnerId + "/wallet",
         headers: {
-            "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+            "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
             "Content-Type": "application/json"
         },
-        success: function(response){
-            
+        success: function (response) {
+
             if (response.status == "success") {
 
                 let element = response.data;
 
                 let partnerWalletBody = "<h3 class='mb-4'>Partner\'s Wallet</h3>";
-                            
-                    partnerWalletBody += "<div class='col-sm-6'>";
-                        partnerWalletBody += "<label for='partner'>Wallet Type</label>";
-                        partnerWalletBody += "<h4 class='mb-4'>"+ element.type +"</h4>";
-                    partnerWalletBody += "</div>";
-                    
-                    partnerWalletBody += "<div class='col-sm-6'>";
-                        partnerWalletBody += "<label for='partner'>Total Balance</label>";
-                        partnerWalletBody += "<h4 class='mb-4'>&#8358;"+ element.balance +"</h4>";
-                    partnerWalletBody += "</div>";
 
-                    partnerWalletBody += "<div class='col-sm-6'>";
-                        partnerWalletBody += "<label for='partner'>Total Credit</label>";
-                        partnerWalletBody += "<h4 class='mb-4'>&#8358;"+ element.total_credit +"</h4>";
-                    partnerWalletBody += "</div>";
-                    
-                    partnerWalletBody += "<div class='col-sm-6'>";
-                        partnerWalletBody += "<label for='partner'>Total Debit</label>";
-                        partnerWalletBody += "<h4 class='mb-4'>&#8358;"+ element.total_debit +"</h4>";
-                    partnerWalletBody += "</div>";
+                partnerWalletBody += "<div class='col-sm-6'>";
+                partnerWalletBody += "<label for='partner'>Wallet Type</label>";
+                partnerWalletBody += "<h4 class='mb-4'>" + element.type + "</h4>";
+                partnerWalletBody += "</div>";
 
-                
+                partnerWalletBody += "<div class='col-sm-6'>";
+                partnerWalletBody += "<label for='partner'>Total Balance</label>";
+                partnerWalletBody += "<h4 class='mb-4'>&#8358;" + element.balance + "</h4>";
+                partnerWalletBody += "</div>";
+
+                partnerWalletBody += "<div class='col-sm-6'>";
+                partnerWalletBody += "<label for='partner'>Total Credit</label>";
+                partnerWalletBody += "<h4 class='mb-4'>&#8358;" + element.total_credit + "</h4>";
+                partnerWalletBody += "</div>";
+
+                partnerWalletBody += "<div class='col-sm-6'>";
+                partnerWalletBody += "<label for='partner'>Total Debit</label>";
+                partnerWalletBody += "<h4 class='mb-4'>&#8358;" + element.total_debit + "</h4>";
+                partnerWalletBody += "</div>";
+
+
                 $('#partnerWalletHtml').html(partnerWalletBody);
             }
             else {
@@ -1197,9 +1198,9 @@ function updatePartner() {
         "description": description,
         "bank": bank,
         "account_number": accountNumber,
-        "account_name": accountName  
+        "account_name": accountName
     });
-    
+
     swal({
         title: "Update Partner",
         text: "Are you sure you want to save the changes?",
@@ -1207,40 +1208,40 @@ function updatePartner() {
         buttons: true,
         dangerMode: true,
     })
-    .then((willDelete) => {
+        .then((willDelete) => {
 
-        if (willDelete) {
-            
-            $.ajax({
-                type: "PUT",
-                url: API_URL+"partners/" + partnerId,
-                data: params,
-                dataType: "JSON",
-                headers: {
-                    "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
-                    "Content-Type": "application/json"
-                },
-                success: function(response){
-                    
-                    if (response.status == "success") {
-                        alertBox("Partner Updated", response.message, "success")
+            if (willDelete) {
 
-                        setInterval(window.location.reload(), 5000)
+                $.ajax({
+                    type: "PUT",
+                    url: API_URL + "partners/" + partnerId,
+                    data: params,
+                    dataType: "JSON",
+                    headers: {
+                        "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                        "Content-Type": "application/json"
+                    },
+                    success: function (response) {
+
+                        if (response.status == "success") {
+                            alertBox("Partner Updated", response.message, "success")
+
+                            setInterval(window.location.reload(), 5000)
+                        }
+                        else {
+                            alertBox("Error", response.message, "error")
+                        }
+                    },
+                    error: function (response) {
+                        alertBox("Error", response.responseJSON.message, "error")
                     }
-                    else {
-                        alertBox("Error", response.message, "error")
-                    }
-                },
-                error: function (response) {
-                    alertBox("Error", response.responseJSON.message, "error")
-                }
-            })
+                })
 
-        }
-        else {
-            alertBox("Cancel", "Partner update request cancelled", "info")
-        }
-    })
+            }
+            else {
+                alertBox("Cancel", "Partner update request cancelled", "info")
+            }
+        })
 
 }
 
@@ -1252,38 +1253,38 @@ function deletePartner(partnerId) {
         buttons: true,
         dangerMode: true,
     })
-    .then((willDelete) => {
+        .then((willDelete) => {
 
-        if (willDelete) {
-            
-            $.ajax({
-                type: "DELETE",
-                url: API_URL+"partners/" + partnerId,
-                headers: {
-                    "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
-                    "Content-Type": "application/json"
-                },
-                success: function(response){
-                    
-                    if (response.status == "success") {
-                        alertBox("Partner Deleted", response.message, "success")
-    
-                        setInterval(window.location = "/admin/partners", 5000)
-                    }
-                    else {
-                        alertBox("Error", response.message, "error")
-                    }
-                },
-                error: function (response) {
-                    alertBox("Error", response.responseJSON.message, "error")
-                }
-            })
+            if (willDelete) {
 
-        }
-        else {
-            alertBox("Cancel", "Partner delete request cancelled", "info")
-        }
-    })
+                $.ajax({
+                    type: "DELETE",
+                    url: API_URL + "partners/" + partnerId,
+                    headers: {
+                        "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                        "Content-Type": "application/json"
+                    },
+                    success: function (response) {
+
+                        if (response.status == "success") {
+                            alertBox("Partner Deleted", response.message, "success")
+
+                            setInterval(window.location = ADMIN_URL + "partners", 5000)
+                        }
+                        else {
+                            alertBox("Error", response.message, "error")
+                        }
+                    },
+                    error: function (response) {
+                        alertBox("Error", response.responseJSON.message, "error")
+                    }
+                })
+
+            }
+            else {
+                alertBox("Cancel", "Partner delete request cancelled", "info")
+            }
+        })
 
 }
 
@@ -1294,28 +1295,28 @@ function fetchSections() {
     if (getPage == "Gemtrust Dashboard || View Sections") {
         $.ajax({
             type: "GET",
-            url: API_URL+"sections",
+            url: API_URL + "sections",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
-                
+            success: function (response) {
+
                 if (response.status == "success") {
 
                     $('#sectionHtml').html('');
                     $('#sectionHtml').html("<h3 class='mb-4'>Sections</h3>");
 
                     response.data.forEach(element => {
-                        
+
                         let sectionBody = "<div class='col-sm-12 col-xl-6'>";
-                            sectionBody += "<div class='bg-light rounded h-100 p-4'>";
-                                sectionBody += "<label>Section Name</label>";
-                                sectionBody += "<h6 class='mb-4'>"+ element.section +"</h6>";
-                                sectionBody += "<label for='amount'>Description</label>";
-                                sectionBody += "<p class='mb-4'>"+ element.description +"</p>";
-                                sectionBody += "<a href='/admin/section/"+ element.id +"' class='btn btn-primary py-3 w-50 mt-2'>View Section</a>";
-                            sectionBody += "</div>";
+                        sectionBody += "<div class='bg-light rounded h-100 p-4'>";
+                        sectionBody += "<label>Section Name</label>";
+                        sectionBody += "<h6 class='mb-4'>" + element.section + "</h6>";
+                        sectionBody += "<label for='amount'>Description</label>";
+                        sectionBody += "<p class='mb-4'>" + element.description + "</p>";
+                        sectionBody += "<a href='" + ADMIN_URL + "section/" + element.id + "' class='btn btn-primary py-3 w-50 mt-2'>View Section</a>";
+                        sectionBody += "</div>";
                         sectionBody += "</div>";
 
                         $('#sectionHtml').append(sectionBody);
@@ -1325,7 +1326,7 @@ function fetchSections() {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 alertBox("Error", response.responseJSON.message, "error")
             }
         })
@@ -1344,56 +1345,56 @@ function fetchSingleSection() {
 
         $.ajax({
             type: "GET",
-            url: API_URL+"sections/" + section_id,
+            url: API_URL + "sections/" + section_id,
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
-                
+            success: function (response) {
+
                 if (response.status == "success") {
 
                     $('#singleSectionHtml').html('');
 
                     let element = response.data;
                     sectionArray = element;
-                    
+
                     let sectionBody = "<div class='col-sm-12 col-xl-12'>";
-                        sectionBody += "<div class='bg-light rounded h-100 p-4'>";
+                    sectionBody += "<div class='bg-light rounded h-100 p-4'>";
 
-                            sectionBody += "<div class='row g-4'>";
+                    sectionBody += "<div class='row g-4'>";
 
-                                sectionBody += "<h3 class='mb-4'>Section Details</h3>";
+                    sectionBody += "<h3 class='mb-4'>Section Details</h3>";
 
-                                sectionBody += "<div class='col-sm-12'>";
-                                    sectionBody += "<label>Section Name</label>";
-                                    sectionBody += "<h6 class='mb-4'>"+ element.section +"</h6>";
-                                sectionBody += "</div>";
-
-                                sectionBody += "<div class='col-sm-12'>";
-                                    sectionBody += "<label for='amount'>Description</label>";
-                                    sectionBody += "<p class='mb-4'>"+ element.description +"</p>";
-                                sectionBody += "</div>";
-
-                                sectionBody += "<div class='col-sm-6'>";
-                                    sectionBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#sectionEditModal' onclick='loadEditSectionModal()' title='click here to edit Section' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
-                                sectionBody += "</div>";
-
-                                sectionBody += "<div class='col-sm-6'>";
-                                    sectionBody += "<button type='button' title='click here to delete Section' class='btn btn-danger py-3 w-100 mb-4' onclick='deleteSection("+ '"' + element.id + '"' +")' >Delete</button>";
-                                sectionBody += "</div>";
-
-                            sectionBody += "</div>";
-                        sectionBody += "</div>";
+                    sectionBody += "<div class='col-sm-12'>";
+                    sectionBody += "<label>Section Name</label>";
+                    sectionBody += "<h6 class='mb-4'>" + element.section + "</h6>";
                     sectionBody += "</div>";
-                    
+
+                    sectionBody += "<div class='col-sm-12'>";
+                    sectionBody += "<label for='amount'>Description</label>";
+                    sectionBody += "<p class='mb-4'>" + element.description + "</p>";
+                    sectionBody += "</div>";
+
+                    sectionBody += "<div class='col-sm-6'>";
+                    sectionBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#sectionEditModal' onclick='loadEditSectionModal()' title='click here to edit Section' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                    sectionBody += "</div>";
+
+                    sectionBody += "<div class='col-sm-6'>";
+                    sectionBody += "<button type='button' title='click here to delete Section' class='btn btn-danger py-3 w-100 mb-4' onclick='deleteSection(" + '"' + element.id + '"' + ")' >Delete</button>";
+                    sectionBody += "</div>";
+
+                    sectionBody += "</div>";
+                    sectionBody += "</div>";
+                    sectionBody += "</div>";
+
                     $('#singleSectionHtml').html(sectionBody);
                 }
                 else {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 alertBox("Error", response.responseJSON.message, "error")
             }
         })
@@ -1431,28 +1432,28 @@ function addSection() {
 
         $.ajax({
             type: "POST",
-            url: API_URL+"sections",
+            url: API_URL + "sections",
             data: params,
             dataType: "json",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
+            success: function (response) {
                 btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
                 btnFunc.removeAttribute("disabled");
                 btnFunc.innerText = 'Add Section';
-                
+
                 if (response.status == "success") {
                     alertBox("Section Added", response.message, "success")
 
-                    setInterval(window.location = "/admin/sections", 5000)
+                    setInterval(window.location = ADMIN_URL + "sections", 5000)
                 }
                 else {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
                 btnFunc.removeAttribute("disabled");
                 btnFunc.innerText = 'Add Section';
@@ -1474,7 +1475,7 @@ function updateSection() {
         "section": sectionName,
         "description": description
     });
-    
+
     swal({
         title: "Update Section",
         text: "Are you sure you want to save the changes?",
@@ -1482,40 +1483,40 @@ function updateSection() {
         buttons: true,
         dangerMode: true,
     })
-    .then((willDelete) => {
+        .then((willDelete) => {
 
-        if (willDelete) {
-            
-            $.ajax({
-                type: "PUT",
-                url: API_URL+"sections/" + sectionId,
-                data: params,
-                dataType: "JSON",
-                headers: {
-                    "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
-                    "Content-Type": "application/json"
-                },
-                success: function(response){
-                    
-                    if (response.status == "success") {
-                        alertBox("Section Updated", response.message, "success")
+            if (willDelete) {
 
-                        setInterval(window.location.reload(), 5000)
+                $.ajax({
+                    type: "PUT",
+                    url: API_URL + "sections/" + sectionId,
+                    data: params,
+                    dataType: "JSON",
+                    headers: {
+                        "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                        "Content-Type": "application/json"
+                    },
+                    success: function (response) {
+
+                        if (response.status == "success") {
+                            alertBox("Section Updated", response.message, "success")
+
+                            setInterval(window.location.reload(), 5000)
+                        }
+                        else {
+                            alertBox("Error", response.message, "error")
+                        }
+                    },
+                    error: function (response) {
+                        alertBox("Error", response.responseJSON.message, "error")
                     }
-                    else {
-                        alertBox("Error", response.message, "error")
-                    }
-                },
-                error: function (response) {
-                    alertBox("Error", response.responseJSON.message, "error")
-                }
-            })
+                })
 
-        }
-        else {
-            alertBox("Cancel", "Section update request cancelled", "info")
-        }
-    })
+            }
+            else {
+                alertBox("Cancel", "Section update request cancelled", "info")
+            }
+        })
 
 }
 
@@ -1527,38 +1528,38 @@ function deleteSection(sectionId) {
         buttons: true,
         dangerMode: true,
     })
-    .then((willDelete) => {
+        .then((willDelete) => {
 
-        if (willDelete) {
-            
-            $.ajax({
-                type: "DELETE",
-                url: API_URL+"sections/" + sectionId,
-                headers: {
-                    "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
-                    "Content-Type": "application/json"
-                },
-                success: function(response){
-                    
-                    if (response.status == "success") {
-                        alertBox("Section Deleted", response.message, "success")
-    
-                        setInterval(window.location = "/admin/sections", 5000)
-                    }
-                    else {
-                        alertBox("Error", response.message, "error")
-                    }
-                },
-                error: function (response) {
-                    alertBox("Error", response.responseJSON.message, "error")
-                }
-            })
+            if (willDelete) {
 
-        }
-        else {
-            alertBox("Cancel", "Section delete request cancelled", "info")
-        }
-    })
+                $.ajax({
+                    type: "DELETE",
+                    url: API_URL + "sections/" + sectionId,
+                    headers: {
+                        "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                        "Content-Type": "application/json"
+                    },
+                    success: function (response) {
+
+                        if (response.status == "success") {
+                            alertBox("Section Deleted", response.message, "success")
+
+                            setInterval(window.location = ADMIN_URL + "sections", 5000)
+                        }
+                        else {
+                            alertBox("Error", response.message, "error")
+                        }
+                    },
+                    error: function (response) {
+                        alertBox("Error", response.responseJSON.message, "error")
+                    }
+                })
+
+            }
+            else {
+                alertBox("Cancel", "Section delete request cancelled", "info")
+            }
+        })
 
 }
 
@@ -1577,7 +1578,7 @@ function addSignalProvider() {
     else if (phoneNumber === "") {
         alertBox("Form Field Required", "Phone number is required", "warning")
     }
-    else if (phoneNumber.length > 11 || phoneNumber.length < 11 ) {
+    else if (phoneNumber.length > 11 || phoneNumber.length < 11) {
         alertBox("Form Field Required", "Phone number can't be lesser or greater than 11 digits", "warning")
     }
     else {
@@ -1594,28 +1595,28 @@ function addSignalProvider() {
 
         $.ajax({
             type: "POST",
-            url: API_URL+"signal-providers",
+            url: API_URL + "signal-providers",
             data: params,
             dataType: "json",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
+            success: function (response) {
                 btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
                 btnFunc.removeAttribute("disabled");
                 btnFunc.innerText = 'Add Signal Provider';
-                
+
                 if (response.status == "success") {
                     alertBox("Signal Provider Added", response.message, "success")
 
-                    setInterval(window.location = "/admin/signalsProvider", 5000)
+                    setInterval(window.location = ADMIN_URL + "signalsProvider", 5000)
                 }
                 else {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
                 btnFunc.removeAttribute("disabled");
                 btnFunc.innerText = 'Add Signal Provider';
@@ -1634,57 +1635,56 @@ function fetchSignalProvider() {
     if (getPage == "Gemtrust Dashboard || View Signals Provider") {
         $.ajax({
             type: "GET",
-            url: API_URL+"signal-providers",
+            url: API_URL + "signal-providers",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
-                
+            success: function (response) {
+
                 if (response.status == "success") {
 
-                    $('#SignalHtml').html('');
-                    $('#SignalHtml').html("<h3 class='mb-4'>Signals Provider</h3>");
+                    $('#SignalsProviderHtml').html('');
+                    $('#SignalsProviderHtml').html("<h3 class='mb-4'>Signals Provider</h3>");
 
                     response.data.forEach(element => {
-                        
+
+                        let status;
+                        if (element.status == "0") {
+                            status = "Not Verified";
+                        }
+                        else {
+                            status = "Verified";
+                        }
+
                         let signalProviderBody = "<div class='col-sm-6 col-xl-6'>";
-                            signalProviderBody += "<div class='bg-light rounded h-100 p-4'>";
+                        signalProviderBody += "<div class='bg-light rounded h-100 p-4'>";
 
-                            signalProviderBody += "<div class='row g-4'>";
+                        signalProviderBody += "<label for=''>Fullname</label>";
+                        signalProviderBody += "<h6 class='mb-4'>" + element.name + "</h6>";
 
-                                signalProviderBody += "<div class='col-sm-6'>";
-                                    signalProviderBody += "<label for=''>Fullname</label>";
-                                    signalProviderBody += "<h6 class='mb-4'>"+ element.name +"</h6>";
-                                signalProviderBody += "</div>";
-                                
-                                signalProviderBody += "<div class='col-sm-6'>";
-                                    signalProviderBody += "<label for=''>Email Address</label>";
-                                    signalProviderBody += "<h6 class='mb-4'>"+ element.email +"</h6>";
-                                signalProviderBody += "</div>";
+                        signalProviderBody += "<label for=''>Email Address</label>";
+                        signalProviderBody += "<h6 class='mb-4'>" + element.email + "</h6>";
 
-                                signalProviderBody += "<div class='col-sm-6'>";
-                                    signalProviderBody += "<label for=''>Phone Number</label>";
-                                    signalProviderBody += "<h6 class='mb-4'>"+ element.phone +"</h6>";
-                                signalProviderBody += "</div>";
-                                
-                                signalProviderBody += "<div class='col-sm-6'>";
-                                    signalProviderBody += "<label for=''>Status</label>";
-                                    signalProviderBody += "<h6 class='mb-4'>"+ element.status +"</h6>";
-                                signalProviderBody += "</div>";
+                        signalProviderBody += "<label for=''>Phone Number</label>";
+                        signalProviderBody += "<h6 class='mb-4'>" + element.phone + "</h6>";
 
-                                signalProviderBody += "</div>";
-                            signalProviderBody += "</div>";
+                        signalProviderBody += "<label for=''>Status</label>";
+                        signalProviderBody += "<h6 class='mb-4'>" + status + "</h6>";
+
+                        signalProviderBody += "<a href='" + ADMIN_URL + "signalProvider/" + element.id + "' class='btn btn-primary py-3 w-100 mt-2'>View Signal Provider</a>";
+
+                        signalProviderBody += "</div>";
                         signalProviderBody += "</div>";
 
-                        $('#SignalHtml').append(signalProviderBody);
+                        $('#SignalsProviderHtml').append(signalProviderBody);
                     });
                 }
                 else {
                     alertBox("Error", response.message, "error")
                 }
             },
-            error: function(response){
+            error: function (response) {
                 alertBox("Error", response.responseJSON.message, "error")
             }
         })
@@ -1693,35 +1693,248 @@ function fetchSignalProvider() {
 }
 fetchSignalProvider()
 
+function fetchSingleSignalProvider() {
 
+    let getPage = document.title;
 
+    if (getPage == "Gemtrust Dashboard || View Signal Provider") {
 
+        let signalProvider_id = $("#signalProvider_id").val();
+
+        $.ajax({
+            type: "GET",
+            url: API_URL + "signal-providers/" + signalProvider_id,
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function (response) {
+
+                if (response.status == "success") {
+
+                    $('#SignalProviderHtml').html('');
+
+                    let element = response.data;
+                    signalProviderArray = element;
+
+                    let status;
+                    if (element.status == "0") {
+                        status = "Not Verified";
+                    }
+                    else {
+                        status = "Verified";
+                    }
+
+                    let signalProviderBody = "<div class='col-sm-12 col-xl-12'>";
+                    signalProviderBody += "<div class='bg-light rounded h-100 p-4'>";
+
+                    signalProviderBody += "<div class='row g-4'>";
+
+                    signalProviderBody += "<h3 class='mb-4'>Signal Provider Details</h3>";
+
+                    signalProviderBody += "<div class='col-sm-6'>";
+                    signalProviderBody += "<label>Fullname</label>";
+                    signalProviderBody += "<h5 class='mb-4'>" + element.name + "</h5>";
+                    signalProviderBody += "</div>";
+
+                    signalProviderBody += "<div class='col-sm-6'>";
+                    signalProviderBody += "<label for='amount'>Email Address</label>";
+                    signalProviderBody += "<h5 class='mb-4'>" + element.email + "</h5>";
+                    signalProviderBody += "</div>";
+
+                    signalProviderBody += "<div class='col-sm-6'>";
+                    signalProviderBody += "<label>Phone Number</label>";
+                    signalProviderBody += "<h5 class='mb-4'>" + element.phone + "</h5>";
+                    signalProviderBody += "</div>";
+
+                    signalProviderBody += "<div class='col-sm-6'>";
+                    signalProviderBody += "<label for=''>Status</label>";
+                    signalProviderBody += "<h5 class='mb-4'>" + status + "</h5>";
+                    signalProviderBody += "</div>";
+
+                    signalProviderBody += "<div class='col-sm-6'>";
+                    signalProviderBody += "<label>Date Created</label>";
+                    signalProviderBody += "<h5 class='mb-4'>" + formatDate(element.created_at) + "</h5>";
+                    signalProviderBody += "</div>";
+
+                    signalProviderBody += "<div class='col-sm-6'>";
+                    signalProviderBody += "<label>Last Updated</label>";
+                    signalProviderBody += "<h5 class='mb-4'>" + formatDate(element.updated_at) + "</h5>";
+                    signalProviderBody += "</div>";
+
+                    signalProviderBody += "<div class='col-sm-6'>";
+                    signalProviderBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#SignalProviderEditModal' onclick='loadEditSignalProviderModal()' title='click here to edit Signal Provider' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                    signalProviderBody += "</div>";
+
+                    signalProviderBody += "<div class='col-sm-6'>";
+                    signalProviderBody += "<button type='button' title='click here to delete Signal Provider' class='btn btn-danger py-3 w-100 mb-4' onclick='deleteSignalProvider(" + '"' + element.id + '"' + ")' >Delete</button>";
+                    signalProviderBody += "</div>";
+
+                    signalProviderBody += "</div>";
+                    signalProviderBody += "</div>";
+                    signalProviderBody += "</div>";
+
+                    $('#SignalProviderHtml').html(signalProviderBody);
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function (response) {
+                alertBox("Error", response.responseJSON.message, "error")
+            }
+        })
+    }
+
+}
+fetchSingleSignalProvider()
+
+function loadEditSignalProviderModal() {
+    document.getElementById('e_name').value = signalProviderArray.name;
+    document.getElementById('e_email').value = signalProviderArray.email;
+    document.getElementById('e_phone').value = signalProviderArray.phone;
+}
+
+function updateSignalProvider() {
+
+    let fullName = $("#e_name").val();
+    let emailAddress = $("#e_email").val();
+    let phoneNumber = $("#e_phone").val();
+    let signalProvider_id = $("#signalProvider_id").val();
+
+    if (fullName === "") {
+        alertBox("Form Field Required", "Full name is required", "warning")
+    }
+    else if (emailAddress === "") {
+        alertBox("Form Field Required", "Email address is required", "warning")
+    }
+    else if (phoneNumber === "") {
+        alertBox("Form Field Required", "Phone number is required", "warning")
+    }
+    else if (phoneNumber.length > 11 || phoneNumber.length < 11) {
+        alertBox("Form Field Required", "Phone number can't be lesser or greater than 11 digits", "warning")
+    }
+    else {
+
+        const params = JSON.stringify({
+            "name": fullName,
+            "email": emailAddress,
+            "phone": phoneNumber,
+        });
+
+        swal({
+            title: "Update Signal Provider",
+            text: "Are you sure you want to save the changes?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+
+                if (willDelete) {
+
+                    $.ajax({
+                        type: "PUT",
+                        url: API_URL + "signal-providers/" + signalProvider_id,
+                        data: params,
+                        dataType: "JSON",
+                        headers: {
+                            "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                            "Content-Type": "application/json"
+                        },
+                        success: function (response) {
+
+                            if (response.status == "success") {
+                                alertBox("Signal Provider Updated", response.message, "success")
+
+                                setInterval(window.location.reload(), 5000)
+                            }
+                            else {
+                                alertBox("Error", response.message, "error")
+                            }
+                        },
+                        error: function (response) {
+                            alertBox("Error", response.responseJSON.message, "error")
+                        }
+                    })
+
+                }
+                else {
+                    alertBox("Cancel", "Signal Provider update request cancelled", "info")
+                }
+            })
+    }
+
+}
+
+function deleteSignalProvider(signalProviderId) {
+    swal({
+        title: "Delete Signal Provider",
+        text: "Are you sure you want to delete this Signal Provider?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+
+            if (willDelete) {
+
+                $.ajax({
+                    type: "DELETE",
+                    url: API_URL + "signal-providers/" + signalProviderId,
+                    headers: {
+                        "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                        "Content-Type": "application/json"
+                    },
+                    success: function (response) {
+
+                        if (response.status == "success") {
+                            alertBox("Signal Provider Deleted", response.message, "success")
+
+                            setInterval(window.location = ADMIN_URL + "signalsProvider", 5000)
+                        }
+                        else {
+                            alertBox("Error", response.message, "error")
+                        }
+                    },
+                    error: function (response) {
+                        alertBox("Error", response.responseJSON.message, "error")
+                    }
+                })
+
+            }
+            else {
+                alertBox("Cancel", "Signal Provider delete request cancelled", "info")
+            }
+        })
+
+}
 
 
 
 var admin_del_buttons = document.querySelectorAll(".del_admin");
-for(let i=0; i < admin_del_buttons.length; i++){
+for (let i = 0; i < admin_del_buttons.length; i++) {
     del_button = admin_del_buttons[i];
 
-    del_button.onclick = function(e){
+    del_button.onclick = function (e) {
         var admin_id = e.target.dataset['id'];
 
         $.ajax({
             type: "DELETE",
-            url: API_URL+"users/"+admin_id,
+            url: API_URL + "users/" + admin_id,
             dataType: "json",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('token'),
+                "Authorization": "Bearer " + sessionStorage.getItem('token'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
-                if(response.status == "success"){
+            success: function (response) {
+                if (response.status == "success") {
                     toaster_success(response.message);
 
-                    $("tr#admin"+admin_id).fadeOut(1500);
+                    $("tr#admin" + admin_id).fadeOut(1500);
                 }
             },
-            error: function(response){
+            error: function (response) {
                 toaster_error(response.responseText);
             }
         })
@@ -1729,41 +1942,41 @@ for(let i=0; i < admin_del_buttons.length; i++){
 }
 
 var series_message_div = document.querySelectorAll(".show_series_message");
-for(let i=0; i<=series_message_div.length-1; i++){
+for (let i = 0; i <= series_message_div.length - 1; i++) {
     series = series_message_div[i];
-    
-    series.onclick = function(e){
+
+    series.onclick = function (e) {
         var id = e.target.dataset['id'];
 
         $.ajax({
             type: "GET",
-            url: API_URL+"messages/"+id,
+            url: API_URL + "messages/" + id,
             dataType: "json",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('token'),
+                "Authorization": "Bearer " + sessionStorage.getItem('token'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
-                if(response.status == "success"){
+            success: function (response) {
+                if (response.status == "success") {
                     var data = response.data;
 
                     $("#series_message_modal h5.modal-title").html(data.title);
-                    var output = '<div class="row"><img src="'+data.image_path+'" style="width: 400px; max-width:80%; margin: 0 auto" /></div>';
-                    output +=   '<div class="row">';
-                    output +=       '<div class="col-lg-6 col-md-9 col-sm-12 mx-auto my-2"><audio src="'+data.audio_path+'" style="margin: 0 auto" controls></audio></div>'
-                    output +=   '</div>';
-                    output +=   '<div class="row text-dark">';
-                    output +=       '<div class="col-lg-9 col-md-12 mx-auto">';
-                    output +=           '<p><strong>Date Preached: </strong>'+ data.date_preached +'</p>';
-                    output +=           '<p>'+data.description+'</p>';
-                    output +=       '</div>';
-                    output +=   '</div>';
+                    var output = '<div class="row"><img src="' + data.image_path + '" style="width: 400px; max-width:80%; margin: 0 auto" /></div>';
+                    output += '<div class="row">';
+                    output += '<div class="col-lg-6 col-md-9 col-sm-12 mx-auto my-2"><audio src="' + data.audio_path + '" style="margin: 0 auto" controls></audio></div>'
+                    output += '</div>';
+                    output += '<div class="row text-dark">';
+                    output += '<div class="col-lg-9 col-md-12 mx-auto">';
+                    output += '<p><strong>Date Preached: </strong>' + data.date_preached + '</p>';
+                    output += '<p>' + data.description + '</p>';
+                    output += '</div>';
+                    output += '</div>';
                     $("#series_message_modal div.modal-body").html(output);
                 } else {
                     $("#series_message_modal .modal-body").html(response.message);
                 }
             },
-            error: function(response){
+            error: function (response) {
                 toaster_error(response.responseText);
             }
         })
@@ -1772,35 +1985,35 @@ for(let i=0; i<=series_message_div.length-1; i++){
 }
 
 del_series = document.querySelector("#delete_series");
-if(del_series){
-    del_series.onclick = function(e){
+if (del_series) {
+    del_series.onclick = function (e) {
         var series_id = e.target.dataset['id'];
-    
+
         $.ajax({
             type: "DELETE",
-            url: API_URL+"series/"+series_id,
+            url: API_URL + "series/" + series_id,
             dataType: "json",
             headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('token'),
+                "Authorization": "Bearer " + sessionStorage.getItem('token'),
                 "Content-Type": "application/json"
             },
-            success: function(response){
-                if(response.status == "success"){
+            success: function (response) {
+                if (response.status == "success") {
                     toaster_success(response.message);
-    
-                    window.location = ADMIN_URL+"message-series";
+
+                    window.location = ADMIN_URL + "message-series";
                 } else {
                     toaster_error(response.message);
                 }
             },
-            error: function(response){
+            error: function (response) {
                 toaster_error(response.responseText);
             }
         })
     }
 }
 
-$("form.message_form").submit(function(e){
+$("form.message_form").submit(function (e) {
     e.preventDefault();
 
     var title = $("input#message_title").val();
@@ -1808,19 +2021,19 @@ $("form.message_form").submit(function(e){
     var image_files = $('#image_upload')[0].files;
     var audio_files = $("input#audio_upload")[0].files;
     var data_id = e.target.dataset['id'];
-    if(data_id == ""){
-        if((title == "") || (minister == "") || (image_files.length < 1) || (audio_files.length < 1)){
+    if (data_id == "") {
+        if ((title == "") || (minister == "") || (image_files.length < 1) || (audio_files.length < 1)) {
             var error_message = "";
-            if(title == ""){
+            if (title == "") {
                 error_message += "Message Title must be provided! ";
             }
-            if(minister == ""){
+            if (minister == "") {
                 error_message += "Minister must be provided! ";
             }
-            if(image_files.length < 1){
+            if (image_files.length < 1) {
                 error_message += "Message Album Art must be uploaded! ";
             }
-            if(audio_files.length < 1){
+            if (audio_files.length < 1) {
                 error_message += "Message Audio File must be uploaded! ";
             }
             toaster_error(error_message);
@@ -1828,49 +2041,49 @@ $("form.message_form").submit(function(e){
         }
 
         image_file = image_files[0].type;
-        if((image_file != "image/jpg") && (image_file != "image/jpeg") && (image_file != "image/png")){
+        if ((image_file != "image/jpg") && (image_file != "image/jpeg") && (image_file != "image/png")) {
             toaster_error("Wrong Image Filetype");
             return false;
         }
 
         audio_file = audio_files[0].type;
-        if((audio_file != "audio/mp3") && (audio_file != "audio/mpeg3") && (audio_file != "audio/mpeg")){
+        if ((audio_file != "audio/mp3") && (audio_file != "audio/mpeg3") && (audio_file != "audio/mpeg")) {
             toaster_error("Wrong Audio File upload");
             console.log(audio_file);
             return false;
         }
 
-        url = API_URL+"messages";
+        url = API_URL + "messages";
     } else {
-        if((title == "") || (minister == "")){
+        if ((title == "") || (minister == "")) {
             var error_message = "";
-            if(title == ""){
+            if (title == "") {
                 error_message += "Message Title must be provided! ";
             }
-            if(minister == ""){
+            if (minister == "") {
                 error_message += "Minister must be provided! ";
             }
             toaster_error(error_message);
             return false;
         }
 
-        if(image_files.length > 0){
+        if (image_files.length > 0) {
             image_file = image_files[0].type;
-            if((image_file != "image/jpg") && (image_file != "image/jpeg") && (image_file != "image/png")){
+            if ((image_file != "image/jpg") && (image_file != "image/jpeg") && (image_file != "image/png")) {
                 toaster_error("Wrong Image Filetype");
                 return false;
             }
         }
-        
-        if(audio_files.length > 0){
+
+        if (audio_files.length > 0) {
             audio_file = audio_files[0].type;
-            if((audio_file != "audio/mp3") && (audio_file != "audio/mpeg3") && (audio_file != "audio/mpeg")){
+            if ((audio_file != "audio/mp3") && (audio_file != "audio/mpeg3") && (audio_file != "audio/mpeg")) {
                 toaster_error("Wrong Audio File upload");
                 return false;
             }
         }
-        
-        url = API_URL+"messages/"+data_id;
+
+        url = API_URL + "messages/" + data_id;
     }
     var fd = new FormData(document.querySelector(".message_form"));
     toaster_success("Message Uploading...");
@@ -1883,62 +2096,34 @@ $("form.message_form").submit(function(e){
         contentType: false,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            "Authorization": "Bearer "+sessionStorage.getItem('token')
+            "Authorization": "Bearer " + sessionStorage.getItem('token')
         },
-        success: function(response){
-            if(response.status == "success"){
+        success: function (response) {
+            if (response.status == "success") {
                 toaster_success(response.message);
-                if(data_id == ""){
+                if (data_id == "") {
                     var redirect = $("input#redirect");
-                    if(redirect){
-                        window.location= ADMIN_URL+"message-series/"+redirect.val();
+                    if (redirect) {
+                        window.location = ADMIN_URL + "message-series/" + redirect.val();
                     } else {
-                        window.location = ADMIN_URL+"messages";
+                        window.location = ADMIN_URL + "messages";
                     }
                 } else {
-                    window.location = ADMIN_URL+"messages/"+response.data.slug
+                    window.location = ADMIN_URL + "messages/" + response.data.slug
                 }
             } else {
                 toaster_error(response.message);
             }
         },
-        error: function(response){
+        error: function (response) {
             console.log(response.responseText);
             toaster_error(response.responseText);
         }
     })
 });
 
-del_message = document.querySelector("#delete_message");
-if(del_message){
-    del_message.onclick = function(e){
-        var msg_id = e.target.dataset['id'];
-    
-        $.ajax({
-            type: "DELETE",
-            url: API_URL+"messages/"+msg_id,
-            dataType: "json",
-            headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('token'),
-                "Content-Type": "application/json"
-            },
-            success: function(response){
-                if(response.status == "success"){
-                    toaster_success(response.message);
-    
-                    window.location = ADMIN_URL+"messages";
-                } else {
-                    toaster_error(response.message);
-                }
-            },
-            error: function(response){
-                toaster_error(response.responseText);
-            }
-        })
-    }
-}
 
-$("form.book_form").submit(function(e){
+$("form.book_form").submit(function (e) {
     e.preventDefault();
 
     var title = $("input#book_title").val();
@@ -1947,19 +2132,19 @@ $("form.book_form").submit(function(e){
     var pdf_files = $("input#pdf_upload")[0].files;
     var data_id = e.target.dataset['id'];
 
-    if(data_id == ""){
-        if((title == "") || (minister == "") || (image_files.length < 1) || (pdf_files.length < 1)){
+    if (data_id == "") {
+        if ((title == "") || (minister == "") || (image_files.length < 1) || (pdf_files.length < 1)) {
             var error_message = "";
-            if(title == ""){
+            if (title == "") {
                 error_message += "Book Title must be provided! ";
             }
-            if(minister == ""){
+            if (minister == "") {
                 error_message += "Author must be provided! ";
             }
-            if(image_files.length < 1){
+            if (image_files.length < 1) {
                 error_message += "Book Cover Image must be uploaded! ";
             }
-            if(pdf_files.length < 1){
+            if (pdf_files.length < 1) {
                 error_message += "Book PDF File must be uploaded! ";
             }
             toaster_error(error_message);
@@ -1967,49 +2152,49 @@ $("form.book_form").submit(function(e){
         }
 
         image_file = image_files[0].type;
-        if((image_file != "image/jpg") && (image_file != "image/jpeg") && (image_file != "image/png")){
+        if ((image_file != "image/jpg") && (image_file != "image/jpeg") && (image_file != "image/png")) {
             toaster_error("Wrong Image Filetype");
             return false;
         }
 
         pdf_file = pdf_files[0].type;
-        if(pdf_file != "application/pdf"){
+        if (pdf_file != "application/pdf") {
             toaster_error("Wrong File Format Uploaded for Books");
             console.log(audio_file);
             return false;
         }
 
-        url = API_URL+"books";
+        url = API_URL + "books";
     } else {
-        if((title == "") || (minister == "")){
+        if ((title == "") || (minister == "")) {
             var error_message = "";
-            if(title == ""){
+            if (title == "") {
                 error_message += "Book Title must be provided! ";
             }
-            if(minister == ""){
+            if (minister == "") {
                 error_message += "Author must be provided! ";
             }
             toaster_error(error_message);
             return false;
         }
 
-        if(image_files.length > 0){
+        if (image_files.length > 0) {
             image_file = image_files[0].type;
-            if((image_file != "image/jpg") && (image_file != "image/jpeg") && (image_file != "image/png")){
+            if ((image_file != "image/jpg") && (image_file != "image/jpeg") && (image_file != "image/png")) {
                 toaster_error("Wrong Image Filetype");
                 return false;
             }
         }
-        
-        if(pdf_files.length > 0){
+
+        if (pdf_files.length > 0) {
             pdf_file = pdf_files[0].type;
-            if(pdf_file != "application/pdf"){
+            if (pdf_file != "application/pdf") {
                 toaster_error("Wrong File Format Uploaded for Books");
                 return false;
             }
         }
-        
-        url = API_URL+"books/"+data_id;
+
+        url = API_URL + "books/" + data_id;
     }
     var fd = new FormData(document.querySelector(".book_form"));
     toaster_success("Book Uploading...");
@@ -2022,81 +2207,51 @@ $("form.book_form").submit(function(e){
         contentType: false,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            "Authorization": "Bearer "+sessionStorage.getItem('token')
+            "Authorization": "Bearer " + sessionStorage.getItem('token')
         },
-        success: function(response){
-            if(response.status == "success"){
+        success: function (response) {
+            if (response.status == "success") {
                 toaster_success(response.message);
-                if(data_id == ""){
-                    window.location= ADMIN_URL+"books"
+                if (data_id == "") {
+                    window.location = ADMIN_URL + "books"
                 } else {
-                    window.location = ADMIN_URL+"books/"+response.data.slug
+                    window.location = ADMIN_URL + "books/" + response.data.slug
                 }
             } else {
                 toaster_error(response.message);
             }
         },
-        error: function(response){
+        error: function (response) {
             console.log(response.responseText);
             toaster_error(response.responseText);
         }
     })
 });
 
-del_book = document.querySelector("#delete_book");
-if(del_book){
-    del_book.onclick = function(e){
-        var book_id = e.target.dataset['id'];
-    
-        $.ajax({
-            type: "DELETE",
-            url: API_URL+"books/"+book_id,
-            dataType: "json",
-            headers: {
-                "Authorization": "Bearer "+sessionStorage.getItem('token'),
-                "Content-Type": "application/json"
-            },
-            success: function(response){
-                if(response.status == "success"){
-                    toaster_success(response.message);
-    
-                    window.location = ADMIN_URL+"books";
-                } else {
-                    toaster_error(response.message);
-                }
-            },
-            error: function(response){
-                toaster_error(response.responseText);
-            }
-        })
-    }
-}
-
-
 
 function adminLogout() {
 
     $.ajax({
         type: "GET",
-        url: API_URL+"logout",
+        url: API_URL + "logout",
         headers: {
-            "Authorization": "Bearer "+sessionStorage.getItem('adminToken'),
+            "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
             "Content-Type": "application/json"
         },
-        success: function(response){
-            
+        success: function (response) {
+
             if (response.status == "success") {
-                sessionStorage.clear() 
+                sessionStorage.clear()
 
                 alertBox("Logout Successful", response.message, "success")
 
-                setInterval(window.location = "/admin", 3000)
+                setInterval(window.location = ADMIN_URL, 3000)
             }
             else {
                 alertBox("Error", response.message, "error")
             }
         },
-        error: function(response){
+        error: function (response) {
             alertBox("Error", response.responseJSON.message, "error")
         }
     })
@@ -2110,14 +2265,14 @@ function alertBox(title, text, icon) {
         icon: icon,
         buttons: false,
         dangerMode: false,
-    }) 
+    })
 }
 
 function dataTable() {
     $('#resultTable').DataTable({
         "scrollX": true,
         "bPaginate": true,
-        "info": true, 
+        "info": true,
     });
 }
 

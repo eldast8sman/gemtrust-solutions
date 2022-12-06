@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Gemtrust Dashboard || Admin Login</title>
+    <title>Gemtrust Dashboard || Signal Provider Login</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -48,8 +48,8 @@
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="" class="">
-                                <h3 class="text-primary">Gemtrust Admin</h3>
+                            <a href="index.html" class="">
+                                <h3 class="text-primary">Signal Provider</h3>
                             </a>
                             <h3>Sign In</h3>
                         </div>
@@ -68,7 +68,7 @@
                             </div>
                             <a href="">Forgot Password</a>
                         </div>
-                        <button type="button" class="btn btn-primary py-3 w-100 mb-4" id="btnFunc" onclick="adminLogin()">Sign In</button>
+                        <button type="button" class="btn btn-primary py-3 w-100 mb-4" id="btnFunc" onclick="spLogin()">Sign In</button>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
     <!-- Template Javascript -->
     <script src=" {{ asset('dashboard/js/main.js') }}"></script>
     <script src=" {{ asset('dashboard/js/sweetalert.min.js') }}"></script>
-    <script src=" {{ asset('dashboard/js/script.js') }}"></script>
+    <script src=" {{ asset('dashboard/js/sp_script.js') }}"></script>
 </body>
 
 </html>

@@ -74,12 +74,23 @@ class PageController extends Controller
         return view("admin/viewSignalsProvider");
     }
 
-    public function viewSingleSignalProvider($id) {
-        return view("admin/viewSingleSignal", ["signalProvider_id" => $id]);
+    public function viewSignalProvider($id) {
+        return view("admin/viewSignalProvider", ["signalProvider_id" => $id]);
     }
 
     public function addSignalProvider() {
         return view('admin/addSignalProvider');
     }
 
+    public function signalsProvider() {
+        return view("signalsProvider/home");
+    }
+
+    public function signalsProviderLogin() {
+        return view("signalsProvider/signin");
+    }
+
+    public function sp_accountVerification($verifyToken) {
+        return view("signalsProvider/verifyAccount", ["verifyToken" => $verifyToken]);
+    }
 }
