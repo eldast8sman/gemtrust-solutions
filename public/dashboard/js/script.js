@@ -1,4 +1,4 @@
-var BASE_URL = "http://127.0.0.1:8000/";
+var BASE_URL = "https://develop.gemtrustsolutions.com/";
 var ADMIN_URL = "/admin/"
 var API_URL = BASE_URL + "api/admin/";
 
