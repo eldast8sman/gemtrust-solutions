@@ -115,18 +115,86 @@ function activateAccount() {
                     sessionStorage.setItem("spName", res.name);
                     sessionStorage.setItem("spEmail", res.email);
 
-                    setInterval(window.location = "/signal-provider", 5000)
+                    setInterval(window.location = "/signalsProvider", 5000)
                 }
                 else {
                     alertBox("Error", response.message, "error")
                 }
             },
             error: function (response) {
-                alertBox("Error", response.responseJSON.message, "error")
+
+                if (response.responseJSON.status == "failed") {
+                    alertBox("Error", response.responseJSON.message, "error")
+
+                    swal({
+                        title: "Error",
+                        text: response.responseJSON.message,
+                        icon: "error",
+                        buttons: ["Cancel", "Resend"],
+                    })
+                    .then((willDelete) => {
+                        resendAccountVerification(verifyToken)
+                    })
+                }
+                else {
+                    alertBox("Error", response.responseJSON.message, "error")
+                }
+                
             }
         });
     }
      
+}
+
+function resendAccountVerification(token) {
+    
+    $.ajax({
+        type: "GET",
+        url: API_URL + "resend-verification-link/" + token,
+        contentType: "json",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        success: function (response) {
+            if (response.status == "success") {
+                alertBox("Verification Mail Sent", response.message, "success")
+            }
+            else {
+                alertBox("Error", response.message, "error")
+            }
+        },
+        error: function (response) {
+            alertBox("Error", response.responseJSON.message, "error")
+        }
+    });
+}
+
+function spLogout() {
+
+    $.ajax({
+        type: "GET",
+        url: API_URL + "logout",
+        headers: {
+            "Authorization": "Bearer " + sessionStorage.getItem('spToken'),
+            "Content-Type": "application/json"
+        },
+        success: function (response) {
+
+            if (response.status == "success") {
+                sessionStorage.clear()
+
+                alertBox("Logout Successful", response.message, "success")
+
+                setInterval(window.location = ADMIN_URL, 3000)
+            }
+            else {
+                alertBox("Error", response.message, "error")
+            }
+        },
+        error: function (response) {
+            alertBox("Error", response.responseJSON.message, "error")
+        }
+    })
 }
 
 function alertBox(title, text, icon) {

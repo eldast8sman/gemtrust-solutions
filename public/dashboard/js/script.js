@@ -152,11 +152,11 @@ function fetchAdmins() {
 
                     response.data.forEach(element => {
                         let tableBody = "<tr>";
-                        tableBody += "<th scope='row'>" + sn++ + "</th>";
-                        tableBody += "<td>" + element.name + "</td>";
-                        tableBody += "<td>" + element.email + "</td>";
-                        tableBody += "<td>" + formatDate(element.created_at) + "</td>";
-                        tableBody += "<td><a href='" + ADMIN_URL + "admin/" + element.id + "' class='btn btn-primary py-2 w-100'>View</a></td>";
+                            tableBody += "<th scope='row'>" + sn++ + "</th>";
+                            tableBody += "<td>" + element.name + "</td>";
+                            tableBody += "<td>" + element.email + "</td>";
+                            tableBody += "<td>" + formatDate(element.created_at) + "</td>";
+                            tableBody += "<td><a href='" + ADMIN_URL + "admin/" + element.id + "' class='btn btn-primary py-2 w-100'>View</a></td>";
                         tableBody += "</tr>";
 
                         $('#tableBody').append(tableBody);
@@ -202,42 +202,42 @@ function fetchSingleAdmin() {
                     adminArray = element;
 
                     let adminBody = "<div class='col-sm-12 col-xl-12'>";
-                    adminBody += "<div class='bg-light rounded h-100 p-4'>";
+                        adminBody += "<div class='bg-light rounded h-100 p-4'>";
 
-                    adminBody += "<div class='row g-4'>";
+                            adminBody += "<div class='row g-4'>";
 
-                    adminBody += "<h3 class='mb-4'>Administrator Details</h3>";
+                                adminBody += "<h3 class='mb-4'>Administrator Details</h3>";
 
-                    adminBody += "<div class='col-sm-6'>";
-                    adminBody += "<label>FullName</label>";
-                    adminBody += "<h6 class='mb-4'>" + element.name + "</h6>";
-                    adminBody += "</div>";
+                                adminBody += "<div class='col-sm-6'>";
+                                adminBody += "<label>FullName</label>";
+                                adminBody += "<h6 class='mb-4'>" + element.name + "</h6>";
+                                adminBody += "</div>";
 
-                    adminBody += "<div class='col-sm-6'>";
-                    adminBody += "<label>Email</label>";
-                    adminBody += "<h6 class='mb-4' id='adminEmail' >" + element.email + "</h6>";
-                    adminBody += "</div>";
+                                adminBody += "<div class='col-sm-6'>";
+                                adminBody += "<label>Email</label>";
+                                adminBody += "<h6 class='mb-4' id='adminEmail' >" + element.email + "</h6>";
+                                adminBody += "</div>";
 
-                    adminBody += "<div class='col-sm-6'>";
-                    adminBody += "<label>Date Created</label>";
-                    adminBody += "<h6 class='mb-4'>" + formatDate(element.created_at) + "</h6>";
-                    adminBody += "</div>";
+                                adminBody += "<div class='col-sm-6'>";
+                                adminBody += "<label>Date Created</label>";
+                                adminBody += "<h6 class='mb-4'>" + formatDate(element.created_at) + "</h6>";
+                                adminBody += "</div>";
 
-                    adminBody += "<div class='col-sm-6'>";
-                    adminBody += "<label>Last Updated</label>";
-                    adminBody += "<h6 class='mb-4'>" + formatDate(element.updated_at) + "</h6>";
-                    adminBody += "</div>";
+                                adminBody += "<div class='col-sm-6'>";
+                                adminBody += "<label>Last Updated</label>";
+                                adminBody += "<h6 class='mb-4'>" + formatDate(element.updated_at) + "</h6>";
+                                adminBody += "</div>";
 
-                    adminBody += "<div class='col-sm-6'>";
-                    adminBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#adminEditModal' title='click here to edit Admin' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
-                    adminBody += "</div>";
+                                adminBody += "<div class='col-sm-6'>";
+                                adminBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#adminEditModal' title='click here to edit Admin' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                                adminBody += "</div>";
 
-                    adminBody += "<div class='col-sm-6'>";
-                    adminBody += "<button type='button' title='click here to delete Section' class='btn btn-danger py-3 w-100 mb-4' onclick='alert(" + '"Under Development :( "' + ")' >Delete</button>";
-                    adminBody += "</div>";
+                                adminBody += "<div class='col-sm-6'>";
+                                adminBody += "<button type='button' title='click here to delete Section' class='btn btn-danger py-3 w-100 mb-4' onclick='alert(" + '"Under Development :( "' + ")' >Delete</button>";
+                                adminBody += "</div>";
 
-                    adminBody += "</div>";
-                    adminBody += "</div>";
+                            adminBody += "</div>";
+                        adminBody += "</div>";
                     adminBody += "</div>";
 
                     $('#singleAdminHtml').html(adminBody);
@@ -426,13 +426,13 @@ function fetchPackages() {
                     response.data.forEach(element => {
 
                         let packageBody = "<div class='col-sm-12 col-xl-6'>";
-                        packageBody += "<div class='bg-light rounded h-100 p-4'>";
-                        packageBody += "<label for='" + element.package + "'>Package Name</label>";
-                        packageBody += "<h6 class='mb-4'>" + element.package + "</h6>";
-                        packageBody += "<label for='amount'>Amount</label>";
-                        packageBody += "<h6 class='mb-4'>&#8358;" + element.reg_amount + "</h6>";
-                        packageBody += "<a href='" + ADMIN_URL + "package/" + element.id + "' class='btn btn-primary py-3 w-50 mt-2'>View Package</a>";
-                        packageBody += "</div>";
+                            packageBody += "<div class='bg-light rounded h-100 p-4'>";
+                                packageBody += "<label for='" + element.package + "'>Package Name</label>";
+                                packageBody += "<h6 class='mb-4'>" + element.package + "</h6>";
+                                packageBody += "<label for='amount'>Amount</label>";
+                                packageBody += "<h6 class='mb-4'>&#8358;" + element.reg_amount + "</h6>";
+                                packageBody += "<a href='" + ADMIN_URL + "package/" + element.id + "' class='btn btn-primary py-3 w-50 mt-2'>View Package</a>";
+                            packageBody += "</div>";
                         packageBody += "</div>";
 
                         $('#packageHtml').append(packageBody);
@@ -478,123 +478,151 @@ function fetchSinglePackage() {
                     let sn = 1;
 
                     let packageBody = "<div class='col-sm-6 col-xl-6'>";
-                    packageBody += "<div class='bg-light rounded h-100 p-4'>";
+                        packageBody += "<div class='bg-light rounded h-100 p-4'>";
+                            packageBody += "<div class='row g-4'>";
 
-                    packageBody += "<div class='row g-4'>";
+                                packageBody += "<h3 class='mb-4'>Package Details</h3>";
 
-                    packageBody += "<h3 class='mb-4'>Package Details</h3>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='package Name'>Package Name</label>";
+                                    packageBody += "<h4 class='mb-4'>" + element.package + "</h4>";
+                                packageBody += "</div>";
 
-                    packageBody += "<div class='col-sm-6'>";
-                    packageBody += "<label for='package Name'>Package Name</label>";
-                    packageBody += "<h4 class='mb-4'>" + element.package + "</h4>";
-                    packageBody += "</div>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='amount'>Amount</label>";
+                                    packageBody += "<h4 class='mb-4'>&#8358;" + element.reg_amount + "</h4>";
+                                packageBody += "</div>";
 
-                    packageBody += "<div class='col-sm-6'>";
-                    packageBody += "<label for='amount'>Amount</label>";
-                    packageBody += "<h4 class='mb-4'>&#8358;" + element.reg_amount + "</h4>";
-                    packageBody += "</div>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='level'>Level</label>";
+                                    packageBody += "<h4 class='mb-4'>" + element.level + "</h4>";
+                                packageBody += "</div>";
 
-                    packageBody += "<div class='col-sm-6'>";
-                    packageBody += "<label for='upline1'>upline1</label>";
-                    packageBody += "<h4 class='mb-4'>&#8358;" + element.upline1 + "</h4>";
-                    packageBody += "</div>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='discount'>Discount</label>";
+                                    packageBody += "<h4 class='mb-4'>" + element.discount + "%</h4>";
+                                packageBody += "</div>";
 
-                    packageBody += "<div class='col-sm-6'>";
-                    packageBody += "<label for='upline2'>upline2</label>";
-                    packageBody += "<h4 class='mb-4'>&#8358;" + element.upline2 + "</h4>";
-                    packageBody += "</div>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='upline1'>upline1</label>";
+                                    packageBody += "<h4 class='mb-4'>&#8358;" + element.upline1 + "</h4>";
+                                packageBody += "</div>";
 
-                    packageBody += "<div class='col-sm-6'>";
-                    packageBody += "<label for='upline3'>Upline3</label>";
-                    packageBody += "<h4 class='mb-4'>&#8358;" + element.upline3 + "</h4>";
-                    packageBody += "</div>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='upline2'>upline2</label>";
+                                    packageBody += "<h4 class='mb-4'>&#8358;" + element.upline2 + "</h4>";
+                                packageBody += "</div>";
 
-                    packageBody += "<div class='col-sm-6'>";
-                    packageBody += "<label for='upline4'>Upline4</label>";
-                    packageBody += "<h4 class='mb-4'>&#8358;" + element.upline4 + "</h4>";
-                    packageBody += "</div>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='upline3'>Upline3</label>";
+                                    packageBody += "<h4 class='mb-4'>&#8358;" + element.upline3 + "</h4>";
+                                packageBody += "</div>";
 
-                    packageBody += "<div class='col-sm-6'>";
-                    packageBody += "<label for='created_at'>Date Created</label>";
-                    packageBody += "<h5 class='mb-4'>" + formatDate(element.created_at) + "</h5>";
-                    packageBody += "</div>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='upline4'>Upline4</label>";
+                                    packageBody += "<h4 class='mb-4'>&#8358;" + element.upline4 + "</h4>";
+                                packageBody += "</div>";
 
-                    packageBody += "<div class='col-sm-6'>";
-                    packageBody += "<label for='updated_at'>Last Update</label>";
-                    packageBody += "<h5 class='mb-4'>" + formatDate(element.updated_at) + "</h5>";
-                    packageBody += "</div>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='level1_bonus'>upline1</label>";
+                                    packageBody += "<h4 class='mb-4'>&#8358;" + element.level1_bonus + "</h4>";
+                                packageBody += "</div>";
 
-                    packageBody += "<div class='col-sm-12'>";
-                    packageBody += "<label for='Description'>Description</label>";
-                    packageBody += "<h5 class='mb-4'>" + element.description + "</h5>";
-                    packageBody += "</div>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='level2_bonus'>upline2</label>";
+                                    packageBody += "<h4 class='mb-4'>&#8358;" + element.level2_bonus + "</h4>";
+                                packageBody += "</div>";
 
-                    packageBody += "<div class='col-sm-6' >";
-                    packageBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#packageEditModal' onclick='loadEditPackageModal()' title='click here to edit Package' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
-                    packageBody += "</div>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='level3_bonus'>Upline3</label>";
+                                    packageBody += "<h4 class='mb-4'>&#8358;" + element.level3_bonus + "</h4>";
+                                packageBody += "</div>";
 
-                    packageBody += "<div class='col-sm-6'>";
-                    packageBody += "<button type='button' title='click here to delete Package' class='btn btn-danger py-3 w-100 mb-4' onclick='deletePackage(" + '"' + element.id + '"' + ")' >Delete</button>";
-                    packageBody += "</div>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='level4_bonus'>Upline4</label>";
+                                    packageBody += "<h4 class='mb-4'>&#8358;" + element.level4_bonus + "</h4>";
+                                packageBody += "</div>";
 
-                    packageBody += "</div>";
-                    packageBody += "</div>";
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='created_at'>Date Created</label>";
+                                    packageBody += "<h5 class='mb-4'>" + formatDate(element.created_at) + "</h5>";
+                                packageBody += "</div>";
+
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<label for='updated_at'>Last Update</label>";
+                                    packageBody += "<h5 class='mb-4'>" + formatDate(element.updated_at) + "</h5>";
+                                packageBody += "</div>";
+
+                                packageBody += "<div class='col-sm-12'>";
+                                    packageBody += "<label for='Description'>Description</label>";
+                                    packageBody += "<h5 class='mb-4'>" + element.description + "</h5>";
+                                packageBody += "</div>";
+
+                                packageBody += "<div class='col-sm-6' >";
+                                    packageBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#packageEditModal' onclick='loadEditPackageModal()' title='click here to edit Package' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                                packageBody += "</div>";
+
+                                packageBody += "<div class='col-sm-6'>";
+                                    packageBody += "<button type='button' title='click here to delete Package' class='btn btn-danger py-3 w-100 mb-4' onclick='deletePackage(" + '"' + element.id + '"' + ")' >Delete</button>";
+                                packageBody += "</div>";
+
+                            packageBody += "</div>";
+                        packageBody += "</div>";
                     packageBody += "</div>";
 
                     packageBody += "<div class='col-sm-6 col-xl-6'>";
-                    packageBody += "<div class='bg-light rounded h-100 p-4'>";
+                        packageBody += "<div class='bg-light rounded h-100 p-4'>";
+                            packageBody += "<div class='row g-4'>";
 
-                    packageBody += "<div class='row g-4'>";
+                                packageBody += "<h3 class='mb-4'>Package\'s Partners</h3>";
 
-                    packageBody += "<h3 class='mb-4'>Package\'s Partners</h3>";
+                                packageBody += '<table class="table table-bordered table-responsive">';
+                                    packageBody += '<thead>';
+                                        packageBody += '<tr>';
+                                            packageBody += '<th scope="col">#</th>';
+                                            packageBody += '<th scope="col">Partner</th>';
+                                            packageBody += '<th scope="col">Amount</th>';
+                                            packageBody += '<th scope="col">Action</th>';
+                                        packageBody += '</tr>';
+                                    packageBody += '</thead>';
 
-                    packageBody += '<table class="table table-bordered table-responsive">';
-                    packageBody += '<thead>';
-                    packageBody += '<tr>';
-                    packageBody += '<th scope="col">#</th>';
-                    packageBody += '<th scope="col">Partner</th>';
-                    packageBody += '<th scope="col">Amount</th>';
-                    packageBody += '<th scope="col">Action</th>';
-                    packageBody += '</tr>';
-                    packageBody += '</thead>';
+                                    packageBody += '<tbody>';
+                                    element.partners.forEach(partner => {
+                                        packageBody += "<tr>";
+                                            packageBody += "<th scope='row'>" + sn++ + "</th>";
+                                            packageBody += "<td>" + partner.partner + "</td>";
+                                            packageBody += "<td>&#8358;" + partner.amount + "</td>";
+                                            packageBody += "<td><button type='button' title='click here to remove Partner' class='btn btn-danger py-2 w-100' onclick='removePartner(" + '"' + partner.id + '"' + ")' >Remove</button></td>";
+                                        packageBody += "</tr>"
+                                    })
+                                    packageBody += '</tbody>';
+                                packageBody += '</table>';
 
-                    packageBody += '<tbody>';
-                    element.partners.forEach(partner => {
-                        packageBody += "<tr>";
-                        packageBody += "<th scope='row'>" + sn++ + "</th>";
-                        packageBody += "<td>" + partner.partner + "</td>";
-                        packageBody += "<td>&#8358;" + partner.amount + "</td>";
-                        packageBody += "<td><button type='button' title='click here to remove Partner' class='btn btn-danger py-2 w-100' onclick='removePartner(" + '"' + partner.id + '"' + ")' >Remove</button></td>";
-                        packageBody += "</tr>"
-                    })
-                    packageBody += '</tbody>';
+                                packageBody += "<div class='col-sm-12'>";
+                                    packageBody += '<div class="form-floating mb-2">';
+                                        packageBody += '<select class="form-select" id="partner_package_select" >';
+                                        packageBody += '</select>';
+                                        packageBody += '<label for="partner_package_select">Select Partner</label>';
+                                    packageBody += '</div>';
 
-                    packageBody += '</table>';
+                                    packageBody += '<div class="form-floating mb-3">';
+                                        packageBody += '<input type="number" class="form-control" id="partnerAmount" placeholder="Partner Amount">';
+                                        packageBody += '<label for="partnerAmount">Partner Amount</label>';
+                                    packageBody += '</div>';
+                                packageBody += '</div>';
 
-                    packageBody += "<div class='col-sm-12'>";
-                    packageBody += '<div class="form-floating mb-2">';
-                    packageBody += '<select class="form-select" id="partner_package_select" >';
-                    packageBody += '</select>';
-                    packageBody += '<label for="partner_package_select">Select Partner</label>';
-                    packageBody += '</div>';
+                                packageBody += "<div class='col-sm-12'>";
+                                    packageBody += "<button type='button' title='click here to add Partner' class='btn btn-success py-3 w-100 mb-4' onclick='add_partner_package()' >Add Partner</button>";
+                                packageBody += "</div>";
 
-                    packageBody += '<div class="form-floating mb-3">';
-                    packageBody += '<input type="number" class="form-control" id="partnerAmount" placeholder="Partner Amount">';
-                    packageBody += '<label for="partnerAmount">Partner Amount</label>';
-                    packageBody += '</div>';
-                    packageBody += '</div>';
-
-                    packageBody += "<div class='col-sm-12'>";
-                    packageBody += "<button type='button' title='click here to add Partner' class='btn btn-success py-3 w-100 mb-4' onclick='add_partner_package()' >Add Partner</button>";
-                    packageBody += "</div>";
-
-                    packageBody += "</div>";
-                    packageBody += "</div>";
+                            packageBody += "</div>";
+                        packageBody += "</div>";
                     packageBody += "</div>";
 
                     $('#singlePackageHtml').html(packageBody);
 
                     load_package_partner()
+
                 }
                 else {
                     alertBox("Error", response.message, "error")
@@ -885,7 +913,7 @@ function loadBanks() {
                     $("#bank").html('<option selected="">select bank name</option>');
 
                     response.data.forEach(element => {
-                        let bankOption = '<option selected="' + element.name + '">' + element.name + '</option>';
+                        let bankOption = '<option value="' + element.name + '">' + element.name + '</option>';
 
                         $("#bank").append(bankOption);
                     })
@@ -997,13 +1025,13 @@ function fetchPartners() {
                     response.data.forEach(element => {
 
                         let partnerBody = "<div class='col-sm-12 col-xl-6'>";
-                        partnerBody += "<div class='bg-light rounded h-100 p-4'>";
-                        partnerBody += "<label for='partner' >Partner</label>";
-                        partnerBody += "<h6 class='mb-4'>" + element.partner + "</h6>";
-                        partnerBody += "<label for='description' >Description</label>";
-                        partnerBody += "<h6 class='mb-4'>" + element.description + "</h6>";
-                        partnerBody += "<a href='" + ADMIN_URL + "partner/" + element.id + "' class='btn btn-primary py-3 w-50 mt-2'>View Partner</a>";
-                        partnerBody += "</div>";
+                            partnerBody += "<div class='bg-light rounded h-100 p-4'>";
+                                partnerBody += "<label for='partner' >Partner</label>";
+                                partnerBody += "<h6 class='mb-4'>" + element.partner + "</h6>";
+                                partnerBody += "<label for='description' >Description</label>";
+                                partnerBody += "<h6 class='mb-4'>" + element.description + "</h6>";
+                                partnerBody += "<a href='" + ADMIN_URL + "partner/" + element.id + "' class='btn btn-primary py-3 w-50 mt-2'>View Partner</a>";
+                            partnerBody += "</div>";
                         partnerBody += "</div>";
 
                         $('#partnerHtml').append(partnerBody);
@@ -1047,64 +1075,63 @@ function fetchSinglePartners() {
                     partnerArray = element;
 
                     let partnerBody = "<div class='col-sm-7 col-xl-7'>";
-                    partnerBody += "<div class='bg-light rounded h-100 p-4'>";
+                        partnerBody += "<div class='bg-light rounded h-100 p-4'>";
+                            partnerBody += "<div class='row g-4'>";
 
-                    partnerBody += "<div class='row g-4'>";
+                                partnerBody += "<h3 class='mb-4'>Partner Details</h3>";
 
-                    partnerBody += "<h3 class='mb-4'>Partner Details</h3>";
+                                partnerBody += "<div class='col-sm-6'>";
+                                    partnerBody += "<label for='partner'>Partner</label>";
+                                    partnerBody += "<h4 class='mb-4'>" + element.partner + "</h4>";
+                                partnerBody += "</div>";
 
-                    partnerBody += "<div class='col-sm-6'>";
-                    partnerBody += "<label for='partner'>Partner</label>";
-                    partnerBody += "<h4 class='mb-4'>" + element.partner + "</h4>";
-                    partnerBody += "</div>";
+                                partnerBody += "<div class='col-sm-6'>";
+                                    partnerBody += "<label for='Bank'>Bank</label>";
+                                    partnerBody += "<h4 class='mb-4'>" + element.bank + "</h4>";
+                                partnerBody += "</div>";
 
-                    partnerBody += "<div class='col-sm-6'>";
-                    partnerBody += "<label for='Bank'>Bank</label>";
-                    partnerBody += "<h4 class='mb-4'>" + element.bank + "</h4>";
-                    partnerBody += "</div>";
+                                partnerBody += "<div class='col-sm-6'>";
+                                    partnerBody += "<label for='Account Number'>Account Number</label>";
+                                    partnerBody += "<h4 class='mb-4'>" + element.account_number + "</h4>";
+                                partnerBody += "</div>";
 
-                    partnerBody += "<div class='col-sm-6'>";
-                    partnerBody += "<label for='Account Number'>Account Number</label>";
-                    partnerBody += "<h4 class='mb-4'>" + element.account_number + "</h4>";
-                    partnerBody += "</div>";
+                                partnerBody += "<div class='col-sm-6'>";
+                                    partnerBody += "<label for='Account Name'>Account Name</label>";
+                                    partnerBody += "<h4 class='mb-4'>" + element.account_name + "</h4>";
+                                partnerBody += "</div>";
 
-                    partnerBody += "<div class='col-sm-6'>";
-                    partnerBody += "<label for='Account Name'>Account Name</label>";
-                    partnerBody += "<h4 class='mb-4'>" + element.account_name + "</h4>";
-                    partnerBody += "</div>";
+                                partnerBody += "<div class='col-sm-6'>";
+                                    partnerBody += "<label for='created_at'>Date Created</label>";
+                                    partnerBody += "<h5 class='mb-4'>" + formatDate(element.created_at) + "</h5>";
+                                partnerBody += "</div>";
 
-                    partnerBody += "<div class='col-sm-6'>";
-                    partnerBody += "<label for='created_at'>Date Created</label>";
-                    partnerBody += "<h5 class='mb-4'>" + formatDate(element.created_at) + "</h5>";
-                    partnerBody += "</div>";
+                                partnerBody += "<div class='col-sm-6'>";
+                                    partnerBody += "<label for='updated_at'>Last Update</label>";
+                                    partnerBody += "<h5 class='mb-4'>" + formatDate(element.updated_at) + "</h5>";
+                                partnerBody += "</div>";
 
-                    partnerBody += "<div class='col-sm-6'>";
-                    partnerBody += "<label for='updated_at'>Last Update</label>";
-                    partnerBody += "<h5 class='mb-4'>" + formatDate(element.updated_at) + "</h5>";
-                    partnerBody += "</div>";
+                                partnerBody += "<div class='col-sm-12'>";
+                                    partnerBody += "<label for='Description'>Description</label>";
+                                    partnerBody += "<h5 class='mb-4'>" + element.description + "</h5>";
+                                partnerBody += "</div>";
 
-                    partnerBody += "<div class='col-sm-12'>";
-                    partnerBody += "<label for='Description'>Description</label>";
-                    partnerBody += "<h5 class='mb-4'>" + element.description + "</h5>";
-                    partnerBody += "</div>";
+                                partnerBody += "<div class='col-sm-6' >";
+                                    partnerBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#partnerEditModal' onclick='loadEditPartner()' title='click here to edit Partner' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                                partnerBody += "</div>";
 
-                    partnerBody += "<div class='col-sm-6' >";
-                    partnerBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#partnerEditModal' onclick='loadEditPartner()' title='click here to edit Partner' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
-                    partnerBody += "</div>";
+                                partnerBody += "<div class='col-sm-6'>";
+                                    partnerBody += "<button type='button' title='click here to delete Partner' class='btn btn-danger py-3 w-100 mb-4' onclick='deletePartner(" + '"' + element.id + '"' + ")' >Delete</button>";
+                                partnerBody += "</div>";
 
-                    partnerBody += "<div class='col-sm-6'>";
-                    partnerBody += "<button type='button' title='click here to delete Partner' class='btn btn-danger py-3 w-100 mb-4' onclick='deletePartner(" + '"' + element.id + '"' + ")' >Delete</button>";
-                    partnerBody += "</div>";
-
-                    partnerBody += "</div>";
-                    partnerBody += "</div>";
+                            partnerBody += "</div>";
+                        partnerBody += "</div>";
                     partnerBody += "</div>";
 
                     partnerBody += "<div class='col-sm-5 col-xl-5'>";
-                    partnerBody += "<div class='bg-light rounded h-100 p-4'>";
-                    partnerBody += "<div class='row g-4' id='partnerWalletHtml'>";
-                    partnerBody += "</div>";
-                    partnerBody += "</div>";
+                        partnerBody += "<div class='bg-light rounded h-100 p-4'>";
+                            partnerBody += "<div class='row g-4' id='partnerWalletHtml'>";
+                            partnerBody += "</div>";
+                        partnerBody += "</div>";
                     partnerBody += "</div>";
 
                     $('#singlePartnerHtml').html(partnerBody);
@@ -1143,23 +1170,23 @@ function loadPartnerWallet(partnerId) {
                 let partnerWalletBody = "<h3 class='mb-4'>Partner\'s Wallet</h3>";
 
                 partnerWalletBody += "<div class='col-sm-6'>";
-                partnerWalletBody += "<label for='partner'>Wallet Type</label>";
-                partnerWalletBody += "<h4 class='mb-4'>" + element.type + "</h4>";
+                    partnerWalletBody += "<label for='partner'>Wallet Type</label>";
+                    partnerWalletBody += "<h4 class='mb-4'>" + element.type + "</h4>";
                 partnerWalletBody += "</div>";
 
                 partnerWalletBody += "<div class='col-sm-6'>";
-                partnerWalletBody += "<label for='partner'>Total Balance</label>";
-                partnerWalletBody += "<h4 class='mb-4'>&#8358;" + element.balance + "</h4>";
+                    partnerWalletBody += "<label for='partner'>Total Balance</label>";
+                    partnerWalletBody += "<h4 class='mb-4'>&#8358;" + element.balance + "</h4>";
                 partnerWalletBody += "</div>";
 
                 partnerWalletBody += "<div class='col-sm-6'>";
-                partnerWalletBody += "<label for='partner'>Total Credit</label>";
-                partnerWalletBody += "<h4 class='mb-4'>&#8358;" + element.total_credit + "</h4>";
+                    partnerWalletBody += "<label for='partner'>Total Credit</label>";
+                    partnerWalletBody += "<h4 class='mb-4'>&#8358;" + element.total_credit + "</h4>";
                 partnerWalletBody += "</div>";
 
                 partnerWalletBody += "<div class='col-sm-6'>";
-                partnerWalletBody += "<label for='partner'>Total Debit</label>";
-                partnerWalletBody += "<h4 class='mb-4'>&#8358;" + element.total_debit + "</h4>";
+                    partnerWalletBody += "<label for='partner'>Total Debit</label>";
+                    partnerWalletBody += "<h4 class='mb-4'>&#8358;" + element.total_debit + "</h4>";
                 partnerWalletBody += "</div>";
 
 
@@ -1310,13 +1337,13 @@ function fetchSections() {
                     response.data.forEach(element => {
 
                         let sectionBody = "<div class='col-sm-12 col-xl-6'>";
-                        sectionBody += "<div class='bg-light rounded h-100 p-4'>";
-                        sectionBody += "<label>Section Name</label>";
-                        sectionBody += "<h6 class='mb-4'>" + element.section + "</h6>";
-                        sectionBody += "<label for='amount'>Description</label>";
-                        sectionBody += "<p class='mb-4'>" + element.description + "</p>";
-                        sectionBody += "<a href='" + ADMIN_URL + "section/" + element.id + "' class='btn btn-primary py-3 w-50 mt-2'>View Section</a>";
-                        sectionBody += "</div>";
+                            sectionBody += "<div class='bg-light rounded h-100 p-4'>";
+                                sectionBody += "<label>Section Name</label>";
+                                sectionBody += "<h6 class='mb-4'>" + element.section + "</h6>";
+                                sectionBody += "<label for='amount'>Description</label>";
+                                sectionBody += "<p class='mb-4'>" + element.description + "</p>";
+                                sectionBody += "<a href='" + ADMIN_URL + "section/" + element.id + "' class='btn btn-primary py-3 w-50 mt-2'>View Section</a>";
+                            sectionBody += "</div>";
                         sectionBody += "</div>";
 
                         $('#sectionHtml').append(sectionBody);
@@ -1360,32 +1387,31 @@ function fetchSingleSection() {
                     sectionArray = element;
 
                     let sectionBody = "<div class='col-sm-12 col-xl-12'>";
-                    sectionBody += "<div class='bg-light rounded h-100 p-4'>";
+                        sectionBody += "<div class='bg-light rounded h-100 p-4'>";
+                            sectionBody += "<div class='row g-4'>";
 
-                    sectionBody += "<div class='row g-4'>";
+                                sectionBody += "<h3 class='mb-4'>Section Details</h3>";
 
-                    sectionBody += "<h3 class='mb-4'>Section Details</h3>";
+                                sectionBody += "<div class='col-sm-12'>";
+                                    sectionBody += "<label>Section Name</label>";
+                                    sectionBody += "<h6 class='mb-4'>" + element.section + "</h6>";
+                                sectionBody += "</div>";
 
-                    sectionBody += "<div class='col-sm-12'>";
-                    sectionBody += "<label>Section Name</label>";
-                    sectionBody += "<h6 class='mb-4'>" + element.section + "</h6>";
-                    sectionBody += "</div>";
+                                sectionBody += "<div class='col-sm-12'>";
+                                    sectionBody += "<label for='amount'>Description</label>";
+                                    sectionBody += "<p class='mb-4'>" + element.description + "</p>";
+                                sectionBody += "</div>";
 
-                    sectionBody += "<div class='col-sm-12'>";
-                    sectionBody += "<label for='amount'>Description</label>";
-                    sectionBody += "<p class='mb-4'>" + element.description + "</p>";
-                    sectionBody += "</div>";
+                                sectionBody += "<div class='col-sm-6'>";
+                                    sectionBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#sectionEditModal' onclick='loadEditSectionModal()' title='click here to edit Section' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                                sectionBody += "</div>";
 
-                    sectionBody += "<div class='col-sm-6'>";
-                    sectionBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#sectionEditModal' onclick='loadEditSectionModal()' title='click here to edit Section' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
-                    sectionBody += "</div>";
+                                sectionBody += "<div class='col-sm-6'>";
+                                    sectionBody += "<button type='button' title='click here to delete Section' class='btn btn-danger py-3 w-100 mb-4' onclick='deleteSection(" + '"' + element.id + '"' + ")' >Delete</button>";
+                                sectionBody += "</div>";
 
-                    sectionBody += "<div class='col-sm-6'>";
-                    sectionBody += "<button type='button' title='click here to delete Section' class='btn btn-danger py-3 w-100 mb-4' onclick='deleteSection(" + '"' + element.id + '"' + ")' >Delete</button>";
-                    sectionBody += "</div>";
-
-                    sectionBody += "</div>";
-                    sectionBody += "</div>";
+                            sectionBody += "</div>";
+                        sectionBody += "</div>";
                     sectionBody += "</div>";
 
                     $('#singleSectionHtml').html(sectionBody);
@@ -1563,6 +1589,108 @@ function deleteSection(sectionId) {
 
 }
 
+function addArticle() {
+
+    var form = $('#addArticleForm')[0];
+
+    var formData = new FormData(form);
+
+    for(var data of formData.entries()) {
+        console.log(data[0]+ ', '+ data[1]);
+    }
+
+    console.log(formData);
+
+    $.ajax({
+        type: "POST",
+        url: API_URL + "articles",
+        data: JSON.stringify(formData),
+        cache: false,
+        processData: false,
+        contentType: false,
+        dataType: "json",
+        headers: {
+            "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+            "Content-Type": "application/json"
+        },
+        success: function (data) {
+            console.log(data)
+        },
+        error: function(response) {
+            console.log(response)
+        }
+    });
+
+    // $.ajax({
+    //     type: "POST",
+    //     url: API_URL + "sections",
+    //     data: params,
+    //     dataType: "json",
+    //     headers: {
+    //         "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+    //         "Content-Type": "application/json"
+    //     },
+    //     success: function (response) {
+    //         btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
+    //         btnFunc.removeAttribute("disabled");
+    //         btnFunc.innerText = 'Add Section';
+
+    //         if (response.status == "success") {
+    //             alertBox("Section Added", response.message, "success")
+
+    //             setInterval(window.location = ADMIN_URL + "sections", 5000)
+    //         }
+    //         else {
+    //             alertBox("Error", response.message, "error")
+    //         }
+    //     },
+    //     error: function (response) {
+    //         btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
+    //         btnFunc.removeAttribute("disabled");
+    //         btnFunc.innerText = 'Add Section';
+
+    //         alertBox("Error", response.responseJSON.message, "error")
+    //     }
+    // });
+}
+
+function loadSections() {
+
+    let getPage = document.title;
+
+    if (getPage == "Gemtrust Dashboard || Add Article") {
+        $.ajax({
+            type: "GET",
+            url: API_URL + "sections",
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function (response) {
+                if (response.status == "success") {
+
+                    $("#section_id").html("");
+                    $("#section_id").html('<option selected="">select section</option>');
+
+                    response.data.forEach(element => {
+                        let sectionOption = '<option value="' + element.id + '">' + element.section + '</option>';
+
+                        $("#section_id").append(sectionOption);
+                    })
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function (response) {
+                alertBox("Error", response.responseJSON.message, "error")
+            }
+        });
+    }
+
+}
+loadSections();
+
 function addSignalProvider() {
 
     let fullName = $("#signal_fullname").val();
@@ -1652,29 +1780,31 @@ function fetchSignalProvider() {
                         let status;
                         if (element.status == "0") {
                             status = "Not Verified";
+                            statusClass = "text-danger";
                         }
                         else {
                             status = "Verified";
+                            statusClass = "text-success";
                         }
 
                         let signalProviderBody = "<div class='col-sm-6 col-xl-6'>";
-                        signalProviderBody += "<div class='bg-light rounded h-100 p-4'>";
+                            signalProviderBody += "<div class='bg-light rounded h-100 p-4'>";
 
-                        signalProviderBody += "<label for=''>Fullname</label>";
-                        signalProviderBody += "<h6 class='mb-4'>" + element.name + "</h6>";
+                                signalProviderBody += "<label for=''>Fullname</label>";
+                                signalProviderBody += "<h6 class='mb-4'>" + element.name + "</h6>";
 
-                        signalProviderBody += "<label for=''>Email Address</label>";
-                        signalProviderBody += "<h6 class='mb-4'>" + element.email + "</h6>";
+                                signalProviderBody += "<label for=''>Email Address</label>";
+                                signalProviderBody += "<h6 class='mb-4'>" + element.email + "</h6>";
 
-                        signalProviderBody += "<label for=''>Phone Number</label>";
-                        signalProviderBody += "<h6 class='mb-4'>" + element.phone + "</h6>";
+                                signalProviderBody += "<label for=''>Phone Number</label>";
+                                signalProviderBody += "<h6 class='mb-4'>" + element.phone + "</h6>";
 
-                        signalProviderBody += "<label for=''>Status</label>";
-                        signalProviderBody += "<h6 class='mb-4'>" + status + "</h6>";
+                                signalProviderBody += "<label for=''>Status</label>";
+                                signalProviderBody += "<h6 class='mb-4 " + statusClass + "'>" + status + "</h6>";
 
-                        signalProviderBody += "<a href='" + ADMIN_URL + "signalProvider/" + element.id + "' class='btn btn-primary py-3 w-100 mt-2'>View Signal Provider</a>";
+                                signalProviderBody += "<a href='" + ADMIN_URL + "signalProvider/" + element.id + "' class='btn btn-primary py-3 w-100 mt-2'>View Signal Provider</a>";
 
-                        signalProviderBody += "</div>";
+                            signalProviderBody += "</div>";
                         signalProviderBody += "</div>";
 
                         $('#SignalsProviderHtml').append(signalProviderBody);
@@ -1720,58 +1850,59 @@ function fetchSingleSignalProvider() {
                     let status;
                     if (element.status == "0") {
                         status = "Not Verified";
+                        statusClass = "text-danger";
                     }
                     else {
                         status = "Verified";
+                        statusClass = "text-success";
                     }
 
                     let signalProviderBody = "<div class='col-sm-12 col-xl-12'>";
-                    signalProviderBody += "<div class='bg-light rounded h-100 p-4'>";
+                        signalProviderBody += "<div class='bg-light rounded h-100 p-4'>";
+                            signalProviderBody += "<div class='row g-4'>";
 
-                    signalProviderBody += "<div class='row g-4'>";
+                                signalProviderBody += "<h3 class='mb-4'>Signal Provider Details</h3>";
 
-                    signalProviderBody += "<h3 class='mb-4'>Signal Provider Details</h3>";
+                                signalProviderBody += "<div class='col-sm-6'>";
+                                    signalProviderBody += "<label>Fullname</label>";
+                                    signalProviderBody += "<h5 class='mb-4'>" + element.name + "</h5>";
+                                signalProviderBody += "</div>";
 
-                    signalProviderBody += "<div class='col-sm-6'>";
-                    signalProviderBody += "<label>Fullname</label>";
-                    signalProviderBody += "<h5 class='mb-4'>" + element.name + "</h5>";
-                    signalProviderBody += "</div>";
+                                signalProviderBody += "<div class='col-sm-6'>";
+                                    signalProviderBody += "<label for='amount'>Email Address</label>";
+                                    signalProviderBody += "<h5 class='mb-4'>" + element.email + "</h5>";
+                                signalProviderBody += "</div>";
 
-                    signalProviderBody += "<div class='col-sm-6'>";
-                    signalProviderBody += "<label for='amount'>Email Address</label>";
-                    signalProviderBody += "<h5 class='mb-4'>" + element.email + "</h5>";
-                    signalProviderBody += "</div>";
+                                signalProviderBody += "<div class='col-sm-6'>";
+                                    signalProviderBody += "<label>Phone Number</label>";
+                                    signalProviderBody += "<h5 class='mb-4'>" + element.phone + "</h5>";
+                                signalProviderBody += "</div>";
 
-                    signalProviderBody += "<div class='col-sm-6'>";
-                    signalProviderBody += "<label>Phone Number</label>";
-                    signalProviderBody += "<h5 class='mb-4'>" + element.phone + "</h5>";
-                    signalProviderBody += "</div>";
+                                signalProviderBody += "<div class='col-sm-6'>";
+                                    signalProviderBody += "<label for=''>Status</label>";
+                                    signalProviderBody += "<h5 class='mb-4 " + statusClass + "'>" + status + "</h5>";
+                                signalProviderBody += "</div>";
 
-                    signalProviderBody += "<div class='col-sm-6'>";
-                    signalProviderBody += "<label for=''>Status</label>";
-                    signalProviderBody += "<h5 class='mb-4'>" + status + "</h5>";
-                    signalProviderBody += "</div>";
+                                signalProviderBody += "<div class='col-sm-6'>";
+                                    signalProviderBody += "<label>Date Created</label>";
+                                    signalProviderBody += "<h5 class='mb-4'>" + formatDate(element.created_at) + "</h5>";
+                                signalProviderBody += "</div>";
 
-                    signalProviderBody += "<div class='col-sm-6'>";
-                    signalProviderBody += "<label>Date Created</label>";
-                    signalProviderBody += "<h5 class='mb-4'>" + formatDate(element.created_at) + "</h5>";
-                    signalProviderBody += "</div>";
+                                signalProviderBody += "<div class='col-sm-6'>";
+                                    signalProviderBody += "<label>Last Updated</label>";
+                                    signalProviderBody += "<h5 class='mb-4'>" + formatDate(element.updated_at) + "</h5>";
+                                signalProviderBody += "</div>";
 
-                    signalProviderBody += "<div class='col-sm-6'>";
-                    signalProviderBody += "<label>Last Updated</label>";
-                    signalProviderBody += "<h5 class='mb-4'>" + formatDate(element.updated_at) + "</h5>";
-                    signalProviderBody += "</div>";
+                                signalProviderBody += "<div class='col-sm-6'>";
+                                    signalProviderBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#SignalProviderEditModal' onclick='loadEditSignalProviderModal()' title='click here to edit Signal Provider' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                                signalProviderBody += "</div>";
 
-                    signalProviderBody += "<div class='col-sm-6'>";
-                    signalProviderBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#SignalProviderEditModal' onclick='loadEditSignalProviderModal()' title='click here to edit Signal Provider' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
-                    signalProviderBody += "</div>";
+                                signalProviderBody += "<div class='col-sm-6'>";
+                                    signalProviderBody += "<button type='button' title='click here to delete Signal Provider' class='btn btn-danger py-3 w-100 mb-4' onclick='deleteSignalProvider(" + '"' + element.id + '"' + ")' >Delete</button>";
+                                signalProviderBody += "</div>";
 
-                    signalProviderBody += "<div class='col-sm-6'>";
-                    signalProviderBody += "<button type='button' title='click here to delete Signal Provider' class='btn btn-danger py-3 w-100 mb-4' onclick='deleteSignalProvider(" + '"' + element.id + '"' + ")' >Delete</button>";
-                    signalProviderBody += "</div>";
-
-                    signalProviderBody += "</div>";
-                    signalProviderBody += "</div>";
+                            signalProviderBody += "</div>";
+                        signalProviderBody += "</div>";
                     signalProviderBody += "</div>";
 
                     $('#SignalProviderHtml').html(signalProviderBody);
@@ -2280,6 +2411,31 @@ function formatDate(date_string) {
     let date = new Date(date_string);
     return date.toUTCString();
 }
+
+var currSeconds = 0;
+
+$(document).ready(function () {
+
+    setInterval(timerIncrement, 1000);
+
+    $(this).mousemove(resetTimer);
+    $(this).keypress(resetTimer);
+    
+})
+
+function timerIncrement() {
+    currSeconds = currSeconds + 1;
+
+    if (currSeconds == 600) {
+        sessionStorage.clear();
+        window.location = "/admin/login";
+    }
+}
+
+function resetTimer() {
+    currSeconds = 0;
+}
+
 document.querySelectorAll("#adminName").forEach(element => {
     element.innerText = sessionStorage.getItem('adminName');
 })

@@ -5,7 +5,7 @@
     <!-- BOTTOM NAV -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="/"><img src="{{ asset('img/logo.png') }}" alt="Website Logo" style="width: 100px; height: auto"></a>
+            <a class="navbar-brand" href="/"><img src="{{ asset('img/logo2.png') }}" alt="Website Logo" style="width: 250px; height: auto"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -24,12 +24,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#partners">partners</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#reviews">Reviews</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#team">Team</a>
-                    </li>
+                    </li> -->
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="#blog">Blog</a>
                     </li> -->
@@ -282,7 +282,7 @@
         </div>
     </section>
 
-    <section class="bg-light" id="reviews">
+    <!-- <section class="bg-light" id="reviews">
 
         <div class="owl-theme owl-carousel reviews-slider container">
             <div class="review">
@@ -340,17 +340,17 @@
                 <i class='bx bxs-quote-alt-left'></i>
             </div>
         </div>
-    </section>
+    </section> -->
 
-    <section id="team">
+    <!-- <section id="team">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="intro">
                         <h6>Team</h6>
                         <h1>Team Members</h1>
-                        <!-- <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
-                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p> -->
+                        <p class="mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
                     </div>
                 </div>
             </div>
@@ -408,7 +408,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- <section id="blog">
         <div class="container">

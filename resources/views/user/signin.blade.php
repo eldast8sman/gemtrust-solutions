@@ -29,11 +29,11 @@
 
     <!-- Template Stylesheet -->
     <link href=" {{ asset('dashboard/css/style.css') }}" rel="stylesheet">
-    <script>
+    <!-- <script>
         if (sessionStorage.getItem('adminToken') !== null) {
             window.location = "/admin/";
         }
-    </script>
+    </script> -->
 
 </head>
 
@@ -55,9 +55,8 @@
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <a href="" class="">
-                                <h3 class="text-primary">Gemtrust Admin</h3>
+                                <h3 class="text-primary">Sign In</h3>
                             </a>
-                            <h3>Sign In</h3>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="emailAddress" placeholder="name@example.com">
@@ -74,7 +73,7 @@
                             </div>
                             <a href="">Forgot Password</a>
                         </div>
-                        <button type="button" class="btn btn-primary py-3 w-100 mb-4" id="btnFunc" onclick="adminLogin()">Sign In</button>
+                        <button type="button" class="btn btn-primary py-3 w-100 mb-4" id="btnFunc" onclick="userLogin()">Sign In</button>
                     </div>
                 </div>
             </div>
@@ -96,7 +95,7 @@
     <!-- Template Javascript -->
     <script src=" {{ asset('dashboard/js/main.js') }}"></script>
     <script src=" {{ asset('dashboard/js/sweetalert.min.js') }}"></script>
-    <script src=" {{ asset('dashboard/js/script.js') }}"></script>
+    <script src=" {{ asset('dashboard/js/user_script.js') }}"></script>
 </body>
 
 </html>
