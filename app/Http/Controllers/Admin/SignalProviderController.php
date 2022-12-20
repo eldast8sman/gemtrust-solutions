@@ -64,7 +64,7 @@ class SignalProviderController extends Controller
             Mail::to($provider)->send(new Mailings('Invitiation to be a Signal Provider on Gemtrust', 'emails.add_signal_provider', [
                 'title' => 'Invitation to be a Signal Provider',
                 'name' => $provider->name,
-                'link' => env('APP_URL', 'https://gemtrustsolutions.com').'/signal-provider/activate/'.$token
+                'link' => env('APP_URL', 'https://develop.gemtrustsolutions.com').'/signal-provider/activate/'.$token
             ]));
 
             return response([
@@ -75,7 +75,7 @@ class SignalProviderController extends Controller
         } else {
             return response([
                 'status' => 'failed',
-                'message' => 'Signal Provider was  not added'
+                'message' => 'Signal Provider was not added'
             ], 500);
         }
     }

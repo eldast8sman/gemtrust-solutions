@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::controller(PageController::class)->group(function(){
+
     Route::get('/', 'index');
     Route::get('terms_conditions', 'terms');
 
@@ -58,5 +59,12 @@ Route::controller(PageController::class)->group(function(){
     // signal Provider route
     Route::get('signalsProvider', 'signalsProvider');
     Route::get('signalsProvider/login', 'signalsProviderLogin');
+    Route::get('signal-provider/activate/{verify_token}', 'activateAccount');
     Route::get('signalsProvider/verifyAccount/{verify_token}', 'sp_accountVerification');
+
+    // User route
+    Route::get('user', 'userHome');
+    Route::get('user/login', 'userLogin');
+    Route::get('user/subscribe', 'signalSubscription');
+
 });

@@ -7,8 +7,8 @@
                         <p>Gemtrust financial solutions is a financial literacy campaign targeted at just any and every class of persons. Gemtrust has put together an academy of constant increasing content to educate our community on finance.</p>
                         <div class="col-auto social-icons">
                             <a href="#"><i class='bx bxl-facebook'></i></a>
-                            <a href="#"><i class='bx bxl-twitter'></i></a>
-                            <a href="#"><i class='bx bxl-instagram'></i></a>
+                            <a href="https://twitter.com/GemTrust1" target="_blank"><i class='bx bxl-twitter'></i></a>
+                            <a href="https://www.instagram.com/gemtrustonline" target="_blank"><i class='bx bxl-instagram'></i></a>
                             <a href="#"><i class='bx bxl-pinterest'></i></a>
                         </div>
                         <div class="col-auto conditions-section">

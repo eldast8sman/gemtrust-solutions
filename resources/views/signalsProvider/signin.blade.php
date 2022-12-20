@@ -29,6 +29,11 @@
 
     <!-- Template Stylesheet -->
     <link href=" {{ asset('dashboard/css/style.css') }}" rel="stylesheet">
+    <script>
+        if (sessionStorage.getItem('spToken') !== null) {
+            window.location = "/signalsProvider/";
+        }
+    </script>
 </head>
 
 <body>
