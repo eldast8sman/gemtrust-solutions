@@ -22,7 +22,7 @@ class ArticleController extends Controller
     public function index()
     {
         $search = !empty($_GET['search']) ? (string)$_GET['search'] : "";
-        $limit = !empty($_GET['limit']) ? (string)$_GET['limit'] : 20;
+        $limit = !empty($_GET['limit']) ? (int)$_GET['limit'] : 20;
         if(empty($search)){
             $articles = Article::orderBy('created_at', 'desc')->paginate($limit);
             foreach($articles as $article){

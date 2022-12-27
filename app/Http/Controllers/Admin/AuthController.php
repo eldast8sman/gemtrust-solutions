@@ -118,6 +118,10 @@ class AuthController extends Controller
         }
     }
 
+    public function user(){
+        return auth('admin-api')->user();
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

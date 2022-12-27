@@ -118,7 +118,7 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr>
     <td class="v-text-align" style="padding-right: 0px;padding-left: 0px;" align="center">
-      <a href="https://unlayer.com" target="_blank">
+      <a href="{{ env('APP_URL') }}/img/logo.png" target="_blank">
       <img align="center" border="0" src="images/image-4.png" alt="Logo" title="Logo" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 20%;max-width: 108px;" width="108" class="v-src-width v-src-max-width"/>
       </a>
     </td>
