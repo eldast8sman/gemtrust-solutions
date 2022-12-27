@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\SignalProviderController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SignalProvider\AuthController as SignalProviderAuthController;
+use App\Http\Controllers\SignalSubscriberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,7 +58,7 @@ Route::prefix('admin')->group(function(){
             Route::delete('/packages/remove-partner/{id}', 'removePartner');
         });
 
-        Route::controller(App\Http\Controllers\Admin\ArticleController::class)->group(function(){
+        Route::controller(ArticleController::class)->group(function(){
             Route::get('/articles', 'index');
             Route::post('/articles', 'store');
             Route::get('/articles/{id}', 'show');
@@ -79,7 +83,7 @@ Route::prefix('admin')->group(function(){
         });
     });
 
-    Route::controller(App\Http\Controllers\Admin\AuthController::class)->group(function(){
+    Route::controller(AdminAuthController::class)->group(function(){
         Route::post('login', 'login');
         Route::post('admins', 'store');
         Route::get('admins', 'index');
@@ -92,7 +96,7 @@ Route::prefix('admin')->group(function(){
 });
 
 Route::prefix('signal-provider')->group(function(){
-    Route::controller(App\Http\Controllers\SignalProvider\AuthController::class)->group(function(){
+    Route::controller(SignalProviderAuthController::class)->group(function(){
         Route::post('/login', 'login');
         Route::post('/activate', 'activate');
         Route::get('/resend-verification-link/{old_token}', 'resend_token');
@@ -114,7 +118,7 @@ Route::middleware('auth:api')->group(function(){
         Route::get('/logout', 'logout');
     });
 
-    Route::controller(SignalProviderController::class)->group(function(){
+    Route::controller(SignalSubscriberController::class)->group(function(){
         Route::get('/signal-providing/subscribe', 'subscribe');
         Route::get('/signal-providing/unsubscribe', 'unsubscribe');
     });

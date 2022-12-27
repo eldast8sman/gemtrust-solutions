@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('verification_token', 255)->nullable()->after('compressed');
             $table->timestamp('verification_token_expiry')->nullable()->after('verification_token');
             $table->string('token', 255)->nullable()->after('verification_token_expiry');
-            $table->timestamp('token_expiry', 255)->nullable()->after('token');
+            $table->timestamp('token_expiry')->nullable()->after('token');
             $table->string('bank', 255)->nullable()->after('token_expiry');
-            $table->string('bank_code', 255)->nullable()->after('bank_code');
+            $table->string('bank_code', 255)->nullable()->after('bank');
             $table->string('bank_nip', 255)->nullable()->after('bank_code');
             $table->string('account_number')->nullable()->after('bank_nip');
             $table->string('account_name')->nullable()->after('account_number');
@@ -50,7 +50,7 @@ return new class extends Migration
             $table->dropColumn('bank_nip');
             $table->dropColumn('account_number');
             $table->dropColumn('account_name');
-            $table->dropColumn('slug');
+            $table->dropColumn('referral_code');
             $table->dropColumn('status');
         });
     }

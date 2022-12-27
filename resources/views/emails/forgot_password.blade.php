@@ -28,7 +28,7 @@
                                 </p>
                                 <p style="font-size: 14px; line-height: 180%;"><br /><span style="font-size: 16px; line-height: 28.8px; font-family: 'trebuchet ms', geneva;">
                                     <a href="{{ $data['link'] }}">
-                                        <button style="border: 1 px solid #00FF00; border-radius: 10px; padding: 10px 15px; text-align: center; margin: 10px auto; background-color: #1010FF; color: #FFF;">Activate Account</button>
+                                        <button style="border: 1 px solid #00FF00; border-radius: 10px; padding: 10px 15px; text-align: center; margin: 10px auto; background-color: #1010FF; color: #FFF;">Reset Password</button>
                                     </a>
                                 </span></p>
                                 <p style="font-size: 14px; line-height: 180%;"><br /><strong><span style="font-size: 16px; line-height: 28.8px; font-family: 'trebuchet ms', geneva;">Best regards,</span></strong><br /><span style="font-size: 16px; line-height: 28.8px; font-family: 'trebuchet ms', geneva;">Anderson Oyinpreye</span></p>

@@ -57,7 +57,10 @@ class AuthController extends Controller
                 "link" => env('APP_URL', 'https://gemtrustsolutions.com').'/portal/activate/'.$user->verification_token
             ]));
 
-            if($token = auth('api')->attempt($request->email, $request->password)){
+            if($token = auth('api')->attempt([
+                'email' => $request->email,
+                'password' => $request->password
+            ])){
                 $user->authorization = [
                     'token' => $token,
                     'type' => "Bearer",
@@ -86,7 +89,7 @@ class AuthController extends Controller
     public function login(UserLoginRequest $request){
         $all = $request->all();
 
-        if($token = auth('admin-api')->attempt($all)){
+        if($token = auth('api')->attempt($all)){
             $admin = User::where('email', $all['email'])->first();
             $admin->authorization = [
                 'token' => $token,
@@ -134,9 +137,9 @@ class AuthController extends Controller
         if($user->status == 2){
             $time = time();
             $user->verification_token = Str::random(20).$time;
-            $$user->verification_token_expiry = date('Y-m-d H:i:s', $time + (60 * 20));
+            $user->verification_token_expiry = date('Y-m-d H:i:s', $time + (60 * 20));
             $user->save();
-            Mail::to($user)->send(new Mailings("Activation Link Resent", "email.resend_user_verification_link", [
+            Mail::to($user)->send(new Mailings("Activation Link Resent", "emails.resend_user_verification_link", [
                 'title' => 'Verification Link Reset',
                 'name' => $user->name,
                 'link' => env('APP_URL', 'https://gemtrustsolutions.com').'/users/activate/'.$user->verification_token
@@ -164,7 +167,7 @@ class AuthController extends Controller
         Mail::to($user)->send(new Mailings("Reset Password", "emails.forgot_password", [
             "title" => "Account Activation",
             "name" => $user->name,
-            "link" => env('APP_URL', 'https://gemtrustsolutions.com').'/portal/reset-password/'.$user->tokens
+            "link" => env('APP_URL', 'https://gemtrustsolutions.com').'/portal/reset-password/'.$user->token
         ]));
 
         return response([
@@ -200,7 +203,7 @@ class AuthController extends Controller
         }
     }
 
-    public function user(){
+    public static function user(){
         return auth('api')->user();
     }
 
