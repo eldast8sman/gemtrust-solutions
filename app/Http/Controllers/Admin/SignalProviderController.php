@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Mail\Mailings;
+use App\Models\Signal;
 use Illuminate\Support\Str;
 use App\Models\SignalProvider;
 use App\Http\Controllers\Controller;
@@ -127,6 +128,7 @@ class SignalProviderController extends Controller
         if(!empty($provider)){
             $all = $request->all();
             if($provider->update($all)){
+                $provider->update_dependencies();
                 return response([
                     'status' => 'success',
                     'message' => 'Signal Provider Update successful',
@@ -168,6 +170,48 @@ class SignalProviderController extends Controller
             return response([
                 'status' => 'failed',
                 'message' => "NO Signal Provider was found"
+            ], 404);
+        }
+    }
+
+    public function fetch_signals(){
+        $name = !empty($_GET['name']) ? (string)$_GET['name'] : "";
+        $pair = !empty($_GET['currency_pair']) ? (string)$_GET['surrency_pair'] : "";
+        $limit = !empty($_GET{'limit'}) ? (int)$_GET['limit'] : 10;
+
+        $signals = Signal::orderBy('created_at', 'desc');
+        if(!empty($name)){
+            $signals = $signals->where('name', 'like', '%'.$name.'%');
+        }
+        if(!empty($pair)){
+            $signals = $signals->where('currency_pair', 'like', '%'.$pair.'%');
+        }
+
+        if($signals->count() > 0){
+            return response([
+                'status' => 'success',
+                'message' => 'Signals fetched successfully',
+                'data' => $signals->paginate($limit)
+            ], 200);
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'No Signal was fetched'
+            ], 404);
+        }
+    }
+
+    public function fetch_signal($id){
+        if(!empty($signal = Signal::find($id))){
+            return response([
+                'status' => 'success',
+                'message' => 'Signal fetched successfully',
+                'data' => $signal
+            ], 200);
+        } else {
+            return response([
+                'status' => 'failed',
+                'message' => 'No Signal was fetched'
             ], 404);
         }
     }

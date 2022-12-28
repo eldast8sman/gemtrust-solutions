@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\SignalProviderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SignalProvider\AuthController as SignalProviderAuthController;
+use App\Http\Controllers\SignalProvider\SignalController;
 use App\Http\Controllers\SignalSubscriberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +81,8 @@ Route::prefix('admin')->group(function(){
             Route::get('/signal-providers/{id}', 'show');
             Route::put('/signal-providers/{id}', 'update');
             Route::delete('/signal-providers/{id}', 'destroy');
+            Route::get('/signals', 'fetch_signals');
+            Route::get('signals/{id}', 'fetch_signal');
         });
     });
 
@@ -102,6 +105,14 @@ Route::prefix('signal-provider')->group(function(){
         Route::get('/resend-verification-link/{old_token}', 'resend_token');
         Route::get('/logut', 'logout');
     });
+
+    Route::middleware('auth:signalprovider-api')->group(function(){
+        Route::controller(SignalController::class)->group(function(){
+            Route::get('/signals', 'index');
+            Route::post('/signals', 'store');
+            Route::get('/signals/{id}', 'show');
+        });
+    });
 });
 
 Route::controller(AuthController::class)->group(function(){
@@ -121,5 +132,7 @@ Route::middleware('auth:api')->group(function(){
     Route::controller(SignalSubscriberController::class)->group(function(){
         Route::get('/signal-providing/subscribe', 'subscribe');
         Route::get('/signal-providing/unsubscribe', 'unsubscribe');
+        Route::get('/signals', 'fetch_signals');
+        Route::get('/signals/{id}', 'fetch_signal');
     });
 });

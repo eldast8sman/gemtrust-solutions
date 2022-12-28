@@ -57,4 +57,13 @@ class SignalProvider extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function update_dependencies(){
+        if(!empty($signals = Signal::where('signal_provider_id', $this->id))){
+            foreach($signals as $signal){
+                $signal->name = $this->name;
+                $signal->save();
+            }
+        }
+    }
 }
