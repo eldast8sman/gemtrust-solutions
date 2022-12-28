@@ -92,4 +92,13 @@ class User extends Authenticatable implements JWTSubject
             ->saveSlugsTo('referral_code')
             ->doNotGenerateSlugsOnUpdate();
     }
+
+    public function update_dependencies(){
+        if(!empty($subscriber = SignalSubscriber::where('user_id', $this->id)->first())){
+            $subscriber->name = $this->name;
+            $subscriber->phone = $this->phone;
+            $subscriber->email = $this->email;
+            $subscriber->save();
+        }
+    }
 }

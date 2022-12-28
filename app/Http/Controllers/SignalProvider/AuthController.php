@@ -113,6 +113,10 @@ class AuthController extends Controller
         }
     }
 
+    public static function user(){
+        return auth('signalprovider-api')->user();
+    }
+
     public function logout(){
         auth('signalprovider-api')->logout();
 
