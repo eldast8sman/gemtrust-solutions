@@ -22,7 +22,7 @@ class PageController extends Controller
     }
 
     public function viewAdmins() {
-        return view('admin/viewAdmins');
+        return view('admin/admins');
     }
     
     public function viewSingleAdmin($id) {
@@ -107,6 +107,14 @@ class PageController extends Controller
         return view('admin/addSignalProvider');
     }
 
+    public function viewAdminSignals() {
+        return view("admin/viewSignals");
+    }
+
+    public function viewAdminSingleSignal($id) {
+        return view("admin/viewSingleSignal", ["signal_id" => $id]);
+    }
+
 
     // Signal Provider Functions
     public function signalsProvider() {
@@ -125,17 +133,62 @@ class PageController extends Controller
         return view("signalsProvider/verifyAccount", ["verifyToken" => $verifyToken]);
     }
 
-    // Signal Provider Functions
-    public function userHome() {
-        return view("user/home");
+    public function sendSignal() {
+        return view("signalsProvider/addSignal");
+    }
+
+    public function viewSignals() {
+        return view("signalsProvider/viewSignals");
+    }
+
+    public function viewSingleSignal($id) {
+        return view("signalsProvider/viewSingleSignal", ["signal_id" => $id]);
+    }
+
+
+    // User Functions
+    public function user() {
+        return view("users/home");
     }
 
     public function userLogin() {
-        return view("user/signin");
+        return view("users/login");
+    }
+
+    public function user_registration() {
+        return view("users/registration");
+    }
+
+    public function forgotPassword() {
+        return view("users/forgot-password");
+    }
+
+    public function userResetPassword($token) {
+        return view("users/reset-password", ["token" => $token]);
+    }
+
+    public function resetPassword($token) {
+        return view("users/reset-password", ["token" => $token]);
+    }
+
+    public function userAccountActivation($verifyToken) {
+        return view("users/verifyAccount", ["verifyToken" => $verifyToken]);
+    }
+
+    public function accountActivation($verifyToken) {
+        return view("users/verifyAccount", ["verifyToken" => $verifyToken]);
+    }
+
+    public function userViewSignals() {
+        return view("users/viewSignals");
+    }
+
+    public function userViewSingleSignal($id) {
+        return view("users/viewSingleSignal", ["signal_id" => $id]);
     }
 
     public function signalSubscription() {
-        return view("user/signalSubscription");
+        return view("users/subscribe");
     }
 
 }

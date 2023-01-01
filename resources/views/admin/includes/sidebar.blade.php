@@ -1,6 +1,6 @@
 
             <nav class="navbar bg-light navbar-light">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <a href="/admin" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary">Gemtrust</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="/admin" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
 
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Administrator</a>
@@ -61,6 +61,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/admin/signalsProvider" class="dropdown-item">View Signals Provider</a>
                             <a href="/admin/addSignalProvider" class="dropdown-item">Add Signal Provider</a>
+                            <a href="/admin/signals" class="dropdown-item">View Signals</a>
                         </div>
                     </div>
 

@@ -55,16 +55,33 @@ Route::controller(PageController::class)->group(function(){
     Route::get('admin/signalsProvider/', 'viewSignalsProvider');
     Route::get('admin/signalProvider/{id}', 'viewSignalProvider');
     Route::get('admin/addSignalProvider', 'addSignalProvider');
+    Route::get('admin/signals', 'viewAdminSignals');
+    Route::get('admin/signal/{id}', 'viewAdminSingleSignal');
 
     // signal Provider route
     Route::get('signalsProvider', 'signalsProvider');
     Route::get('signalsProvider/login', 'signalsProviderLogin');
     Route::get('signal-provider/activate/{verify_token}', 'activateAccount');
     Route::get('signalsProvider/verifyAccount/{verify_token}', 'sp_accountVerification');
+    Route::get('signalsProvider/sendSignal', 'sendSignal');
+    Route::get('signalsProvider/signals', 'viewSignals');
+    Route::get('signalsProvider/signal/{id}', 'viewSingleSignal');
 
     // User route
-    Route::get('user', 'userHome');
-    Route::get('user/login', 'userLogin');
-    Route::get('user/subscribe', 'signalSubscription');
+    Route::get('users', 'user');
+
+    // User authentication route
+    Route::get('users/login', 'userLogin');
+    Route::get('users/registration', 'user_registration');
+    Route::get('users/forgotPassword', 'forgotPassword');
+    Route::get('users/reset-password/{token}', 'userResetPassword');
+    Route::get('portal/reset-password/{token}', 'resetPassword');
+    Route::get('portal/activate/{verify_token}', 'userAccountActivation');
+    Route::get('users/verifyAccount/{verify_token}', 'accountActivation');
+
+    // User signals route
+    Route::get('users/signals', 'userViewSignals');
+    Route::get('users/signal/{id}', 'userViewSingleSignal');
+    Route::get('users/subscription', 'signalSubscription');
 
 });
