@@ -1,4 +1,4 @@
-                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                <a href="/admin" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0">Gemtrust</h2>
                 </a>
                 <a href="#" class="sidebar-toggler flex-shrink-0">

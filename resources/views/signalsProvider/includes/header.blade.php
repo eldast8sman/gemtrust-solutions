@@ -1,4 +1,4 @@
-                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                <a href="/signalsProvider" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0">Gemtrust</h2>
                 </a>
                 <a href="#" class="sidebar-toggler flex-shrink-0">
@@ -13,7 +13,7 @@
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
                             <a href="#" class="dropdown-item">Settings</a>
-                            <a href="javascript: adminLogout()" class="dropdown-item">Log Out</a>
+                            <a href="javascript: spLogout()" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
                 </div>

@@ -910,7 +910,7 @@ function loadBanks() {
                 if (response.status == "success") {
 
                     $("#bank").html("");
-                    $("#bank").html('<option selected="">select bank name</option>');
+                    $("#bank").html('<option value="" selected>select bank name</option>');
 
                     response.data.forEach(element => {
                         let bankOption = '<option value="' + element.name + '">' + element.name + '</option>';
@@ -1589,70 +1589,165 @@ function deleteSection(sectionId) {
 
 }
 
-function addArticle() {
 
-    var form = $('#addArticleForm')[0];
+function fetchArticles() {
 
-    var formData = new FormData(form);
+    let getPage = document.title;
 
-    for(var data of formData.entries()) {
-        console.log(data[0]+ ', '+ data[1]);
+    if (getPage == "Gemtrust Dashboard || View Articles") {
+        $.ajax({
+            type: "GET",
+            url: API_URL + "articles",
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function (response) {
+
+                if (response.status == "success") {
+
+                    $('#articleHtml').html('');
+                    $('#articleHtml').html("<h3 class='mb-4'>Articles</h3>");
+
+                    console.log(response.data)
+                    // response.data.forEach(element => {
+
+                    //     let sectionBody = "<div class='col-sm-12 col-xl-6'>";
+                    //         sectionBody += "<div class='bg-light rounded h-100 p-4'>";
+                    //             sectionBody += "<label>Section Name</label>";
+                    //             sectionBody += "<h6 class='mb-4'>" + element.section + "</h6>";
+                    //             sectionBody += "<label for='amount'>Description</label>";
+                    //             sectionBody += "<p class='mb-4'>" + element.description + "</p>";
+                    //             sectionBody += "<a href='" + ADMIN_URL + "section/" + element.id + "' class='btn btn-primary py-3 w-50 mt-2'>View Section</a>";
+                    //         sectionBody += "</div>";
+                    //     sectionBody += "</div>";
+
+                    //     $('#articleHtml').append(sectionBody);
+                    // });
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function (response) {
+                alertBox("Error", response.responseJSON.message, "error")
+            }
+        })
     }
 
-    console.log(formData);
-
-    $.ajax({
-        type: "POST",
-        url: API_URL + "articles",
-        data: JSON.stringify(formData),
-        cache: false,
-        processData: false,
-        contentType: false,
-        dataType: "json",
-        headers: {
-            "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
-            "Content-Type": "application/json"
-        },
-        success: function (data) {
-            console.log(data)
-        },
-        error: function(response) {
-            console.log(response)
-        }
-    });
-
-    // $.ajax({
-    //     type: "POST",
-    //     url: API_URL + "sections",
-    //     data: params,
-    //     dataType: "json",
-    //     headers: {
-    //         "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
-    //         "Content-Type": "application/json"
-    //     },
-    //     success: function (response) {
-    //         btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
-    //         btnFunc.removeAttribute("disabled");
-    //         btnFunc.innerText = 'Add Section';
-
-    //         if (response.status == "success") {
-    //             alertBox("Section Added", response.message, "success")
-
-    //             setInterval(window.location = ADMIN_URL + "sections", 5000)
-    //         }
-    //         else {
-    //             alertBox("Error", response.message, "error")
-    //         }
-    //     },
-    //     error: function (response) {
-    //         btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
-    //         btnFunc.removeAttribute("disabled");
-    //         btnFunc.innerText = 'Add Section';
-
-    //         alertBox("Error", response.responseJSON.message, "error")
-    //     }
-    // });
 }
+fetchArticles()
+
+// Add Articles
+let frm = $('#addArticleForm');
+
+frm.submit(function (e) {
+    
+    e.preventDefault(e);
+
+    let articleTitle = $("#title").val();
+    let articleAuthor = $("#author").val();
+    let articleImage = $("#filename").val();
+    let articleSectionId = $("#section_id").val();
+    let articleMinimunLevel = $("#minimum_level").val();
+    let articleReleaseDate = $("#release_date").val();
+    let articleContent = $("#content").val();
+
+
+    if (articleTitle === "") {
+        alertBox("Form Field Required", "Title is required", "warning")
+    }
+    else if (articleAuthor === "") {
+        alertBox("Form Field Required", "Author is required", "warning")
+    }
+    else if (articleImage === "") {
+        alertBox("Form Field Required", "Image file is required", "warning")
+    }
+    else if (articleSectionId === "") {
+        alertBox("Form Field Required", "Section ID is required", "warning")
+    }
+    else if (articleMinimunLevel === "") {
+        alertBox("Form Field Required", "Minimum level is required", "warning")
+    }
+    else if (articleReleaseDate === "") {
+        alertBox("Form Field Required", "Release date is required", "warning")
+    }
+    else if (articleContent === "") {
+        alertBox("Form Field Required", "Content is required", "warning")
+    }
+    else {
+
+        btnFunc.setAttribute("class", "btn btn-warning py-3 w-100 mb-4");
+        btnFunc.setAttribute("disabled", "disabled");
+        btnFunc.innerHTML = '<div class="spinner-border"></div>';
+
+        let img = document.getElementById("filename").files[0];
+
+        // let reader = new FileReader();
+        
+        // reader.readAsDataURL(img);
+    
+        // reader.onload = function() {
+            let formData = new FormData();
+
+            let imgObj = {
+                "name": img.name,
+                "size": img.size,
+                "type": img.type
+            }
+
+
+            formData.append('title', articleTitle)
+            formData.append('content', articleAuthor)
+            formData.append('filename', img)
+            formData.append('section_id', articleSectionId)
+            formData.append('minimum_level', articleMinimunLevel)
+            formData.append('author', articleReleaseDate)
+            formData.append('release_date', articleContent)
+
+            $.ajax({
+                async: true,
+                type: "POST",
+                url: API_URL + "articles",
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    "Authorization": "Bearer " + sessionStorage.getItem('adminToken')
+                },
+                success: function (response) {
+                    btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
+                    btnFunc.removeAttribute("disabled");
+                    btnFunc.innerText = 'Add Article';
+
+                    if (response.status == "success") {
+                        alertBox("Section Added", response.message, "success")
+
+                        setInterval(window.location = ADMIN_URL + "sections", 5000)
+                    }
+                    else {
+                        alertBox("Error", response.message, "error")
+                    }
+                },
+                error: function(response) {
+                    btnFunc.setAttribute("class", "btn btn-primary py-3 w-100 mb-4");
+                    btnFunc.removeAttribute("disabled");
+                    btnFunc.innerText = 'Add Article';
+                    
+                    alertBox("Error", response.responseJSON.message, "error")
+                }
+            });
+            
+    
+        // };
+    
+        // reader.onerror = function() {
+        //     alertBox("Error", reader.error, "error")
+        //     console.log(reader.error);
+        // };
+    }
+
+})
 
 function loadSections() {
 
@@ -1670,7 +1765,7 @@ function loadSections() {
                 if (response.status == "success") {
 
                     $("#section_id").html("");
-                    $("#section_id").html('<option selected="">select section</option>');
+                    $("#section_id").html('<option value="" selected>Select Section</option>');
 
                     response.data.forEach(element => {
                         let sectionOption = '<option value="' + element.id + '">' + element.section + '</option>';
@@ -2040,6 +2135,200 @@ function deleteSignalProvider(signalProviderId) {
         })
 
 }
+
+function fetchSignals() {
+
+    let getPage = document.title;
+
+    if (getPage == "Gemtrust Dashboard || View Signals") {
+        $.ajax({
+            type: "GET",
+            url: API_URL + "signals",
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function (response) {
+
+                if (response.status == "success") {
+
+                    $('#signalsHtml').html('');
+                    $('#signalsHtml').html("<h3 class='mb-4'>Signals</h3>");
+
+                    console.log(response.data)
+                    response.data.data.forEach(element => {
+
+                        let signalSection = "<div class='col-sm-12 col-xl-6'>";
+                            signalSection += "<div class='bg-light rounded h-100 p-4'>";
+                                
+                                signalSection += "<label>Currency Pair</label>";
+                                signalSection += "<h6 class='mb-4'>" + element.currency_pair + "</h6>";
+
+                                signalSection += "<label>Order Type</label>";
+                                signalSection += "<h6 class='mb-4'>" + element.order_type + "</h6>";
+
+                                signalSection += "<label>Lot Size</label>";
+                                signalSection += "<h6 class='mb-4'>" + element.lot_size + "</h6>";
+
+                                signalSection += "<label>Entry Price</label>";
+                                signalSection += "<h6 class='mb-4'>" + element.entry_price + "</h6>";
+
+                                signalSection += "<a href='" + ADMIN_URL + "signal/" + element.id + "' class='btn btn-primary py-3 w-50 mt-2'>View Signal</a>";
+                           
+                            signalSection += "</div>";
+                        signalSection += "</div>";
+
+                        $('#signalsHtml').append(signalSection);
+                    });
+
+                    let signalPagination = "<div class='col-sm-12 col-xl-12 mt-4'>";
+                        signalPagination += '<ul class="pagination">';
+                        signalPagination += '<li class="page-item disabled">';
+                            signalPagination += '<a class="page-link" href="#" tabindex="-1">';
+                            signalPagination += '<span class="fa fa-angle-left"></span>';
+                            signalPagination += '</a>';
+                            signalPagination += '</li>';
+                            signalPagination += '<li class="page-item"><a class="page-link" href="#">1</a></li>';
+                            signalPagination += '<li class="page-item active">';
+                            signalPagination += '<a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>';
+                            signalPagination += '</li>';
+                            signalPagination += '<li class="page-item"><a class="page-link" href="#">3</a></li>';
+                            
+                            signalPagination += '<li class="page-item">';
+                                signalPagination += '<a class="page-link" href="#">';
+                                    signalPagination += '<span class="fa fa-angle-right"></span>';
+                                signalPagination += '</a>';
+                            signalPagination += '</li>';
+                        signalPagination += '</ul>';
+
+                        signalPagination += '</div>';
+
+
+                    $('#signalsHtml').append(signalPagination);
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function (response) {
+                alertBox("Error", response.responseJSON.message, "error")
+            }
+        })
+    }
+}
+fetchSignals()
+
+function fetchSingleSignal() {
+
+    let getPage = document.title;
+
+    if (getPage == "Gemtrust Dashboard || View Single Signal") {
+
+        let signal_id = $("#signal_id").val();
+
+        $.ajax({
+            type: "GET",
+            url: API_URL + "signals/" + signal_id,
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem('adminToken'),
+                "Content-Type": "application/json"
+            },
+            success: function (response) {
+
+                if (response.status == "success") {
+
+                    $('#singleSignalHtml').html('');
+
+                    let element = response.data;
+                    signalArray = element;
+
+                    let signalBody = "<div class='col-sm-12 col-xl-12'>";
+                        signalBody += "<div class='bg-light rounded h-100 p-4'>";
+                            signalBody += "<div class='row g-4'>";
+
+                                signalBody += "<h3 class='mb-4'>Signal Details</h3>";
+
+                                signalBody += "<div class='col-sm-6'>";
+                                    signalBody += "<label>Currency Pair</label>";
+                                    signalBody += "<h6 class='mb-4'>" + element.currency_pair + "</h6>";
+                                signalBody += "</div>";
+
+                                signalBody += "<div class='col-sm-6'>";
+                                    signalBody += "<label>Oder Type</label>";
+                                    signalBody += "<h6 class='mb-4'>" + element.order_type + "</h6>";
+                                signalBody += "</div>";
+
+                                signalBody += "<div class='col-sm-6'>";
+                                    signalBody += "<label>Lot Size</label>";
+                                    signalBody += "<h6 class='mb-4'>" + element.lot_size + "</h6>";
+                                signalBody += "</div>";
+
+                                signalBody += "<div class='col-sm-6'>";
+                                    signalBody += "<label>Entry Price</label>";
+                                    signalBody += "<h6 class='mb-4'>" + element.entry_price + "</h6>";
+                                signalBody += "</div>";
+
+                                signalBody += "<div class='col-sm-6'>";
+                                    signalBody += "<label>Take Profit 1</label>";
+                                    signalBody += "<h6 class='mb-4'>" + element.take_profit1 + "</h6>";
+                                signalBody += "</div>";
+
+                                signalBody += "<div class='col-sm-6'>";
+                                    signalBody += "<label>Take Profit 2</label>";
+                                    signalBody += "<h6 class='mb-4'>" + element.take_profit2 + "</h6>";
+                                signalBody += "</div>";
+
+                                signalBody += "<div class='col-sm-6'>";
+                                    signalBody += "<label>Take Profit 3</label>";
+                                    signalBody += "<h6 class='mb-4'>" + element.take_profit3 + "</h6>";
+                                signalBody += "</div>";
+
+                                signalBody += "<div class='col-sm-6'>";
+                                    signalBody += "<label>Stop Loss</label>";
+                                    signalBody += "<h6 class='mb-4'>" + element.stop_loss + "</h6>";
+                                signalBody += "</div>";
+
+                                signalBody += "<div class='col-sm-6'>";
+                                    signalBody += "<label>Date Created</label>";
+                                    signalBody += "<h6 class='mb-4'>" + formatDate(element.created_at) + "</h6>";
+                                signalBody += "</div>";
+
+                                signalBody += "<div class='col-sm-6'>";
+                                    signalBody += "<label>Last Update</label>";
+                                    signalBody += "<h6 class='mb-4'>" + formatDate(element.updated_at) + "</h6>";
+                                signalBody += "</div>";
+
+                                signalBody += "<div class='col-sm-12'>";
+                                    signalBody += "<label>Oder Type</label>";
+                                    signalBody += "<p class='mb-4'>" + element.remarks + "</p>";
+                                signalBody += "</div>";
+
+                                // signalBody += "<div class='col-sm-6'>";
+                                //     signalBody += "<button type='button' data-bs-toggle='modal' data-bs-target='#sectionEditModal' onclick='loadEditSectionModal()' title='click here to edit Section' class='btn btn-primary py-3 w-100 mb-4' >Edit</button>";
+                                // signalBody += "</div>";
+
+                                // signalBody += "<div class='col-sm-6'>";
+                                //     signalBody += "<button type='button' title='click here to delete Section' class='btn btn-danger py-3 w-100 mb-4' onclick='deleteSection(" + '"' + element.id + '"' + ")' >Delete</button>";
+                                // signalBody += "</div>";
+
+                            signalBody += "</div>";
+                        signalBody += "</div>";
+                    signalBody += "</div>";
+
+                    $('#singleSignalHtml').html(signalBody);
+                }
+                else {
+                    alertBox("Error", response.message, "error")
+                }
+            },
+            error: function (response) {
+                alertBox("Error", response.responseJSON.message, "error")
+            }
+        })
+    }
+
+}
+fetchSingleSignal()
 
 
 

@@ -33,7 +33,7 @@
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-floating mb-3">
-                                            <input type="file" class="form-control" name="image" id="image" 
+                                            <input type="file" class="form-control" name="filename" id="filename" 
                                                 placeholder="Image">
                                             <label for="image">Image</label>
                                         </div>
@@ -70,7 +70,7 @@
                                     <label for="content">Content</label>
                                 </div>
 
-                                <button type="button" class="btn btn-primary py-3 w-100 mb-4" id="btnFunc" onclick="addArticle()">Add Article</button>
+                                <button type="submit" class="btn btn-primary py-3 w-100 mb-4" id="btnFunc" >Add Article</button>
 
                             </form>
                             
